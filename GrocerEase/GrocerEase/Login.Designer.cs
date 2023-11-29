@@ -34,7 +34,7 @@
             label2 = new Label();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            button1 = new Button();
+            Login_btnLogin = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -84,15 +84,16 @@
             textBox2.Size = new Size(257, 39);
             textBox2.TabIndex = 4;
             // 
-            // button1
+            // Login_btnLogin
             // 
-            button1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(340, 363);
-            button1.Name = "button1";
-            button1.Size = new Size(172, 45);
-            button1.TabIndex = 5;
-            button1.Text = "LOGIN";
-            button1.UseVisualStyleBackColor = true;
+            Login_btnLogin.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Login_btnLogin.Location = new Point(340, 363);
+            Login_btnLogin.Name = "Login_btnLogin";
+            Login_btnLogin.Size = new Size(172, 45);
+            Login_btnLogin.TabIndex = 5;
+            Login_btnLogin.Text = "LOGIN";
+            Login_btnLogin.UseVisualStyleBackColor = true;
+            Login_btnLogin.Click += Login_btnLogin_Click;
             // 
             // Login
             // 
@@ -100,7 +101,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(Login_btnLogin);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(label2);
@@ -108,6 +109,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -121,6 +123,6 @@
         private Label label2;
         private TextBox textBox1;
         private TextBox textBox2;
-        private Button button1;
+        private Button Login_btnLogin;
     }
 }

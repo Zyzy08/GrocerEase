@@ -6,5 +6,12 @@ namespace GrocerEase
         {
             InitializeComponent();
         }
+
+        private void Login_btnLogin_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            this.Hide();
+            dashboard.ShowDialog();
+        }
     }
 }
