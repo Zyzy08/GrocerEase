@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace GrocerEase
 {
-    public partial class Dashboard : Form
+    public partial class Settings : Form
     {
-        public Dashboard()
+        public Settings()
         {
             InitializeComponent();
-        }
-
-        private void btn_Settings_Click(object sender, EventArgs e)
-        {
-            Settings settings = new Settings();
-            this.Hide();
-            settings.ShowDialog();
         }
     }
 }

@@ -34,7 +34,7 @@
             Dashboard_tcSubCategory = new TabControl();
             tabPage3 = new TabPage();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            pictureBox3 = new PictureBox();
+            groupBox1 = new GroupBox();
             tabPage4 = new TabPage();
             flowLayoutPanel2 = new FlowLayoutPanel();
             pictureBox4 = new PictureBox();
@@ -44,26 +44,26 @@
             tabPage6 = new TabPage();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            btn_Settings = new PictureBox();
             panel1 = new Panel();
             Dashboard_btnAdd = new Button();
             panel2 = new Panel();
             label2 = new Label();
             label1 = new Label();
             Dashboard_nudQuantity = new NumericUpDown();
+            panel3 = new Panel();
             Dashboard_tcCategory.SuspendLayout();
             tabPage1.SuspendLayout();
             Dashboard_tcSubCategory.SuspendLayout();
             tabPage3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             tabPage4.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             tabPage2.SuspendLayout();
             tabControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Dashboard_nudQuantity).BeginInit();
             SuspendLayout();
@@ -87,7 +87,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(819, 632);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
+            tabPage1.Text = "Beverage";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // Dashboard_tcSubCategory
@@ -106,7 +106,7 @@
             tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(819, 608);
+            tabPage3.Size = new Size(819, 602);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Coffee";
             tabPage3.UseVisualStyleBackColor = true;
@@ -114,27 +114,31 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(pictureBox3);
+            flowLayoutPanel1.Controls.Add(groupBox1);
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(820, 618);
             flowLayoutPanel1.TabIndex = 0;
             // 
-            // pictureBox3
+            // groupBox1
             // 
-            pictureBox3.Location = new Point(3, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(100, 50);
-            pictureBox3.TabIndex = 0;
-            pictureBox3.TabStop = false;
+            groupBox1.BackgroundImage = (Image)resources.GetObject("groupBox1.BackgroundImage");
+            groupBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            flowLayoutPanel1.SetFlowBreak(groupBox1, true);
+            groupBox1.Location = new Point(3, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(200, 143);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
             // 
             // tabPage4
             // 
             tabPage4.Controls.Add(flowLayoutPanel2);
-            tabPage4.Location = new Point(4, 30);
+            tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(819, 602);
+            tabPage4.Size = new Size(819, 608);
             tabPage4.TabIndex = 1;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -162,7 +166,7 @@
             tabPage2.Location = new Point(4, 30);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(819, 595);
+            tabPage2.Size = new Size(819, 632);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -215,15 +219,16 @@
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // btn_Settings
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(797, 64);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(45, 43);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
+            btn_Settings.Image = (Image)resources.GetObject("btn_Settings.Image");
+            btn_Settings.Location = new Point(797, 64);
+            btn_Settings.Name = "btn_Settings";
+            btn_Settings.Size = new Size(45, 43);
+            btn_Settings.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_Settings.TabIndex = 3;
+            btn_Settings.TabStop = false;
+            btn_Settings.Click += btn_Settings_Click;
             // 
             // panel1
             // 
@@ -285,14 +290,22 @@
             Dashboard_nudQuantity.TabIndex = 2;
             Dashboard_nudQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
+            // panel3
+            // 
+            panel3.Location = new Point(848, 64);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(580, 784);
+            panel3.TabIndex = 6;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1440, 860);
+            Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(pictureBox2);
+            Controls.Add(btn_Settings);
             Controls.Add(pictureBox1);
             Controls.Add(textBox1);
             FormBorderStyle = FormBorderStyle.None;
@@ -304,14 +317,13 @@
             Dashboard_tcSubCategory.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             tabPage4.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             tabPage2.ResumeLayout(false);
             tabControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_Settings).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Dashboard_nudQuantity).EndInit();
@@ -326,13 +338,12 @@
         private TabPage tabPage2;
         private TextBox textBox1;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox btn_Settings;
         private Panel panel1;
         private TabControl Dashboard_tcSubCategory;
         private TabPage tabPage3;
         private TabPage tabPage4;
         private FlowLayoutPanel flowLayoutPanel1;
-        private PictureBox pictureBox3;
         private TabControl tabControl3;
         private TabPage tabPage5;
         private TabPage tabPage6;
@@ -343,5 +354,7 @@
         private PictureBox pictureBox4;
         private Label label2;
         private Label label1;
+        private GroupBox groupBox1;
+        private Panel panel3;
     }
 }
