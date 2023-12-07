@@ -35,13 +35,6 @@
             tabPage3 = new TabPage();
             flowLayoutPanel1 = new FlowLayoutPanel();
             groupBox1 = new GroupBox();
-            tabPage4 = new TabPage();
-            flowLayoutPanel2 = new FlowLayoutPanel();
-            pictureBox4 = new PictureBox();
-            tabPage2 = new TabPage();
-            tabControl3 = new TabControl();
-            tabPage5 = new TabPage();
-            tabPage6 = new TabPage();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
             btn_Settings = new PictureBox();
@@ -57,11 +50,6 @@
             Dashboard_tcSubCategory.SuspendLayout();
             tabPage3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            tabPage4.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            tabPage2.SuspendLayout();
-            tabControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel2.SuspendLayout();
@@ -71,7 +59,6 @@
             // Dashboard_tcCategory
             // 
             Dashboard_tcCategory.Controls.Add(tabPage1);
-            Dashboard_tcCategory.Controls.Add(tabPage2);
             Dashboard_tcCategory.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Dashboard_tcCategory.Location = new Point(3, 3);
             Dashboard_tcCategory.Name = "Dashboard_tcCategory";
@@ -87,13 +74,12 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(819, 632);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Beverage";
+            tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // Dashboard_tcSubCategory
             // 
             Dashboard_tcSubCategory.Controls.Add(tabPage3);
-            Dashboard_tcSubCategory.Controls.Add(tabPage4);
             Dashboard_tcSubCategory.Location = new Point(-4, 0);
             Dashboard_tcSubCategory.Name = "Dashboard_tcSubCategory";
             Dashboard_tcSubCategory.SelectedIndex = 0;
@@ -131,75 +117,6 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
-            // 
-            // tabPage4
-            // 
-            tabPage4.Controls.Add(flowLayoutPanel2);
-            tabPage4.Location = new Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(819, 608);
-            tabPage4.TabIndex = 1;
-            tabPage4.Text = "tabPage4";
-            tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.AutoScroll = true;
-            flowLayoutPanel2.Controls.Add(pictureBox4);
-            flowLayoutPanel2.Location = new Point(0, 0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(469, 624);
-            flowLayoutPanel2.TabIndex = 1;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Location = new Point(3, 3);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(100, 50);
-            pictureBox4.TabIndex = 0;
-            pictureBox4.TabStop = false;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(tabControl3);
-            tabPage2.Location = new Point(4, 30);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(819, 632);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabControl3
-            // 
-            tabControl3.Controls.Add(tabPage5);
-            tabControl3.Controls.Add(tabPage6);
-            tabControl3.Location = new Point(-4, -2);
-            tabControl3.Name = "tabControl3";
-            tabControl3.SelectedIndex = 0;
-            tabControl3.Size = new Size(477, 711);
-            tabControl3.TabIndex = 1;
-            // 
-            // tabPage5
-            // 
-            tabPage5.Location = new Point(4, 30);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(469, 677);
-            tabPage5.TabIndex = 0;
-            tabPage5.Text = "tabPage5";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage6
-            // 
-            tabPage6.Location = new Point(4, 24);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new Padding(3);
-            tabPage6.Size = new Size(469, 683);
-            tabPage6.TabIndex = 1;
-            tabPage6.Text = "tabPage6";
-            tabPage6.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -312,16 +229,12 @@
             Name = "Dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
+            Load += Dashboard_Load;
             Dashboard_tcCategory.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             Dashboard_tcSubCategory.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
-            tabPage4.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            tabPage2.ResumeLayout(false);
-            tabControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).EndInit();
             panel2.ResumeLayout(false);
@@ -335,23 +248,16 @@
 
         private TabControl Dashboard_tcCategory;
         private TabPage tabPage1;
-        private TabPage tabPage2;
         private TextBox textBox1;
         private PictureBox pictureBox1;
         private PictureBox btn_Settings;
         private Panel panel1;
         private TabControl Dashboard_tcSubCategory;
         private TabPage tabPage3;
-        private TabPage tabPage4;
         private FlowLayoutPanel flowLayoutPanel1;
-        private TabControl tabControl3;
-        private TabPage tabPage5;
-        private TabPage tabPage6;
         private Button Dashboard_btnAdd;
         private Panel panel2;
         private NumericUpDown Dashboard_nudQuantity;
-        private FlowLayoutPanel flowLayoutPanel2;
-        private PictureBox pictureBox4;
         private Label label2;
         private Label label1;
         private GroupBox groupBox1;

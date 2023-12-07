@@ -164,9 +164,9 @@
             // panel2
             // 
             panel2.Controls.Add(flowLayoutPanel1);
-            panel2.Location = new Point(4, 100);
+            panel2.Location = new Point(7, 142);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1410, 96);
+            panel2.Size = new Size(1407, 54);
             panel2.TabIndex = 14;
             // 
             // flowLayoutPanel1
@@ -174,9 +174,9 @@
             flowLayoutPanel1.Controls.Add(groupBox1);
             flowLayoutPanel1.Controls.Add(label1);
             flowLayoutPanel1.Controls.Add(button1);
-            flowLayoutPanel1.Location = new Point(3, 3);
+            flowLayoutPanel1.Location = new Point(135, 34);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1404, 90);
+            flowLayoutPanel1.Size = new Size(1272, 59);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
