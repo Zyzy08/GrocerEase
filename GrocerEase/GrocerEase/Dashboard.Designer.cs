@@ -80,7 +80,7 @@
             // Dashboard_tcSubCategory
             // 
             Dashboard_tcSubCategory.Controls.Add(tabPage3);
-            Dashboard_tcSubCategory.Location = new Point(0, 0);
+            Dashboard_tcSubCategory.Location = new Point(26, 30);
             Dashboard_tcSubCategory.Name = "Dashboard_tcSubCategory";
             Dashboard_tcSubCategory.SelectedIndex = 0;
             Dashboard_tcSubCategory.Size = new Size(827, 636);
@@ -145,7 +145,7 @@
             btn_Settings.SizeMode = PictureBoxSizeMode.Zoom;
             btn_Settings.TabIndex = 3;
             btn_Settings.TabStop = false;
-            btn_Settings.Click += btn_Settings_Click;
+            btn_Settings.Click += Btn_Settings_Click;
             // 
             // panel1
             // 

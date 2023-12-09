@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             panel1 = new Panel();
-            pictureBox2 = new PictureBox();
+            btn_Back = new PictureBox();
             pictureBox1 = new PictureBox();
             panel4 = new Panel();
             tabControl1 = new TabControl();
@@ -45,7 +45,7 @@
             groupBox1 = new GroupBox();
             label1 = new Label();
             button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btn_Back).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             panel2.SuspendLayout();
@@ -60,15 +60,16 @@
             panel1.Size = new Size(1442, 58);
             panel1.TabIndex = 10;
             // 
-            // pictureBox2
+            // btn_Back
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(54, 50);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(45, 43);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 9;
-            pictureBox2.TabStop = false;
+            btn_Back.Image = (Image)resources.GetObject("btn_Back.Image");
+            btn_Back.Location = new Point(54, 50);
+            btn_Back.Name = "btn_Back";
+            btn_Back.Size = new Size(45, 43);
+            btn_Back.SizeMode = PictureBoxSizeMode.Zoom;
+            btn_Back.TabIndex = 9;
+            btn_Back.TabStop = false;
+            btn_Back.Click += Btn_Back_Click;
             // 
             // pictureBox1
             // 
@@ -226,13 +227,13 @@
             Controls.Add(tabControl1);
             Controls.Add(panel4);
             Controls.Add(panel1);
-            Controls.Add(pictureBox2);
+            Controls.Add(btn_Back);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Settings";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Settings";
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btn_Back).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabControl1.ResumeLayout(false);
             panel2.ResumeLayout(false);
@@ -242,7 +243,7 @@
 
         #endregion
         private Panel panel1;
-        private PictureBox pictureBox2;
+        private PictureBox btn_Back;
         private PictureBox pictureBox1;
         private Panel panel4;
         private TabControl tabControl1;
