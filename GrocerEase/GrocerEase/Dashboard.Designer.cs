@@ -80,7 +80,7 @@
             // Dashboard_tcSubCategory
             // 
             Dashboard_tcSubCategory.Controls.Add(tabPage3);
-            Dashboard_tcSubCategory.Location = new Point(-4, 0);
+            Dashboard_tcSubCategory.Location = new Point(0, 0);
             Dashboard_tcSubCategory.Name = "Dashboard_tcSubCategory";
             Dashboard_tcSubCategory.SelectedIndex = 0;
             Dashboard_tcSubCategory.Size = new Size(827, 636);
