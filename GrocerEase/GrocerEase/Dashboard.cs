@@ -47,9 +47,10 @@ namespace GrocerEase
                         TabPage tabPage_Category = new()
                         {
                             Name = "Category" + counter,
-                            Text = reader_categories["Category_Name"].ToString()
+                            Text = reader_categories["Category_Name"].ToString(),
+                            Size = new(819, 632)
                         };
-                        TabControl subcategoryTabControl = new();
+                        TabControl Dashboard_tcSubCategory = new();
                         string query_subcategories = "SELECT SubCategory_Name FROM tbl_SubCategories WHERE Category_ID=@categoryID";
                         SqlCommand command_subcategories = new(query_subcategories, connection);
                         command_subcategories.Parameters.AddWithValue("categoryID", counter);
@@ -60,12 +61,28 @@ namespace GrocerEase
                             TabPage tabPage_Subcategory = new()
                             {
                                 Name = "Subcategory" + counter,
-                                Text = reader_subcategories["SubCategory_Name"].ToString()
+                                Text = reader_subcategories["SubCategory_Name"].ToString(),
+                                Size = new(819, 602)
                             };
-                            subcategoryTabControl.TabPages.Add(tabPage_Subcategory);
+                            FlowLayoutPanel flowLayoutPanel_Subcategory = new()
+                            {
+                                Name = "FlowLayoutPanel" + counter,
+                                Dock = DockStyle.Fill,
+                                FlowDirection = FlowDirection.LeftToRight,
+                                AutoScroll = true
+                            };
+                            GroupBox groupBox_Subcategory = new()
+                            {
+                                Height = 200,
+                                Width = 143
+                            };
+                            flowLayoutPanel_Subcategory.Controls.Add(groupBox_Subcategory);
+                            tabPage_Subcategory.Controls.Add(flowLayoutPanel_Subcategory);
+                            Dashboard_tcSubCategory.TabPages.Add(tabPage_Subcategory);
                         }
                         reader_subcategories.Close();
-                        tabPage_Category.Controls.Add(subcategoryTabControl);
+                        tabPage_Category.Controls.Add(Dashboard_tcSubCategory);
+                        Dashboard_tcSubCategory.Size = new Size(819, 602);
                         Dashboard_tcCategory.TabPages.Add(tabPage_Category);
                     }
                 }

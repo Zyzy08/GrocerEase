@@ -33,7 +33,7 @@
             tabPage1 = new TabPage();
             Dashboard_tcSubCategory = new TabControl();
             tabPage3 = new TabPage();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            flp_tabPage = new FlowLayoutPanel();
             groupBox1 = new GroupBox();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
@@ -49,7 +49,7 @@
             tabPage1.SuspendLayout();
             Dashboard_tcSubCategory.SuspendLayout();
             tabPage3.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            flp_tabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel2.SuspendLayout();
@@ -80,7 +80,7 @@
             // Dashboard_tcSubCategory
             // 
             Dashboard_tcSubCategory.Controls.Add(tabPage3);
-            Dashboard_tcSubCategory.Location = new Point(26, 30);
+            Dashboard_tcSubCategory.Location = new Point(0, 0);
             Dashboard_tcSubCategory.Name = "Dashboard_tcSubCategory";
             Dashboard_tcSubCategory.SelectedIndex = 0;
             Dashboard_tcSubCategory.Size = new Size(827, 636);
@@ -88,7 +88,7 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(flowLayoutPanel1);
+            tabPage3.Controls.Add(flp_tabPage);
             tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -97,20 +97,20 @@
             tabPage3.Text = "Coffee";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel1
+            // flp_tabPage
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(groupBox1);
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(820, 618);
-            flowLayoutPanel1.TabIndex = 0;
+            flp_tabPage.AutoScroll = true;
+            flp_tabPage.Controls.Add(groupBox1);
+            flp_tabPage.Location = new Point(6, 50);
+            flp_tabPage.Name = "flp_tabPage";
+            flp_tabPage.Size = new Size(820, 618);
+            flp_tabPage.TabIndex = 0;
             // 
             // groupBox1
             // 
             groupBox1.BackgroundImage = (Image)resources.GetObject("groupBox1.BackgroundImage");
             groupBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            flowLayoutPanel1.SetFlowBreak(groupBox1, true);
+            flp_tabPage.SetFlowBreak(groupBox1, true);
             groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(200, 143);
@@ -234,7 +234,7 @@
             tabPage1.ResumeLayout(false);
             Dashboard_tcSubCategory.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
+            flp_tabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).EndInit();
             panel2.ResumeLayout(false);
@@ -254,7 +254,7 @@
         private Panel panel1;
         private TabControl Dashboard_tcSubCategory;
         private TabPage tabPage3;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flp_tabPage;
         private Button Dashboard_btnAdd;
         private Panel panel2;
         private NumericUpDown Dashboard_nudQuantity;
