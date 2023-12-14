@@ -19,6 +19,7 @@ namespace GrocerEase
         }
 
         public string connectionString = "Data Source=DESKTOP-BB2GC4I;Initial Catalog = db_GrocerEase; Integrated Security = True; Encrypt=False;";
+        
         private void Btn_Settings_Click(object sender, EventArgs e)
         {
             Settings settings = new();
@@ -28,65 +29,85 @@ namespace GrocerEase
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            SqlConnection connection = new(connectionString);
+            using SqlConnection connection = new(connectionString);
             connection.Open();
-            if(connection.State == ConnectionState.Open)
+
+            if (connection.State == ConnectionState.Open)
             {
-                string query_categories_count = "SELECT COUNT(*) FROM tbl_Categories";
-                SqlCommand command_categories_count = new(query_categories_count, connection);
-                int categories_tabPage_count = (Int32)command_categories_count.ExecuteScalar();
-                SqlDataReader reader_categories;
-                for(int counter = 1; counter <= categories_tabPage_count; counter++)
+                string queryCategories = "SELECT Category_ID, Category_Name FROM tbl_Categories";
+                SqlDataAdapter adapterCategories = new(queryCategories, connection);
+                DataTable categoriesTable = new();
+                adapterCategories.Fill(categoriesTable);
+
+                foreach (DataRow categoryRow in categoriesTable.Rows)
                 {
-                    string query_categories = "SELECT Category_Name FROM tbl_Categories WHERE Category_ID=@tabPage";
-                    SqlCommand command_categories = new(query_categories, connection);
-                    command_categories.Parameters.AddWithValue("tabPage", counter);
-                    reader_categories = command_categories.ExecuteReader();
-                    if(reader_categories.Read())
+                    int categoryId = Convert.ToInt32(categoryRow["Category_ID"]);
+                    string? categoryName = categoryRow["Category_Name"].ToString();
+
+                    TabPage tabPageCategory = new()
                     {
-                        TabPage tabPage_Category = new()
+                        Name = "Category" + categoryId,
+                        Text = categoryName,
+                        Size = new Size(819, 632)
+                    };
+
+                    string querySubcategories = "SELECT SubCategory_ID, SubCategory_Name FROM tbl_SubCategories WHERE Category_ID=@categoryId";
+                    SqlDataAdapter adapterSubcategories = new(querySubcategories, connection);
+                    adapterSubcategories.SelectCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                    DataTable subcategoriesTable = new();
+                    adapterSubcategories.Fill(subcategoriesTable);
+
+                    TabControl tcSubcategories = new()
+                    {
+                        Name = "tcSubcategories",
+                        Dock = DockStyle.Fill
+                    };
+
+                    foreach (DataRow subcategoryRow in subcategoriesTable.Rows)
+                    {
+                        int subcategoryId = Convert.ToInt32(subcategoryRow["SubCategory_ID"]);
+                        string? subcategoryName = subcategoryRow["SubCategory_Name"].ToString();
+
+                        TabPage tabPageSubcategory = new()
                         {
-                            Name = "Category" + counter,
-                            Text = reader_categories["Category_Name"].ToString(),
-                            Size = new(819, 632)
+                            Name = "Subcategory" + subcategoryId,
+                            Text = subcategoryName,
+                            Size = new Size(819, 602)
                         };
-                        TabControl Dashboard_tcSubCategory = new();
-                        string query_subcategories = "SELECT SubCategory_Name FROM tbl_SubCategories WHERE Category_ID=@categoryID";
-                        SqlCommand command_subcategories = new(query_subcategories, connection);
-                        command_subcategories.Parameters.AddWithValue("categoryID", counter);
-                        reader_categories.Close();
-                        SqlDataReader reader_subcategories = command_subcategories.ExecuteReader();
-                        while (reader_subcategories.Read())
+
+                        string queryItems = "SELECT Item_Name FROM tbl_Items WHERE SubCategory_ID=@subcategoryId";
+                        SqlDataAdapter adapterItems = new(queryItems, connection);
+                        adapterItems.SelectCommand.Parameters.AddWithValue("@subcategoryId", subcategoryId);
+                        DataTable itemsTable = new();
+                        adapterItems.Fill(itemsTable);
+
+                        FlowLayoutPanel flowLayoutPanelItems = new()
                         {
-                            TabPage tabPage_Subcategory = new()
+                            Name = "flowLayoutPanelItems",
+                            Dock = DockStyle.Fill,
+                            FlowDirection = FlowDirection.LeftToRight,
+                            AutoScroll = true
+                        };
+
+                        foreach (DataRow itemRow in itemsTable.Rows)
+                        {
+                            GroupBox groupBoxItem = new()
                             {
-                                Name = "Subcategory" + counter,
-                                Text = reader_subcategories["SubCategory_Name"].ToString(),
-                                Size = new(819, 602)
+                                Name = "Item" + itemRow["Item_Name"].ToString(),
+                                Text = itemRow["Item_Name"].ToString(),
+                                Size = new Size(200, 143)
                             };
-                            FlowLayoutPanel flowLayoutPanel_Subcategory = new()
-                            {
-                                Name = "FlowLayoutPanel" + counter,
-                                Dock = DockStyle.Fill,
-                                FlowDirection = FlowDirection.LeftToRight,
-                                AutoScroll = true
-                            };
-                            GroupBox groupBox_Subcategory = new()
-                            {
-                                Height = 200,
-                                Width = 143
-                            };
-                            flowLayoutPanel_Subcategory.Controls.Add(groupBox_Subcategory);
-                            tabPage_Subcategory.Controls.Add(flowLayoutPanel_Subcategory);
-                            Dashboard_tcSubCategory.TabPages.Add(tabPage_Subcategory);
+
+                            flowLayoutPanelItems.Controls.Add(groupBoxItem);
                         }
-                        reader_subcategories.Close();
-                        tabPage_Category.Controls.Add(Dashboard_tcSubCategory);
-                        Dashboard_tcSubCategory.Size = new Size(819, 602);
-                        Dashboard_tcCategory.TabPages.Add(tabPage_Category);
+
+                        tabPageSubcategory.Controls.Add(flowLayoutPanelItems);
+                        tcSubcategories.TabPages.Add(tabPageSubcategory);
                     }
+
+                    tabPageCategory.Controls.Add(tcSubcategories);
+                    Dashboard_tcCategory.TabPages.Add(tabPageCategory);
                 }
-                connection.Close();
             }
         }
     }

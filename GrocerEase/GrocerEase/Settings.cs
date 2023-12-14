@@ -23,5 +23,12 @@ namespace GrocerEase
             dashboard.Show();
             this.Close();
         }
+
+        private void StockManagement_btn_Add_Click(object sender, EventArgs e)
+        {
+            NewProduct newProduct = new();
+            this.Enabled = false;
+            newProduct.ShowDialog();
+        }
     }
 }
