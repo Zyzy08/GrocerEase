@@ -37,15 +37,18 @@
             label6 = new Label();
             label7 = new Label();
             txt_Name = new TextBox();
-            txt_Price = new TextBox();
             txt_Details = new TextBox();
             pb_Image = new PictureBox();
-            dateTimePicker1 = new DateTimePicker();
+            dtp_Expiration = new DateTimePicker();
             cb_Category = new ComboBox();
             cb_SubCategory = new ComboBox();
             StockManagement_btn_Done = new Button();
             StockManagement_btn_Cancel = new Button();
+            nud_Price = new NumericUpDown();
+            label8 = new Label();
+            lbl_ID = new Label();
             ((System.ComponentModel.ISupportInitialize)pb_Image).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nud_Price).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -118,13 +121,6 @@
             txt_Name.Size = new Size(100, 23);
             txt_Name.TabIndex = 7;
             // 
-            // txt_Price
-            // 
-            txt_Price.Location = new Point(98, 115);
-            txt_Price.Name = "txt_Price";
-            txt_Price.Size = new Size(100, 23);
-            txt_Price.TabIndex = 8;
-            // 
             // txt_Details
             // 
             txt_Details.Location = new Point(98, 155);
@@ -141,13 +137,14 @@
             pb_Image.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Image.TabIndex = 10;
             pb_Image.TabStop = false;
+            pb_Image.Click += Pb_Image_Click;
             // 
-            // dateTimePicker1
+            // dtp_Expiration
             // 
-            dateTimePicker1.Location = new Point(98, 188);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 11;
+            dtp_Expiration.Location = new Point(98, 188);
+            dtp_Expiration.Name = "dtp_Expiration";
+            dtp_Expiration.Size = new Size(200, 23);
+            dtp_Expiration.TabIndex = 11;
             // 
             // cb_Category
             // 
@@ -173,6 +170,7 @@
             StockManagement_btn_Done.TabIndex = 14;
             StockManagement_btn_Done.Text = "Done";
             StockManagement_btn_Done.UseVisualStyleBackColor = true;
+            StockManagement_btn_Done.Click += StockManagement_btn_Done_Click;
             // 
             // StockManagement_btn_Cancel
             // 
@@ -183,19 +181,46 @@
             StockManagement_btn_Cancel.Text = "Cancel";
             StockManagement_btn_Cancel.UseVisualStyleBackColor = true;
             // 
+            // nud_Price
+            // 
+            nud_Price.DecimalPlaces = 2;
+            nud_Price.Location = new Point(98, 116);
+            nud_Price.Name = "nud_Price";
+            nud_Price.Size = new Size(120, 23);
+            nud_Price.TabIndex = 16;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 48);
+            label8.Name = "label8";
+            label8.Size = new Size(18, 15);
+            label8.TabIndex = 17;
+            label8.Text = "ID";
+            // 
+            // lbl_ID
+            // 
+            lbl_ID.AutoSize = true;
+            lbl_ID.Location = new Point(98, 48);
+            lbl_ID.Name = "lbl_ID";
+            lbl_ID.Size = new Size(0, 15);
+            lbl_ID.TabIndex = 18;
+            // 
             // NewProduct
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbl_ID);
+            Controls.Add(label8);
+            Controls.Add(nud_Price);
             Controls.Add(StockManagement_btn_Cancel);
             Controls.Add(StockManagement_btn_Done);
             Controls.Add(cb_SubCategory);
             Controls.Add(cb_Category);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtp_Expiration);
             Controls.Add(pb_Image);
             Controls.Add(txt_Details);
-            Controls.Add(txt_Price);
             Controls.Add(txt_Name);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -210,6 +235,7 @@
             Text = "Add New Product";
             Load += NewProduct_Load;
             ((System.ComponentModel.ISupportInitialize)pb_Image).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nud_Price).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -224,13 +250,15 @@
         private Label label6;
         private Label label7;
         private TextBox txt_Name;
-        private TextBox txt_Price;
         private TextBox txt_Details;
         private PictureBox pb_Image;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtp_Expiration;
         private ComboBox cb_Category;
         private ComboBox cb_SubCategory;
         private Button StockManagement_btn_Done;
         private Button StockManagement_btn_Cancel;
+        private NumericUpDown nud_Price;
+        private Label label8;
+        private Label lbl_ID;
     }
 }
