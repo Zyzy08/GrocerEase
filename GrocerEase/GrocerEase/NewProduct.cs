@@ -115,52 +115,43 @@ namespace GrocerEase
 
             byte[] imageBytes = ImageToByteArray(pb_Image.Image);
 
-            // Insert the product details into the database and get the new Item_ID
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using SqlConnection connection = new(connectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
             {
-                connection.Open();
+                string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
 
-                if (connection.State == ConnectionState.Open)
-                {
-                    // Query to get the latest Item_ID
-                    string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
+                using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
+                object latestItemID = commandLatestItemID.ExecuteScalar();
 
-                    using SqlCommand commandLatestItemID = new SqlCommand(queryLatestItemID, connection);
-                    object latestItemID = commandLatestItemID.ExecuteScalar();
+                int newItemID = (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
 
-                    // Calculate the new Item_ID by adding 1 to the latest Item_ID
-                    int newItemID = (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
+                lbl_ID.Text = newItemID.ToString();
 
-                    // Display the new Item_ID in lbl_ID
-                    lbl_ID.Text = newItemID.ToString();
-
-                    // Insert the product details into the database
-                    string insertQuery = @"
+                string insertQuery = @"
                 INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_Details, Item_Expiration, Item_Icon, SubCategory_ID)
                 VALUES (@ItemID, @ItemName, @ItemPrice, @ItemDetails, @ItemExpirationDate, @ItemIcon, (SELECT SubCategory_ID FROM tbl_SubCategories WHERE SubCategory_Name = @SelectedSubcategory))";
 
-                    using SqlCommand command = new SqlCommand(insertQuery, connection);
+                using SqlCommand command = new(insertQuery, connection);
 
-                    command.Parameters.AddWithValue("@ItemID", newItemID);
-                    command.Parameters.AddWithValue("@ItemName", itemName);
-                    command.Parameters.AddWithValue("@ItemPrice", itemPrice);
-                    command.Parameters.AddWithValue("@ItemDetails", (object)itemDetails ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@ItemExpirationDate", itemExpirationDate);
-                    command.Parameters.AddWithValue("@ItemIcon", imageBytes); // Store the byte array in the database
-                    command.Parameters.AddWithValue("@SelectedSubcategory", selectedSubcategory);
+                command.Parameters.AddWithValue("@ItemID", newItemID);
+                command.Parameters.AddWithValue("@ItemName", itemName);
+                command.Parameters.AddWithValue("@ItemPrice", itemPrice);
+                command.Parameters.AddWithValue("@ItemDetails", (object)itemDetails ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ItemExpirationDate", itemExpirationDate);
+                command.Parameters.AddWithValue("@ItemIcon", imageBytes);
+                command.Parameters.AddWithValue("@SelectedSubcategory", selectedSubcategory);
+                command.ExecuteNonQuery();
 
-                    // Execute the query
-                    command.ExecuteNonQuery();
-
-                    MessageBox.Show("Product added successfully!");
-                }
+                MessageBox.Show("Product added successfully!");
             }
         }
 
-        private byte[] ImageToByteArray(System.Drawing.Image image)
+        private static byte[] ImageToByteArray(System.Drawing.Image image)
         {
-            using MemoryStream ms = new MemoryStream();
-            image.Save(ms, ImageFormat.Png); // You may need to adjust the format based on your requirements
+            using MemoryStream ms = new();
+            image.Save(ms, ImageFormat.Png);
             return ms.ToArray();
         }
     }

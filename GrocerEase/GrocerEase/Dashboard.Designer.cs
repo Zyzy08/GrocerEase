@@ -30,11 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             Dashboard_tcCategory = new TabControl();
-            tabPage1 = new TabPage();
-            Dashboard_tcSubCategory = new TabControl();
-            tabPage3 = new TabPage();
-            flp_tabPage = new FlowLayoutPanel();
-            groupBox1 = new GroupBox();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
             btn_Settings = new PictureBox();
@@ -45,11 +40,6 @@
             label1 = new Label();
             Dashboard_nudQuantity = new NumericUpDown();
             panel3 = new Panel();
-            Dashboard_tcCategory.SuspendLayout();
-            tabPage1.SuspendLayout();
-            Dashboard_tcSubCategory.SuspendLayout();
-            tabPage3.SuspendLayout();
-            flp_tabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel2.SuspendLayout();
@@ -58,65 +48,12 @@
             // 
             // Dashboard_tcCategory
             // 
-            Dashboard_tcCategory.Controls.Add(tabPage1);
             Dashboard_tcCategory.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Dashboard_tcCategory.Location = new Point(3, 3);
             Dashboard_tcCategory.Name = "Dashboard_tcCategory";
             Dashboard_tcCategory.SelectedIndex = 0;
             Dashboard_tcCategory.Size = new Size(827, 666);
             Dashboard_tcCategory.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(Dashboard_tcSubCategory);
-            tabPage1.Location = new Point(4, 30);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(819, 632);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // Dashboard_tcSubCategory
-            // 
-            Dashboard_tcSubCategory.Controls.Add(tabPage3);
-            Dashboard_tcSubCategory.Location = new Point(0, 0);
-            Dashboard_tcSubCategory.Name = "Dashboard_tcSubCategory";
-            Dashboard_tcSubCategory.SelectedIndex = 0;
-            Dashboard_tcSubCategory.Size = new Size(827, 636);
-            Dashboard_tcSubCategory.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            tabPage3.Controls.Add(flp_tabPage);
-            tabPage3.Location = new Point(4, 30);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(819, 602);
-            tabPage3.TabIndex = 0;
-            tabPage3.Text = "Coffee";
-            tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // flp_tabPage
-            // 
-            flp_tabPage.AutoScroll = true;
-            flp_tabPage.Controls.Add(groupBox1);
-            flp_tabPage.Location = new Point(6, 50);
-            flp_tabPage.Name = "flp_tabPage";
-            flp_tabPage.Size = new Size(820, 618);
-            flp_tabPage.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            groupBox1.BackgroundImage = (Image)resources.GetObject("groupBox1.BackgroundImage");
-            groupBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            flp_tabPage.SetFlowBreak(groupBox1, true);
-            groupBox1.Location = new Point(3, 3);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 143);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
             // 
             // textBox1
             // 
@@ -230,11 +167,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
             Load += Dashboard_Load;
-            Dashboard_tcCategory.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            Dashboard_tcSubCategory.ResumeLayout(false);
-            tabPage3.ResumeLayout(false);
-            flp_tabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).EndInit();
             panel2.ResumeLayout(false);
@@ -247,20 +179,15 @@
         #endregion
 
         private TabControl Dashboard_tcCategory;
-        private TabPage tabPage1;
         private TextBox textBox1;
         private PictureBox pictureBox1;
         private PictureBox btn_Settings;
         private Panel panel1;
-        private TabControl Dashboard_tcSubCategory;
-        private TabPage tabPage3;
-        private FlowLayoutPanel flp_tabPage;
         private Button Dashboard_btnAdd;
         private Panel panel2;
         private NumericUpDown Dashboard_nudQuantity;
         private Label label2;
         private Label label1;
-        private GroupBox groupBox1;
         private Panel panel3;
     }
 }

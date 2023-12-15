@@ -9,7 +9,7 @@ namespace GrocerEase
 
         private void Login_btnLogin_Click(object sender, EventArgs e)
         {
-            Dashboard dashboard = new Dashboard();
+            Dashboard dashboard = new();
             this.Hide();
             dashboard.ShowDialog();
         }

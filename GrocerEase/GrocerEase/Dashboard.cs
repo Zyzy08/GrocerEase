@@ -27,6 +27,13 @@ namespace GrocerEase
             settings.ShowDialog();
         }
 
+        private static Image ByteArrayToImage(byte[] byteArray)
+        {
+            using MemoryStream ms = new(byteArray);
+            Image image = Image.FromStream(ms);
+            return image;
+        }
+
         private void Dashboard_Load(object sender, EventArgs e)
         {
             using SqlConnection connection = new(connectionString);
@@ -75,7 +82,7 @@ namespace GrocerEase
                             Size = new Size(819, 602)
                         };
 
-                        string queryItems = "SELECT Item_Name FROM tbl_Items WHERE SubCategory_ID=@subcategoryId";
+                        string queryItems = "SELECT Item_Name, Item_Icon FROM tbl_Items WHERE SubCategory_ID=@subcategoryId";
                         SqlDataAdapter adapterItems = new(queryItems, connection);
                         adapterItems.SelectCommand.Parameters.AddWithValue("@subcategoryId", subcategoryId);
                         DataTable itemsTable = new();
@@ -95,8 +102,20 @@ namespace GrocerEase
                             {
                                 Name = "Item" + itemRow["Item_Name"].ToString(),
                                 Text = itemRow["Item_Name"].ToString(),
-                                Size = new Size(200, 143)
+                                Size = new Size(200, 143),
+                                BackgroundImageLayout = ImageLayout.Zoom
                             };
+
+                            if (itemRow["Item_Icon"] != DBNull.Value)
+                            {
+                                byte[] imageBytes = (byte[])itemRow["Item_Icon"];
+                                Image itemImage = ByteArrayToImage(imageBytes);
+                                groupBoxItem.BackgroundImage = itemImage;
+                            }
+                            else
+                            {
+                                groupBoxItem.Text += " (No Image)";
+                            }
 
                             flowLayoutPanelItems.Controls.Add(groupBoxItem);
                         }
