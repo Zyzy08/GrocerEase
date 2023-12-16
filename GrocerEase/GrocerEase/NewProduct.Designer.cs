@@ -180,6 +180,7 @@
             StockManagement_btn_Cancel.TabIndex = 15;
             StockManagement_btn_Cancel.Text = "Cancel";
             StockManagement_btn_Cancel.UseVisualStyleBackColor = true;
+            StockManagement_btn_Cancel.Click += StockManagement_btn_Cancel_Click;
             // 
             // nud_Price
             // 

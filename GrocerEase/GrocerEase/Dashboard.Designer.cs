@@ -36,7 +36,7 @@
             panel1 = new Panel();
             Dashboard_btnAdd = new Button();
             panel2 = new Panel();
-            label2 = new Label();
+            lbl_Price = new Label();
             label1 = new Label();
             Dashboard_nudQuantity = new NumericUpDown();
             panel3 = new Panel();
@@ -105,7 +105,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(label2);
+            panel2.Controls.Add(lbl_Price);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(Dashboard_nudQuantity);
             panel2.Controls.Add(Dashboard_tcCategory);
@@ -115,15 +115,15 @@
             panel2.Size = new Size(830, 735);
             panel2.TabIndex = 5;
             // 
-            // label2
+            // lbl_Price
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(3, 702);
-            label2.Name = "label2";
-            label2.Size = new Size(63, 30);
-            label2.TabIndex = 4;
-            label2.Text = "P0.00";
+            lbl_Price.AutoSize = true;
+            lbl_Price.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_Price.Location = new Point(3, 702);
+            lbl_Price.Name = "lbl_Price";
+            lbl_Price.Size = new Size(63, 30);
+            lbl_Price.TabIndex = 4;
+            lbl_Price.Text = "₱0.00";
             // 
             // label1
             // 
@@ -186,7 +186,7 @@
         private Button Dashboard_btnAdd;
         private Panel panel2;
         private NumericUpDown Dashboard_nudQuantity;
-        private Label label2;
+        private Label lbl_Price;
         private Label label1;
         private Panel panel3;
     }

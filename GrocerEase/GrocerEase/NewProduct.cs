@@ -145,6 +145,14 @@ namespace GrocerEase
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Product added successfully!");
+                txt_Name.Text = string.Empty;
+                nud_Price.Value = 0;
+                txt_Details.Text = string.Empty;
+                dtp_Expiration.Value = DateTime.Now;
+                pb_Image.Image = null;
+                cb_Category.SelectedIndex = 0;
+                cb_SubCategory.Items.Clear();
+                cb_SubCategory.SelectedIndex = -1;
             }
         }
 
@@ -153,6 +161,11 @@ namespace GrocerEase
             using MemoryStream ms = new();
             image.Save(ms, ImageFormat.Png);
             return ms.ToArray();
+        }
+
+        private void StockManagement_btn_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
