@@ -1,3 +1,5 @@
+using frmAddAcount;
+
 namespace GrocerEase
 {
     public partial class Login : Form
@@ -7,11 +9,18 @@ namespace GrocerEase
             InitializeComponent();
         }
 
-        private void Login_btnLogin_Click(object sender, EventArgs e)
+        private void Btn_Register_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+            this.Hide();
+            register.Show();
+        }
+
+        private void Btn_Login_Click(object sender, EventArgs e)
         {
             Dashboard dashboard = new();
             this.Hide();
-            dashboard.ShowDialog();
+            dashboard.Show();
         }
     }
 }

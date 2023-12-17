@@ -52,7 +52,7 @@
             Dashboard_tcCategory.Location = new Point(3, 3);
             Dashboard_tcCategory.Name = "Dashboard_tcCategory";
             Dashboard_tcCategory.SelectedIndex = 0;
-            Dashboard_tcCategory.Size = new Size(827, 666);
+            Dashboard_tcCategory.Size = new Size(862, 666);
             Dashboard_tcCategory.TabIndex = 0;
             // 
             // textBox1
@@ -76,7 +76,7 @@
             // btn_Settings
             // 
             btn_Settings.Image = (Image)resources.GetObject("btn_Settings.Image");
-            btn_Settings.Location = new Point(797, 64);
+            btn_Settings.Location = new Point(835, 64);
             btn_Settings.Name = "btn_Settings";
             btn_Settings.Size = new Size(45, 43);
             btn_Settings.SizeMode = PictureBoxSizeMode.Zoom;
@@ -112,7 +112,7 @@
             panel2.Controls.Add(Dashboard_btnAdd);
             panel2.Location = new Point(12, 113);
             panel2.Name = "panel2";
-            panel2.Size = new Size(830, 735);
+            panel2.Size = new Size(868, 735);
             panel2.TabIndex = 5;
             // 
             // lbl_Price
@@ -146,9 +146,9 @@
             // 
             // panel3
             // 
-            panel3.Location = new Point(848, 64);
+            panel3.Location = new Point(886, 64);
             panel3.Name = "panel3";
-            panel3.Size = new Size(580, 784);
+            panel3.Size = new Size(542, 784);
             panel3.TabIndex = 6;
             // 
             // Dashboard

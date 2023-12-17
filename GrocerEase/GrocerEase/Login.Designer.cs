@@ -34,7 +34,8 @@
             label2 = new Label();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
-            Login_btnLogin = new Button();
+            btn_Login = new Button();
+            btn_Register = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -84,16 +85,27 @@
             textBox2.Size = new Size(257, 39);
             textBox2.TabIndex = 4;
             // 
-            // Login_btnLogin
+            // btn_Login
             // 
-            Login_btnLogin.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Login_btnLogin.Location = new Point(340, 363);
-            Login_btnLogin.Name = "Login_btnLogin";
-            Login_btnLogin.Size = new Size(172, 45);
-            Login_btnLogin.TabIndex = 5;
-            Login_btnLogin.Text = "LOGIN";
-            Login_btnLogin.UseVisualStyleBackColor = true;
-            Login_btnLogin.Click += Login_btnLogin_Click;
+            btn_Login.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Login.Location = new Point(344, 342);
+            btn_Login.Name = "btn_Login";
+            btn_Login.Size = new Size(172, 45);
+            btn_Login.TabIndex = 5;
+            btn_Login.Text = "LOGIN";
+            btn_Login.UseVisualStyleBackColor = true;
+            btn_Login.Click += Btn_Login_Click;
+            // 
+            // btn_Register
+            // 
+            btn_Register.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Register.Location = new Point(344, 393);
+            btn_Register.Name = "btn_Register";
+            btn_Register.Size = new Size(172, 45);
+            btn_Register.TabIndex = 6;
+            btn_Register.Text = "REGISTER";
+            btn_Register.UseVisualStyleBackColor = true;
+            btn_Register.Click += Btn_Register_Click;
             // 
             // Login
             // 
@@ -101,7 +113,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(800, 450);
-            Controls.Add(Login_btnLogin);
+            Controls.Add(btn_Register);
+            Controls.Add(btn_Login);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(label2);
@@ -123,6 +136,7 @@
         private Label label2;
         private TextBox textBox1;
         private TextBox textBox2;
-        private Button Login_btnLogin;
+        private Button btn_Login;
+        private Button btn_Register;
     }
 }
