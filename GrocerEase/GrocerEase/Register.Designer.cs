@@ -254,7 +254,7 @@
             cbxCheck.TabIndex = 21;
             cbxCheck.Text = "Show Password";
             cbxCheck.UseVisualStyleBackColor = true;
-            cbxCheck.CheckedChanged += check_CheckedChanged;
+            cbxCheck.CheckedChanged += Check_CheckedChanged;
             // 
             // btnRegister
             // 
@@ -266,7 +266,7 @@
             btnRegister.TabIndex = 19;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = false;
-            btnRegister.Click += btnRegister_Click;
+            btnRegister.Click += BtnRegister_Click;
             // 
             // btn_Login
             // 
@@ -278,7 +278,7 @@
             btn_Login.TabIndex = 22;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = false;
-            btn_Login.Click += btn_Login_Click;
+            btn_Login.Click += Btn_Login_Click;
             // 
             // Register
             // 

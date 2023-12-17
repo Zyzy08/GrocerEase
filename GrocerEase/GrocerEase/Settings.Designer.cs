@@ -182,6 +182,7 @@
             Name = "Settings";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Settings";
+            Load += Settings_Load;
             ((System.ComponentModel.ISupportInitialize)btn_Back).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tc_Settings.ResumeLayout(false);

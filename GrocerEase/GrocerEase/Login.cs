@@ -11,7 +11,7 @@ namespace GrocerEase
 
         private void Btn_Register_Click(object sender, EventArgs e)
         {
-            Register register = new Register();
+            Register register = new();
             this.Hide();
             register.Show();
         }

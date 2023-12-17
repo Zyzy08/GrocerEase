@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewProduct));
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -130,7 +129,7 @@
             // 
             // pb_Image
             // 
-            pb_Image.Image = (Image)resources.GetObject("pb_Image.Image");
+            pb_Image.Image = Properties.Resources.Upload;
             pb_Image.Location = new Point(98, 217);
             pb_Image.Name = "pb_Image";
             pb_Image.Size = new Size(100, 50);

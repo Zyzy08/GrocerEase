@@ -18,8 +18,8 @@ namespace GrocerEase
             InitializeComponent();
         }
 
-        SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Moi\\Documents\\DBLogin.mdf;Integrated Security=True;Connect Timeout=30");
-        private void btnRegister_Click(object sender, EventArgs e)
+        readonly SqlConnection connection = new("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Moi\\Documents\\DBLogin.mdf;Integrated Security=True;Connect Timeout=30");
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
             try
             {
@@ -28,11 +28,11 @@ namespace GrocerEase
                 {
                     if (Password.Text == ConPass.Text)
                     {
-                        int v = check(Email.Text);
+                        int v = Check(Email.Text);
                         if (v != 1)
                         {
                             connection.Open();
-                            SqlCommand command = new SqlCommand("insert into tbl_Registration values(@f_name,@l_name, @m_name" +
+                            SqlCommand command = new("insert into tbl_Registration values(@f_name,@l_name, @m_name" +
                                 "@b_date, @gender, @Address, @email, @password)", connection);
 
                             command.Parameters.AddWithValue("@f_name", Fname.Text);
@@ -83,18 +83,18 @@ namespace GrocerEase
 
         }
 
-        int check(string email)
+        int Check(string email)
         {
             connection.Open();
             string query = "select count(*) from tbl_Registration where email = '" + email + "'";
-            SqlCommand command = new SqlCommand(query, connection);
+            SqlCommand command = new(query, connection);
             int v = (int)command.ExecuteScalar();
             connection.Close();
             return v;
 
         }
 
-        private void check_CheckedChanged(object sender, EventArgs e)
+        private void Check_CheckedChanged(object sender, EventArgs e)
         {
             if (cbxCheck.Checked)
             {
@@ -108,10 +108,10 @@ namespace GrocerEase
             }
         }
 
-        private void btn_Login_Click(object sender, EventArgs e)
+        private void Btn_Login_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login login = new Login();
+            Login login = new();
             login.Show();
         }
     }

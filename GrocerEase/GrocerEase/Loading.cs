@@ -17,7 +17,7 @@ namespace GrocerEase
             InitializeComponent();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             if (progressBar1.Value < 100)
             {
@@ -32,7 +32,7 @@ namespace GrocerEase
                 MessageBox.Show("Welcome to POS System!");
 
                 Hide();
-                Login login = new Login();
+                Login login = new();
                 login.Show();
             }
         }
