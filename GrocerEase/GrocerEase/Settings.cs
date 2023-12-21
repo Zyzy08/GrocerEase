@@ -19,7 +19,7 @@ namespace GrocerEase
 
         private void Btn_Back_Click(object sender, EventArgs e)
         {
-            Dashboard dashboard = new();
+            POS dashboard = new();
             dashboard.Show();
             this.Close();
         }

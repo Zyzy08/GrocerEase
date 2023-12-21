@@ -1,24 +1,22 @@
 using frmAddAcount;
+using System.Runtime.InteropServices;
 
 namespace GrocerEase
 {
     public partial class Login : Form
     {
+        [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
+
         public Login()
         {
             InitializeComponent();
-        }
-
-        private void Btn_Register_Click(object sender, EventArgs e)
-        {
-            Register register = new();
-            this.Hide();
-            register.Show();
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
         }
 
         private void Btn_Login_Click(object sender, EventArgs e)
         {
-            Dashboard dashboard = new();
+            POS dashboard = new();
             this.Hide();
             dashboard.Show();
         }

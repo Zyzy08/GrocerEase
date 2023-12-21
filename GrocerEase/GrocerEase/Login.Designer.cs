@@ -35,7 +35,6 @@
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             btn_Login = new Button();
-            btn_Register = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -88,7 +87,7 @@
             // btn_Login
             // 
             btn_Login.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_Login.Location = new Point(344, 342);
+            btn_Login.Location = new Point(341, 362);
             btn_Login.Name = "btn_Login";
             btn_Login.Size = new Size(172, 45);
             btn_Login.TabIndex = 5;
@@ -96,24 +95,12 @@
             btn_Login.UseVisualStyleBackColor = true;
             btn_Login.Click += Btn_Login_Click;
             // 
-            // btn_Register
-            // 
-            btn_Register.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_Register.Location = new Point(344, 393);
-            btn_Register.Name = "btn_Register";
-            btn_Register.Size = new Size(172, 45);
-            btn_Register.TabIndex = 6;
-            btn_Register.Text = "REGISTER";
-            btn_Register.UseVisualStyleBackColor = true;
-            btn_Register.Click += Btn_Register_Click;
-            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(800, 450);
-            Controls.Add(btn_Register);
             Controls.Add(btn_Login);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -137,6 +124,5 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private Button btn_Login;
-        private Button btn_Register;
     }
 }

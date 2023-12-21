@@ -11,15 +11,15 @@ using System.Data.SqlClient;
 
 namespace GrocerEase
 {
-    public partial class Dashboard : Form
+    public partial class POS : Form
     {
-        public Dashboard()
+        public POS()
         {
             InitializeComponent();
         }
 
         public string connectionString = "Data Source=DESKTOP-BB2GC4I;Initial Catalog = db_GrocerEase; Integrated Security = True; Encrypt=False;";
-        
+
         private void Btn_Settings_Click(object sender, EventArgs e)
         {
             Settings settings = new();
@@ -34,7 +34,7 @@ namespace GrocerEase
             return image;
         }
 
-        private void Dashboard_Load(object sender, EventArgs e)
+        private void POS_Load(object sender, EventArgs e)
         {
             using SqlConnection connection = new(connectionString);
             connection.Open();
@@ -51,7 +51,7 @@ namespace GrocerEase
                     int categoryId = Convert.ToInt32(categoryRow["Category_ID"]);
                     string? categoryName = categoryRow["Category_Name"].ToString();
 
-                    TabPage tabPageCategory = new()
+                    TabPage tp_Category = new()
                     {
                         Name = "Category" + categoryId,
                         Text = categoryName,
@@ -64,9 +64,9 @@ namespace GrocerEase
                     DataTable subcategoriesTable = new();
                     adapterSubcategories.Fill(subcategoriesTable);
 
-                    TabControl tcSubcategories = new()
+                    TabControl tc_Subcategories = new()
                     {
-                        Name = "tcSubcategories",
+                        Name = "Subcategories",
                         Dock = DockStyle.Fill
                     };
 
@@ -75,7 +75,7 @@ namespace GrocerEase
                         int subcategoryId = Convert.ToInt32(subcategoryRow["SubCategory_ID"]);
                         string? subcategoryName = subcategoryRow["SubCategory_Name"].ToString();
 
-                        TabPage tabPageSubcategory = new()
+                        TabPage tp_Subcategory = new()
                         {
                             Name = "Subcategory" + subcategoryId,
                             Text = subcategoryName,
@@ -88,7 +88,7 @@ namespace GrocerEase
                         DataTable itemsTable = new();
                         adapterItems.Fill(itemsTable);
 
-                        FlowLayoutPanel flowLayoutPanelItems = new()
+                        FlowLayoutPanel flp_Items = new()
                         {
                             Name = "flowLayoutPanelItems",
                             Dock = DockStyle.Fill,
@@ -117,17 +117,27 @@ namespace GrocerEase
                                 groupBoxItem.Text += " (No Image)";
                             }
 
-                            flowLayoutPanelItems.Controls.Add(groupBoxItem);
+                            flp_Items.Controls.Add(groupBoxItem);
                         }
 
-                        tabPageSubcategory.Controls.Add(flowLayoutPanelItems);
-                        tcSubcategories.TabPages.Add(tabPageSubcategory);
+                        tp_Subcategory.Controls.Add(flp_Items);
+                        tc_Subcategories.TabPages.Add(tp_Subcategory);
                     }
 
-                    tabPageCategory.Controls.Add(tcSubcategories);
-                    Dashboard_tcCategory.TabPages.Add(tabPageCategory);
+                    tp_Category.Controls.Add(tc_Subcategories);
+                    tc_Categories.TabPages.Add(tp_Category);
                 }
             }
+        }
+
+        private void Btn_Exit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
