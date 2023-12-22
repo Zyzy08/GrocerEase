@@ -118,7 +118,7 @@ namespace GrocerEase
                 imageBytes = ImageToByteArray(pb_Image.Image);
             }
 
-            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            using SqlConnection connection = new(DatabaseManager.ConnectionString ?? throw new InvalidOperationException("Connection string is not initialized."));
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
