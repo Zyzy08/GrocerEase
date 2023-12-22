@@ -2,25 +2,28 @@
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 
 namespace GrocerEase
 {
     public partial class NewProduct : Form
     {
-        private Settings settingsForm;
+        private readonly Settings settingsForm;
+
         public NewProduct(Settings settingsForm)
         {
             InitializeComponent();
             this.settingsForm = settingsForm;
         }
 
-        public string? connectionString = "Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;";
-
         private void NewProduct_Load(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new(connectionString))
+            lbl_ID.Text = "1";
+
+            using (SqlConnection connection = new(DatabaseManager.ConnectionString))
             {
                 connection.Open();
 
@@ -31,13 +34,15 @@ namespace GrocerEase
                     using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
                     object latestItemID = commandLatestItemID.ExecuteScalar();
 
-                    int newItemID = (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
-
-                    lbl_ID.Text = newItemID.ToString();
+                    if (latestItemID != null && latestItemID != DBNull.Value)
+                    {
+                        int newItemID = (int)latestItemID + 1;
+                        lbl_ID.Text = newItemID.ToString();
+                    }
                 }
             }
 
-            using (SqlConnection connection = new(connectionString))
+            using (SqlConnection connection = new(DatabaseManager.ConnectionString))
             {
                 connection.Open();
 
@@ -56,43 +61,6 @@ namespace GrocerEase
             }
 
             cb_Category.SelectedIndex = 0;
-
-            PopulateSubcategories();
-
-            cb_Category.SelectedIndexChanged += (cbCategorySender, cbCategoryEvent) =>
-            {
-                PopulateSubcategories();
-            };
-        }
-
-        private void PopulateSubcategories()
-        {
-            cb_SubCategory.Items.Clear();
-
-            using (SqlConnection connection = new(connectionString))
-            {
-                connection.Open();
-
-                if (connection.State == ConnectionState.Open)
-                {
-                    string? querySubcategories = "SELECT SubCategory_Name FROM tbl_SubCategories WHERE Category_ID = (SELECT Category_ID FROM tbl_Categories WHERE Category_Name = @SelectedCategory)";
-
-                    using SqlCommand commandSubcategories = new(querySubcategories, connection);
-                    commandSubcategories.Parameters.AddWithValue("@SelectedCategory", cb_Category.SelectedItem.ToString());
-
-                    using SqlDataReader readerSubcategories = commandSubcategories.ExecuteReader();
-                    while (readerSubcategories.Read())
-                    {
-                        string? subcategoryName = readerSubcategories["SubCategory_Name"].ToString();
-                        cb_SubCategory.Items.Add(subcategoryName);
-                    }
-                }
-            }
-
-            if (cb_SubCategory.Items.Count > 0)
-            {
-                cb_SubCategory.SelectedIndex = 0;
-            }
         }
 
         private void Pb_Image_Click(object sender, EventArgs e)
@@ -103,22 +71,40 @@ namespace GrocerEase
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pb_Image.Image = new System.Drawing.Bitmap(openFileDialog.FileName);
+                pb_Image.Image = new Bitmap(openFileDialog.FileName);
             }
         }
 
         private void StockManagement_btn_Done_Click(object sender, EventArgs e)
         {
-            _ = cb_Category.SelectedItem?.ToString();
-            string? selectedSubcategory = cb_SubCategory.SelectedItem?.ToString();
+            int selectedCategoryIndex = cb_Category.SelectedIndex;
+
+            if (selectedCategoryIndex == -1)
+            {
+                MessageBox.Show("Please select a category.", "Missing Category", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string? itemName = txt_Name.Text;
             decimal itemPrice = nud_Price.Value;
-            string? itemDetails = txt_Details.Text;
-            DateTime itemExpirationDate = dtp_Expiration.Value;
+            string? itemNetWeight = txt_NetWT.Text;
+            int itemInStock = (int)nud_InStock.Value;
+
+            if (string.IsNullOrWhiteSpace(itemName))
+            {
+                MessageBox.Show("Please enter a valid product name.", "Missing Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (itemPrice <= 0)
             {
                 MessageBox.Show("Please enter a valid price greater than 0.", "Invalid Price", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(itemNetWeight))
+            {
+                MessageBox.Show("Please enter a valid net weight.", "Missing Net Weight", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -132,63 +118,61 @@ namespace GrocerEase
                 imageBytes = ImageToByteArray(pb_Image.Image);
             }
 
-            using SqlConnection connection = new(connectionString);
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
             {
-                string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
-
-                using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
-                object latestItemID = commandLatestItemID.ExecuteScalar();
-
-                int newItemID = (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
+                int newItemID = GetNewItemId(connection);
 
                 lbl_ID.Text = newItemID.ToString();
 
-                string insertQuery = @"
-            INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_Details, Item_Expiration, Item_Icon, SubCategory_ID)
-            VALUES (@ItemID, @ItemName, @ItemPrice, @ItemDetails, @ItemExpirationDate, @ItemIcon, (SELECT SubCategory_ID FROM tbl_SubCategories WHERE SubCategory_Name = @SelectedSubcategory))";
+                string insertQuery = @"INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID)
+                VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
 
                 using SqlCommand command = new(insertQuery, connection);
 
                 command.Parameters.AddWithValue("@ItemID", newItemID);
                 command.Parameters.AddWithValue("@ItemName", itemName);
                 command.Parameters.AddWithValue("@ItemPrice", itemPrice);
-                command.Parameters.AddWithValue("@ItemDetails", (object)itemDetails ?? DBNull.Value);
-                command.Parameters.AddWithValue("@ItemExpirationDate", itemExpirationDate);
-
-                SqlParameter iconParameter = new("@ItemIcon", SqlDbType.VarBinary, -1);
-                iconParameter.Value = imageBytes as object ?? DBNull.Value;
+                command.Parameters.AddWithValue("@ItemNetWeight", itemNetWeight);
+                SqlParameter iconParameter = new("@ItemIcon", SqlDbType.VarBinary, -1)
+                {
+                    Value = imageBytes as object ?? DBNull.Value
+                };
                 command.Parameters.Add(iconParameter);
 
-                command.Parameters.AddWithValue("@SelectedSubcategory", selectedSubcategory);
+                command.Parameters.AddWithValue("@ItemInStock", itemInStock);
+                command.Parameters.AddWithValue("@CategoryID", selectedCategoryIndex + 1);
+
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Product added successfully!");
                 txt_Name.Text = string.Empty;
                 nud_Price.Value = 0;
-                txt_Details.Text = string.Empty;
-                dtp_Expiration.Value = DateTime.Now;
+                txt_NetWT.Text = string.Empty;
                 pb_Image.Image = Properties.Resources.Upload;
                 cb_Category.SelectedIndex = 0;
-                cb_SubCategory.Items.Clear();
-                cb_SubCategory.SelectedIndex = -1;
+                nud_InStock.Value = 0;
 
-                commandLatestItemID.CommandText = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
-                latestItemID = commandLatestItemID.ExecuteScalar();
-                newItemID = (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
+                newItemID = GetNewItemId(connection);
 
                 lbl_ID.Text = newItemID.ToString();
             }
         }
 
+        private static int GetNewItemId(SqlConnection connection)
+        {
+            string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
+            using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
+            object latestItemID = commandLatestItemID.ExecuteScalar();
+            return (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
+        }
+
         private static bool IsDefaultImage(Image image)
         {
             byte[] defaultImageBytes = ImageToByteArray(Properties.Resources.Upload);
-
             byte[] currentImageBytes = ImageToByteArray(image);
-
             return StructuralComparisons.StructuralEqualityComparer.Equals(defaultImageBytes, currentImageBytes);
         }
 

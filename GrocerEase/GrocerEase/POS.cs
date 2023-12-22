@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace GrocerEase
 {
@@ -16,9 +12,8 @@ namespace GrocerEase
         public POS()
         {
             InitializeComponent();
+            DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
         }
-
-        public string connectionString = "Data Source=DESKTOP-BB2GC4I;Initial Catalog = db_GrocerEase; Integrated Security = True; Encrypt=False;";
 
         private void Btn_Settings_Click(object sender, EventArgs e)
         {
@@ -36,7 +31,7 @@ namespace GrocerEase
 
         private void POS_Load(object sender, EventArgs e)
         {
-            using SqlConnection connection = new(connectionString);
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
@@ -58,73 +53,45 @@ namespace GrocerEase
                         Size = new Size(819, 632)
                     };
 
-                    string querySubcategories = "SELECT SubCategory_ID, SubCategory_Name FROM tbl_SubCategories WHERE Category_ID=@categoryId";
-                    SqlDataAdapter adapterSubcategories = new(querySubcategories, connection);
-                    adapterSubcategories.SelectCommand.Parameters.AddWithValue("@categoryId", categoryId);
-                    DataTable subcategoriesTable = new();
-                    adapterSubcategories.Fill(subcategoriesTable);
+                    string queryItems = "SELECT Item_Name, Item_NetWT, Item_Icon FROM tbl_Items WHERE Category_ID=@categoryId";
+                    SqlDataAdapter adapterItems = new(queryItems, connection);
+                    adapterItems.SelectCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                    DataTable itemsTable = new();
+                    adapterItems.Fill(itemsTable);
 
-                    TabControl tc_Subcategories = new()
+                    FlowLayoutPanel flp_Items = new()
                     {
-                        Name = "Subcategories",
-                        Dock = DockStyle.Fill
+                        Name = "flowLayoutPanelItems",
+                        Dock = DockStyle.Fill,
+                        FlowDirection = FlowDirection.LeftToRight,
+                        AutoScroll = true
                     };
 
-                    foreach (DataRow subcategoryRow in subcategoriesTable.Rows)
+                    foreach (DataRow itemRow in itemsTable.Rows)
                     {
-                        int subcategoryId = Convert.ToInt32(subcategoryRow["SubCategory_ID"]);
-                        string? subcategoryName = subcategoryRow["SubCategory_Name"].ToString();
-
-                        TabPage tp_Subcategory = new()
+                        GroupBox groupBoxItem = new()
                         {
-                            Name = "Subcategory" + subcategoryId,
-                            Text = subcategoryName,
-                            Size = new Size(819, 602)
+                            Name = "Item" + itemRow["Item_Name"].ToString(),
+                            Text = itemRow["Item_Name"].ToString() + " " + itemRow["Item_NetWT"].ToString(),
+                            Size = new Size(200, 143),
+                            BackgroundImageLayout = ImageLayout.Zoom
                         };
 
-                        string queryItems = "SELECT Item_Name, Item_Icon FROM tbl_Items WHERE SubCategory_ID=@subcategoryId";
-                        SqlDataAdapter adapterItems = new(queryItems, connection);
-                        adapterItems.SelectCommand.Parameters.AddWithValue("@subcategoryId", subcategoryId);
-                        DataTable itemsTable = new();
-                        adapterItems.Fill(itemsTable);
-
-                        FlowLayoutPanel flp_Items = new()
+                        if (itemRow["Item_Icon"] != DBNull.Value)
                         {
-                            Name = "flowLayoutPanelItems",
-                            Dock = DockStyle.Fill,
-                            FlowDirection = FlowDirection.LeftToRight,
-                            AutoScroll = true
-                        };
-
-                        foreach (DataRow itemRow in itemsTable.Rows)
+                            byte[] imageBytes = (byte[])itemRow["Item_Icon"];
+                            Image itemImage = ByteArrayToImage(imageBytes);
+                            groupBoxItem.BackgroundImage = itemImage;
+                        }
+                        else
                         {
-                            GroupBox groupBoxItem = new()
-                            {
-                                Name = "Item" + itemRow["Item_Name"].ToString(),
-                                Text = itemRow["Item_Name"].ToString(),
-                                Size = new Size(200, 143),
-                                BackgroundImageLayout = ImageLayout.Zoom
-                            };
-
-                            if (itemRow["Item_Icon"] != DBNull.Value)
-                            {
-                                byte[] imageBytes = (byte[])itemRow["Item_Icon"];
-                                Image itemImage = ByteArrayToImage(imageBytes);
-                                groupBoxItem.BackgroundImage = itemImage;
-                            }
-                            else
-                            {
-                                groupBoxItem.Text += " (No Image)";
-                            }
-
-                            flp_Items.Controls.Add(groupBoxItem);
+                            groupBoxItem.Text += " (No Image)";
                         }
 
-                        tp_Subcategory.Controls.Add(flp_Items);
-                        tc_Subcategories.TabPages.Add(tp_Subcategory);
+                        flp_Items.Controls.Add(groupBoxItem);
                     }
 
-                    tp_Category.Controls.Add(tc_Subcategories);
+                    tp_Category.Controls.Add(flp_Items);
                     tc_Categories.TabPages.Add(tp_Category);
                 }
             }
@@ -133,11 +100,6 @@ namespace GrocerEase
         private void Btn_Exit_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

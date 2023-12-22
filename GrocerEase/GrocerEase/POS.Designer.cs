@@ -245,7 +245,6 @@
             label3.TabIndex = 1;
             label3.Text = "Products";
             label3.TextAlign = ContentAlignment.TopCenter;
-            label3.Click += label3_Click;
             // 
             // label7
             // 
