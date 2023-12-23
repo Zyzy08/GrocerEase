@@ -161,12 +161,14 @@ namespace GrocerEase
             }
         }
 
-        private static int GetNewItemId(SqlConnection connection)
+        private int GetNewItemId(SqlConnection connection)
         {
             string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
+
             using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
             object latestItemID = commandLatestItemID.ExecuteScalar();
-            return (latestItemID == DBNull.Value) ? 1 : ((int)latestItemID + 1);
+
+            return latestItemID != null && latestItemID != DBNull.Value ? Convert.ToInt32(latestItemID) + 1 : 1;
         }
 
         private static bool IsDefaultImage(Image image)

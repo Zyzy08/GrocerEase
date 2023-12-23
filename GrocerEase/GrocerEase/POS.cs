@@ -101,5 +101,12 @@ namespace GrocerEase
         {
             Environment.Exit(0);
         }
+
+        private void Lbl_Products_Click(object sender, EventArgs e)
+        {
+            Products products = new();
+            products.Show();
+            this.Close();
+        }
     }
 }

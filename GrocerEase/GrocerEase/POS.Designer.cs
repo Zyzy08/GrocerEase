@@ -45,7 +45,7 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             label2 = new Label();
             label6 = new Label();
-            label3 = new Label();
+            lbl_Products = new Label();
             label7 = new Label();
             label4 = new Label();
             label8 = new Label();
@@ -53,6 +53,10 @@
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel1.SuspendLayout();
@@ -196,7 +200,7 @@
             // 
             flowLayoutPanel1.Controls.Add(label2);
             flowLayoutPanel1.Controls.Add(label6);
-            flowLayoutPanel1.Controls.Add(label3);
+            flowLayoutPanel1.Controls.Add(lbl_Products);
             flowLayoutPanel1.Controls.Add(label7);
             flowLayoutPanel1.Controls.Add(label4);
             flowLayoutPanel1.Controls.Add(label8);
@@ -204,6 +208,10 @@
             flowLayoutPanel1.Controls.Add(label9);
             flowLayoutPanel1.Controls.Add(label10);
             flowLayoutPanel1.Controls.Add(label11);
+            flowLayoutPanel1.Controls.Add(label12);
+            flowLayoutPanel1.Controls.Add(label13);
+            flowLayoutPanel1.Controls.Add(label14);
+            flowLayoutPanel1.Controls.Add(label15);
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             flowLayoutPanel1.Location = new Point(-3, 59);
@@ -233,18 +241,19 @@
             label6.Size = new Size(154, 38);
             label6.TabIndex = 1;
             // 
-            // label3
+            // lbl_Products
             // 
-            label3.BackColor = SystemColors.Control;
-            label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.SandyBrown;
-            label3.Location = new Point(3, 76);
-            label3.Name = "label3";
-            label3.Size = new Size(154, 38);
-            label3.TabIndex = 1;
-            label3.Text = "Products";
-            label3.TextAlign = ContentAlignment.TopCenter;
+            lbl_Products.BackColor = SystemColors.Control;
+            lbl_Products.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Products.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Products.ForeColor = Color.SandyBrown;
+            lbl_Products.Location = new Point(3, 76);
+            lbl_Products.Name = "lbl_Products";
+            lbl_Products.Size = new Size(154, 38);
+            lbl_Products.TabIndex = 1;
+            lbl_Products.Text = "Products";
+            lbl_Products.TextAlign = ContentAlignment.TopCenter;
+            lbl_Products.Click += Lbl_Products_Click;
             // 
             // label7
             // 
@@ -324,6 +333,49 @@
             label11.Text = "POS";
             label11.TextAlign = ContentAlignment.TopCenter;
             // 
+            // label12
+            // 
+            label12.BackColor = SystemColors.Control;
+            label12.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(3, 380);
+            label12.Name = "label12";
+            label12.Size = new Size(154, 38);
+            label12.TabIndex = 7;
+            // 
+            // label13
+            // 
+            label13.BackColor = SystemColors.Control;
+            label13.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.White;
+            label13.Location = new Point(3, 418);
+            label13.Name = "label13";
+            label13.Size = new Size(154, 38);
+            label13.TabIndex = 8;
+            // 
+            // label14
+            // 
+            label14.BackColor = SystemColors.Control;
+            label14.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.White;
+            label14.Location = new Point(3, 456);
+            label14.Name = "label14";
+            label14.Size = new Size(154, 38);
+            label14.TabIndex = 9;
+            // 
+            // label15
+            // 
+            label15.BackColor = SystemColors.Control;
+            label15.BorderStyle = BorderStyle.FixedSingle;
+            label15.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label15.ForeColor = Color.SandyBrown;
+            label15.Location = new Point(3, 494);
+            label15.Name = "label15";
+            label15.Size = new Size(154, 38);
+            label15.TabIndex = 10;
+            label15.Text = "Logout";
+            label15.TextAlign = ContentAlignment.TopCenter;
+            // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -370,7 +422,7 @@
         private Label label2;
         private Button btn_Exit;
         private Label label4;
-        private Label label3;
+        private Label lbl_Products;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label5;
         private Label label6;
@@ -379,5 +431,9 @@
         private Label label9;
         private Label label10;
         private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
     }
 }

@@ -41,10 +41,13 @@
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
             tabPage6 = new TabPage();
+            toolStripContainer1 = new ToolStripContainer();
             ((System.ComponentModel.ISupportInitialize)btn_Back).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tc_Settings.SuspendLayout();
             tabPage2.SuspendLayout();
+            toolStripContainer1.ContentPanel.SuspendLayout();
+            toolStripContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -168,16 +171,34 @@
             tabPage6.Text = "tab6";
             tabPage6.UseVisualStyleBackColor = true;
             // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            toolStripContainer1.ContentPanel.AutoScroll = true;
+            toolStripContainer1.ContentPanel.Controls.Add(tc_Settings);
+            toolStripContainer1.ContentPanel.Controls.Add(panel4);
+            toolStripContainer1.ContentPanel.Controls.Add(panel1);
+            toolStripContainer1.ContentPanel.Controls.Add(btn_Back);
+            toolStripContainer1.ContentPanel.Controls.Add(pictureBox1);
+            toolStripContainer1.ContentPanel.Size = new Size(1424, 796);
+            toolStripContainer1.Dock = DockStyle.Fill;
+            toolStripContainer1.LeftToolStripPanelVisible = false;
+            toolStripContainer1.Location = new Point(0, 0);
+            toolStripContainer1.Name = "toolStripContainer1";
+            toolStripContainer1.RightToolStripPanelVisible = false;
+            toolStripContainer1.Size = new Size(1424, 821);
+            toolStripContainer1.TabIndex = 0;
+            toolStripContainer1.Text = "toolStripContainer1";
+            toolStripContainer1.TopToolStripPanelVisible = false;
+            // 
             // Settings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1424, 821);
-            Controls.Add(tc_Settings);
-            Controls.Add(panel4);
-            Controls.Add(panel1);
-            Controls.Add(btn_Back);
-            Controls.Add(pictureBox1);
+            Controls.Add(toolStripContainer1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Settings";
             StartPosition = FormStartPosition.CenterScreen;
@@ -187,6 +208,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tc_Settings.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
+            toolStripContainer1.ContentPanel.ResumeLayout(false);
+            toolStripContainer1.ResumeLayout(false);
+            toolStripContainer1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -203,5 +227,6 @@
         private TabPage tabPage5;
         private TabPage tabPage6;
         private Button StockManagement_btn_Add;
+        private ToolStripContainer toolStripContainer1;
     }
 }
