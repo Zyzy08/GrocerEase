@@ -1,17 +1,14 @@
-﻿namespace GrocerEase
+﻿using System.Windows.Forms;
+
+namespace GrocerEase
 {
     public partial class UI : Form
     {
+        string TabContent;
         public UI()
         {
             InitializeComponent();
-        }
-
-        private void Btn_Settings_Click(object sender, EventArgs e)
-        {
-            Settings settings = new();
-            this.Hide();
-            settings.ShowDialog();
+            DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
@@ -21,14 +18,110 @@
 
         private void Lbl_Products_Click(object sender, EventArgs e)
         {
-            Products products = new();
-            products.Show();
-            this.Close();
+            TabContent = "Products";
+            UI_Load(sender, e);
         }
 
         private void UI_Load(object sender, EventArgs e)
         {
+            pnl_Content.Controls.Clear();
 
+            foreach (Control control in flp_Tabs.Controls)
+            {
+                if (control is Label label && control.Tag != null && control.Tag.ToString() == "Tab")
+                {
+                    Label tabLabel = label;
+                    tabLabel.BackColor = SystemColors.Control;
+                    tabLabel.ForeColor = Color.SandyBrown;
+                    tabLabel.BorderStyle = BorderStyle.FixedSingle;
+                }
+            }
+
+            switch (TabContent)
+            {
+                case "Products":
+                    lbl_Products.BackColor = Color.SandyBrown;
+                    lbl_Products.ForeColor = Color.White;
+                    lbl_Products.BorderStyle = BorderStyle.None;
+                    Products products = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(products);
+                    products.Show();
+                    break;
+
+                case "Categories":
+                    lbl_Categories.BackColor = Color.SandyBrown;
+                    lbl_Categories.ForeColor = Color.White;
+                    lbl_Categories.BorderStyle = BorderStyle.None;
+                    break;
+
+                case "Users":
+                    lbl_Users.BackColor = Color.SandyBrown;
+                    lbl_Users.ForeColor = Color.White;
+                    lbl_Users.BorderStyle = BorderStyle.None;
+                    break;
+
+                case "POS":
+                    lbl_POS.BackColor = Color.SandyBrown;
+                    lbl_POS.ForeColor = Color.White;
+                    lbl_POS.BorderStyle = BorderStyle.None;
+                    POS pos = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(pos);
+                    pos.Show();
+                    break;
+
+                case "Logout":
+                    lbl_Logout.BackColor = Color.SandyBrown;
+                    lbl_Logout.ForeColor = Color.White;
+                    lbl_Logout.BorderStyle = BorderStyle.None;
+                    break;
+
+                default:
+                    lbl_Dashboard.BackColor = Color.SandyBrown;
+                    lbl_Dashboard.ForeColor = Color.White;
+                    lbl_Dashboard.BorderStyle = BorderStyle.None;
+                    break;
+            }
+        }
+
+        public void RefreshUI()
+        {
+            UI_Load(this, EventArgs.Empty);
+        }
+
+        private void Lbl_POS_Click(object sender, EventArgs e)
+        {
+            TabContent = "POS";
+            UI_Load(sender, e);
+        }
+
+        private void Lbl_Dashboard_Click(object sender, EventArgs e)
+        {
+            TabContent = "Dashboard";
+            UI_Load(sender, e);
+        }
+
+        private void Lbl_Categories_Click(object sender, EventArgs e)
+        {
+            TabContent = "Categories";
+            UI_Load(sender, e);
+        }
+
+        private void Lbl_Users_Click(object sender, EventArgs e)
+        {
+            TabContent = "Users";
+            UI_Load(sender, e);
+        }
+
+        private void Lbl_Logout_Click(object sender, EventArgs e)
+        {
+            TabContent = "Logout";
+            UI_Load(sender, e);
         }
     }
 }

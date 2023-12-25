@@ -11,7 +11,6 @@ namespace GrocerEase
         public POS()
         {
             InitializeComponent();
-            DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
         }
 
         private void POS_Load(object sender, EventArgs e)

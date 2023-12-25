@@ -39,7 +39,7 @@
             pb_Image = new PictureBox();
             cb_Category = new ComboBox();
             StockManagement_btn_Done = new Button();
-            StockManagement_btn_Cancel = new Button();
+            btn_Cancel = new Button();
             nud_Price = new NumericUpDown();
             label8 = new Label();
             lbl_ID = new Label();
@@ -146,15 +146,15 @@
             StockManagement_btn_Done.UseVisualStyleBackColor = true;
             StockManagement_btn_Done.Click += StockManagement_btn_Done_Click;
             // 
-            // StockManagement_btn_Cancel
+            // btn_Cancel
             // 
-            StockManagement_btn_Cancel.Location = new Point(144, 282);
-            StockManagement_btn_Cancel.Name = "StockManagement_btn_Cancel";
-            StockManagement_btn_Cancel.Size = new Size(75, 23);
-            StockManagement_btn_Cancel.TabIndex = 15;
-            StockManagement_btn_Cancel.Text = "Cancel";
-            StockManagement_btn_Cancel.UseVisualStyleBackColor = true;
-            StockManagement_btn_Cancel.Click += StockManagement_btn_Cancel_Click;
+            btn_Cancel.Location = new Point(144, 282);
+            btn_Cancel.Name = "btn_Cancel";
+            btn_Cancel.Size = new Size(75, 23);
+            btn_Cancel.TabIndex = 15;
+            btn_Cancel.Text = "Cancel";
+            btn_Cancel.UseVisualStyleBackColor = true;
+            btn_Cancel.Click += StockManagement_btn_Cancel_Click;
             // 
             // nud_Price
             // 
@@ -197,7 +197,7 @@
             Controls.Add(lbl_ID);
             Controls.Add(label8);
             Controls.Add(nud_Price);
-            Controls.Add(StockManagement_btn_Cancel);
+            Controls.Add(btn_Cancel);
             Controls.Add(StockManagement_btn_Done);
             Controls.Add(cb_Category);
             Controls.Add(pb_Image);
@@ -234,7 +234,7 @@
         private PictureBox pb_Image;
         private ComboBox cb_Category;
         private Button StockManagement_btn_Done;
-        private Button StockManagement_btn_Cancel;
+        private Button btn_Cancel;
         private NumericUpDown nud_Price;
         private Label label8;
         private Label lbl_ID;

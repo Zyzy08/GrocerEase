@@ -11,12 +11,9 @@ namespace GrocerEase
 {
     public partial class NewProduct : Form
     {
-        private readonly Settings settingsForm;
-
-        public NewProduct(Settings settingsForm)
+        public NewProduct()
         {
             InitializeComponent();
-            this.settingsForm = settingsForm;
         }
 
         private void NewProduct_Load(object sender, EventArgs e)
@@ -161,7 +158,7 @@ namespace GrocerEase
             }
         }
 
-        private int GetNewItemId(SqlConnection connection)
+        private static int GetNewItemId(SqlConnection connection)
         {
             string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
 
@@ -187,7 +184,8 @@ namespace GrocerEase
 
         private void StockManagement_btn_Cancel_Click(object sender, EventArgs e)
         {
-            settingsForm.Enabled = true;
+            UI ui = new();
+            ui.RefreshUI();
             this.Close();
         }
     }

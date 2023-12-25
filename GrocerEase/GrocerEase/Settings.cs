@@ -26,7 +26,7 @@ namespace GrocerEase
 
         private void StockManagement_btn_Add_Click(object sender, EventArgs e)
         {
-            NewProduct newProductForm = new(this);
+            NewProduct newProductForm = new();
             newProductForm.ShowDialog();
         }
 

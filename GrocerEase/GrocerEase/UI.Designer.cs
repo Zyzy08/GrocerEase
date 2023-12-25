@@ -30,31 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             pictureBox1 = new PictureBox();
-            btn_Settings = new PictureBox();
             panel1 = new Panel();
             btn_Exit = new Button();
             pnl_Content = new Panel();
             panel4 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            label2 = new Label();
+            flp_Tabs = new FlowLayoutPanel();
+            lbl_Dashboard = new Label();
             label6 = new Label();
             lbl_Products = new Label();
             label7 = new Label();
-            label4 = new Label();
+            lbl_Categories = new Label();
             label8 = new Label();
-            label5 = new Label();
+            lbl_Users = new Label();
             label9 = new Label();
             label10 = new Label();
-            label11 = new Label();
+            lbl_POS = new Label();
             label12 = new Label();
             label13 = new Label();
             label14 = new Label();
-            label15 = new Label();
+            lbl_Logout = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btn_Settings).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            flp_Tabs.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -67,22 +65,10 @@
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
-            // btn_Settings
-            // 
-            btn_Settings.Image = (Image)resources.GetObject("btn_Settings.Image");
-            btn_Settings.Location = new Point(1346, 12);
-            btn_Settings.Name = "btn_Settings";
-            btn_Settings.Size = new Size(45, 43);
-            btn_Settings.SizeMode = PictureBoxSizeMode.Zoom;
-            btn_Settings.TabIndex = 3;
-            btn_Settings.TabStop = false;
-            btn_Settings.Click += Btn_Settings_Click;
-            // 
             // panel1
             // 
             panel1.BackColor = Color.SandyBrown;
             panel1.Controls.Add(btn_Exit);
-            panel1.Controls.Add(btn_Settings);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1442, 58);
@@ -112,47 +98,49 @@
             // 
             // panel4
             // 
-            panel4.Controls.Add(flowLayoutPanel1);
+            panel4.Controls.Add(flp_Tabs);
             panel4.Controls.Add(pictureBox1);
             panel4.Location = new Point(0, 64);
             panel4.Name = "panel4";
             panel4.Size = new Size(149, 784);
             panel4.TabIndex = 7;
             // 
-            // flowLayoutPanel1
+            // flp_Tabs
             // 
-            flowLayoutPanel1.Controls.Add(label2);
-            flowLayoutPanel1.Controls.Add(label6);
-            flowLayoutPanel1.Controls.Add(lbl_Products);
-            flowLayoutPanel1.Controls.Add(label7);
-            flowLayoutPanel1.Controls.Add(label4);
-            flowLayoutPanel1.Controls.Add(label8);
-            flowLayoutPanel1.Controls.Add(label5);
-            flowLayoutPanel1.Controls.Add(label9);
-            flowLayoutPanel1.Controls.Add(label10);
-            flowLayoutPanel1.Controls.Add(label11);
-            flowLayoutPanel1.Controls.Add(label12);
-            flowLayoutPanel1.Controls.Add(label13);
-            flowLayoutPanel1.Controls.Add(label14);
-            flowLayoutPanel1.Controls.Add(label15);
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            flowLayoutPanel1.Location = new Point(-3, 59);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(154, 659);
-            flowLayoutPanel1.TabIndex = 4;
+            flp_Tabs.Controls.Add(lbl_Dashboard);
+            flp_Tabs.Controls.Add(label6);
+            flp_Tabs.Controls.Add(lbl_Products);
+            flp_Tabs.Controls.Add(label7);
+            flp_Tabs.Controls.Add(lbl_Categories);
+            flp_Tabs.Controls.Add(label8);
+            flp_Tabs.Controls.Add(lbl_Users);
+            flp_Tabs.Controls.Add(label9);
+            flp_Tabs.Controls.Add(label10);
+            flp_Tabs.Controls.Add(lbl_POS);
+            flp_Tabs.Controls.Add(label12);
+            flp_Tabs.Controls.Add(label13);
+            flp_Tabs.Controls.Add(label14);
+            flp_Tabs.Controls.Add(lbl_Logout);
+            flp_Tabs.FlowDirection = FlowDirection.TopDown;
+            flp_Tabs.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            flp_Tabs.Location = new Point(-3, 59);
+            flp_Tabs.Name = "flp_Tabs";
+            flp_Tabs.Size = new Size(154, 659);
+            flp_Tabs.TabIndex = 4;
             // 
-            // label2
+            // lbl_Dashboard
             // 
-            label2.BackColor = SystemColors.Control;
-            label2.BorderStyle = BorderStyle.FixedSingle;
-            label2.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.SandyBrown;
-            label2.Location = new Point(3, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(154, 38);
-            label2.TabIndex = 0;
-            label2.Text = " Dashboard";
+            lbl_Dashboard.BackColor = SystemColors.Control;
+            lbl_Dashboard.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Dashboard.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Dashboard.ForeColor = Color.SandyBrown;
+            lbl_Dashboard.Location = new Point(3, 0);
+            lbl_Dashboard.Name = "lbl_Dashboard";
+            lbl_Dashboard.Size = new Size(154, 38);
+            lbl_Dashboard.TabIndex = 0;
+            lbl_Dashboard.Tag = "Tab";
+            lbl_Dashboard.Text = " Dashboard";
+            lbl_Dashboard.Click += Lbl_Dashboard_Click;
             // 
             // label6
             // 
@@ -174,6 +162,7 @@
             lbl_Products.Name = "lbl_Products";
             lbl_Products.Size = new Size(154, 38);
             lbl_Products.TabIndex = 1;
+            lbl_Products.Tag = "Tab";
             lbl_Products.Text = "Products";
             lbl_Products.TextAlign = ContentAlignment.TopCenter;
             lbl_Products.Click += Lbl_Products_Click;
@@ -188,18 +177,20 @@
             label7.Size = new Size(154, 38);
             label7.TabIndex = 2;
             // 
-            // label4
+            // lbl_Categories
             // 
-            label4.BackColor = SystemColors.Control;
-            label4.BorderStyle = BorderStyle.FixedSingle;
-            label4.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.SandyBrown;
-            label4.Location = new Point(3, 152);
-            label4.Name = "label4";
-            label4.Size = new Size(154, 38);
-            label4.TabIndex = 2;
-            label4.Text = "Categories";
-            label4.TextAlign = ContentAlignment.TopCenter;
+            lbl_Categories.BackColor = SystemColors.Control;
+            lbl_Categories.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Categories.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Categories.ForeColor = Color.SandyBrown;
+            lbl_Categories.Location = new Point(3, 152);
+            lbl_Categories.Name = "lbl_Categories";
+            lbl_Categories.Size = new Size(154, 38);
+            lbl_Categories.TabIndex = 2;
+            lbl_Categories.Tag = "Tab";
+            lbl_Categories.Text = "Categories";
+            lbl_Categories.TextAlign = ContentAlignment.TopCenter;
+            lbl_Categories.Click += Lbl_Categories_Click;
             // 
             // label8
             // 
@@ -211,18 +202,20 @@
             label8.Size = new Size(154, 38);
             label8.TabIndex = 3;
             // 
-            // label5
+            // lbl_Users
             // 
-            label5.BackColor = SystemColors.Control;
-            label5.BorderStyle = BorderStyle.FixedSingle;
-            label5.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.SandyBrown;
-            label5.Location = new Point(3, 228);
-            label5.Name = "label5";
-            label5.Size = new Size(154, 38);
-            label5.TabIndex = 3;
-            label5.Text = "Users";
-            label5.TextAlign = ContentAlignment.TopCenter;
+            lbl_Users.BackColor = SystemColors.Control;
+            lbl_Users.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Users.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Users.ForeColor = Color.SandyBrown;
+            lbl_Users.Location = new Point(3, 228);
+            lbl_Users.Name = "lbl_Users";
+            lbl_Users.Size = new Size(154, 38);
+            lbl_Users.TabIndex = 3;
+            lbl_Users.Tag = "Tab";
+            lbl_Users.Text = "Users";
+            lbl_Users.TextAlign = ContentAlignment.TopCenter;
+            lbl_Users.Click += Lbl_Users_Click;
             // 
             // label9
             // 
@@ -244,17 +237,20 @@
             label10.Size = new Size(154, 38);
             label10.TabIndex = 5;
             // 
-            // label11
+            // lbl_POS
             // 
-            label11.BackColor = Color.SandyBrown;
-            label11.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(3, 342);
-            label11.Name = "label11";
-            label11.Size = new Size(154, 38);
-            label11.TabIndex = 6;
-            label11.Text = "POS";
-            label11.TextAlign = ContentAlignment.TopCenter;
+            lbl_POS.BackColor = SystemColors.Control;
+            lbl_POS.BorderStyle = BorderStyle.FixedSingle;
+            lbl_POS.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_POS.ForeColor = Color.SandyBrown;
+            lbl_POS.Location = new Point(3, 342);
+            lbl_POS.Name = "lbl_POS";
+            lbl_POS.Size = new Size(154, 38);
+            lbl_POS.TabIndex = 6;
+            lbl_POS.Tag = "Tab";
+            lbl_POS.Text = "POS";
+            lbl_POS.TextAlign = ContentAlignment.TopCenter;
+            lbl_POS.Click += Lbl_POS_Click;
             // 
             // label12
             // 
@@ -286,18 +282,20 @@
             label14.Size = new Size(154, 38);
             label14.TabIndex = 9;
             // 
-            // label15
+            // lbl_Logout
             // 
-            label15.BackColor = SystemColors.Control;
-            label15.BorderStyle = BorderStyle.FixedSingle;
-            label15.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.ForeColor = Color.SandyBrown;
-            label15.Location = new Point(3, 494);
-            label15.Name = "label15";
-            label15.Size = new Size(154, 38);
-            label15.TabIndex = 10;
-            label15.Text = "Logout";
-            label15.TextAlign = ContentAlignment.TopCenter;
+            lbl_Logout.BackColor = SystemColors.Control;
+            lbl_Logout.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Logout.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Logout.ForeColor = Color.SandyBrown;
+            lbl_Logout.Location = new Point(3, 494);
+            lbl_Logout.Name = "lbl_Logout";
+            lbl_Logout.Size = new Size(154, 38);
+            lbl_Logout.TabIndex = 10;
+            lbl_Logout.Tag = "Tab";
+            lbl_Logout.Text = "Logout";
+            lbl_Logout.TextAlign = ContentAlignment.TopCenter;
+            lbl_Logout.Click += Lbl_Logout_Click;
             // 
             // UI
             // 
@@ -313,35 +311,33 @@
             Text = "Dashboard";
             Load += UI_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btn_Settings).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel4.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
+            flp_Tabs.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
         private PictureBox pictureBox1;
-        private PictureBox btn_Settings;
         private Panel panel1;
         private Panel pnl_Content;
         private Panel panel4;
-        private Label label2;
+        private Label lbl_Dashboard;
         private Button btn_Exit;
-        private Label label4;
+        private Label lbl_Categories;
         private Label lbl_Products;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label5;
+        private FlowLayoutPanel flp_Tabs;
+        private Label lbl_Users;
         private Label label6;
         private Label label7;
         private Label label8;
         private Label label9;
         private Label label10;
-        private Label label11;
+        private Label lbl_POS;
         private Label label12;
         private Label label13;
         private Label label14;
-        private Label label15;
+        private Label lbl_Logout;
     }
 }

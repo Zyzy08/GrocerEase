@@ -15,13 +15,9 @@ namespace GrocerEase
 
         private void Btn_Login_Click(object sender, EventArgs e)
         {
-            /**UI dashboard = new();
+            UI ui = new();
             this.Hide();
-            dashboard.Show();
-            **/
-            POS pos = new();
-            this.Hide();
-            pos.Show();
+            ui.ShowDialog();
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
