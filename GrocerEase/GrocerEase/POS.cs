@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace GrocerEase
 {
@@ -53,15 +54,15 @@ namespace GrocerEase
                         Size = new Size(819, 632)
                     };
 
-                    string queryItems = "SELECT Item_Name, Item_NetWT, Item_Icon FROM tbl_Items WHERE Category_ID=@categoryId";
+                    string queryItems = "SELECT Item_Name, Item_NetWT, Item_Icon, Item_Price FROM tbl_Items WHERE Category_ID=@categoryId";
                     SqlDataAdapter adapterItems = new(queryItems, connection);
                     adapterItems.SelectCommand.Parameters.AddWithValue("@categoryId", categoryId);
                     DataTable itemsTable = new();
                     adapterItems.Fill(itemsTable);
 
-                    FlowLayoutPanel flp_Items = new()
+                    FlowLayoutPanel flp_Category = new()
                     {
-                        Name = "flowLayoutPanelItems",
+                        Name = "flowLayoutPanelCategory",
                         Dock = DockStyle.Fill,
                         FlowDirection = FlowDirection.LeftToRight,
                         AutoScroll = true
@@ -69,32 +70,84 @@ namespace GrocerEase
 
                     foreach (DataRow itemRow in itemsTable.Rows)
                     {
-                        GroupBox groupBoxItem = new()
+                        FlowLayoutPanel flp_Item = new()
                         {
-                            Name = "Item" + itemRow["Item_Name"].ToString(),
-                            Text = itemRow["Item_Name"].ToString() + " " + itemRow["Item_NetWT"].ToString(),
-                            Size = new Size(200, 143),
-                            BackgroundImageLayout = ImageLayout.Zoom
+                            Name = "flowLayoutPanelItem",
+                            FlowDirection = FlowDirection.TopDown,
+                            Size = new Size(200, 200),
+                            Margin = new Padding(5)
+                        };
+
+                        PictureBox pb_ItemImage = new()
+                        {
+                            Name = "pb_ItemImage",
+                            SizeMode = PictureBoxSizeMode.Zoom,
+                            Size = new Size(150, 100),
+                            BorderStyle = BorderStyle.FixedSingle
+                        };
+
+                        pb_ItemImage.Click += (pbSender, pbEvent) =>
+                        {
+                            DisplayItemDetails(itemRow);
                         };
 
                         if (itemRow["Item_Icon"] != DBNull.Value)
                         {
                             byte[] imageBytes = (byte[])itemRow["Item_Icon"];
                             Image itemImage = ByteArrayToImage(imageBytes);
-                            groupBoxItem.BackgroundImage = itemImage;
+                            pb_ItemImage.Image = itemImage;
                         }
                         else
                         {
-                            groupBoxItem.Text += " (No Image)";
+                            Label lbl_NoImage = new()
+                            {
+                                Name = "lbl_NoImage",
+                                Text = "(no image)",
+                                TextAlign = ContentAlignment.MiddleCenter,
+                                AutoSize = true,
+                                Dock = DockStyle.Fill,
+                                ForeColor = Color.Gray
+                            };
+
+                            pb_ItemImage.Controls.Add(lbl_NoImage);
                         }
 
-                        flp_Items.Controls.Add(groupBoxItem);
+                        Label lbl_ItemDetails = new()
+                        {
+                            Name = "lbl_ItemDetails",
+                            Text = $"{itemRow["Item_Name"]} ({itemRow["Item_NetWT"]})\nPrice: {itemRow["Item_Price"]}",
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            AutoSize = true
+                        };
+
+                        lbl_ItemDetails.Click += (lblSender, lblEvent) =>
+                        {
+                            DisplayItemDetails(itemRow);
+                        };
+
+                        flp_Item.Controls.Add(pb_ItemImage);
+                        flp_Item.Controls.Add(lbl_ItemDetails);
+                        flp_Category.Controls.Add(flp_Item);
                     }
 
-                    tp_Category.Controls.Add(flp_Items);
+                    tp_Category.Controls.Add(flp_Category);
                     tc_Categories.TabPages.Add(tp_Category);
                 }
             }
+        }
+
+        private void DisplayItemDetails(DataRow itemRow)
+        {
+            var itemName = itemRow["Item_Name"].ToString();
+            var itemNetWT = itemRow["Item_NetWT"].ToString();
+            decimal itemPrice = Convert.ToDecimal(itemRow["Item_Price"]);
+
+            selectedItemRow = itemRow;
+
+            lbl_Name.Text = $"Name: {itemName} ({itemNetWT})";
+            lbl_Price.Text = $"Price: ₱{itemPrice:N2}";
+
+            nud_Quantity.Value = 1;
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
@@ -108,5 +161,20 @@ namespace GrocerEase
             products.Show();
             this.Close();
         }
+
+        private void Nud_Quantity_ValueChanged(object sender, EventArgs e)
+        {
+            if (selectedItemRow != null)
+            {
+                decimal itemPrice = Convert.ToDecimal(selectedItemRow["Item_Price"]);
+                int quantity = (int)nud_Quantity.Value;
+
+                decimal totalPrice = itemPrice * quantity;
+
+                lbl_Price.Text = $"Price: ₱{totalPrice:N2}";
+            }
+        }
+
+        private DataRow selectedItemRow;
     }
 }

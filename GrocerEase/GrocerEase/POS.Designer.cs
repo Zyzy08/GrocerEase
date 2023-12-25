@@ -38,7 +38,7 @@
             btn_Add = new Button();
             panel2 = new Panel();
             lbl_Price = new Label();
-            label1 = new Label();
+            lbl_Name = new Label();
             nud_Quantity = new NumericUpDown();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -142,7 +142,7 @@
             // panel2
             // 
             panel2.Controls.Add(lbl_Price);
-            panel2.Controls.Add(label1);
+            panel2.Controls.Add(lbl_Name);
             panel2.Controls.Add(nud_Quantity);
             panel2.Controls.Add(tc_Categories);
             panel2.Controls.Add(btn_Add);
@@ -157,28 +157,30 @@
             lbl_Price.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl_Price.Location = new Point(3, 702);
             lbl_Price.Name = "lbl_Price";
-            lbl_Price.Size = new Size(63, 30);
+            lbl_Price.Size = new Size(119, 30);
             lbl_Price.TabIndex = 4;
-            lbl_Price.Text = "₱0.00";
+            lbl_Price.Text = "Price: ₱0.00";
             // 
-            // label1
+            // lbl_Name
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(3, 672);
-            label1.Name = "label1";
-            label1.Size = new Size(108, 30);
-            label1.TabIndex = 3;
-            label1.Text = "Price / EA:";
+            lbl_Name.AutoSize = true;
+            lbl_Name.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_Name.Location = new Point(3, 672);
+            lbl_Name.Name = "lbl_Name";
+            lbl_Name.Size = new Size(80, 30);
+            lbl_Name.TabIndex = 3;
+            lbl_Name.Text = "Name: ";
             // 
             // nud_Quantity
             // 
             nud_Quantity.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             nud_Quantity.Location = new Point(547, 681);
+            nud_Quantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nud_Quantity.Name = "nud_Quantity";
             nud_Quantity.Size = new Size(136, 43);
             nud_Quantity.TabIndex = 2;
             nud_Quantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            nud_Quantity.ValueChanged += Nud_Quantity_ValueChanged;
             // 
             // panel3
             // 
@@ -416,7 +418,7 @@
         private Panel panel2;
         private NumericUpDown nud_Quantity;
         private Label lbl_Price;
-        private Label label1;
+        private Label lbl_Name;
         private Panel panel3;
         private Panel panel4;
         private Label label2;

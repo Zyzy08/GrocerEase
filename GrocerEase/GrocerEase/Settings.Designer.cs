@@ -182,7 +182,7 @@
             toolStripContainer1.ContentPanel.Controls.Add(panel1);
             toolStripContainer1.ContentPanel.Controls.Add(btn_Back);
             toolStripContainer1.ContentPanel.Controls.Add(pictureBox1);
-            toolStripContainer1.ContentPanel.Size = new Size(1424, 796);
+            toolStripContainer1.ContentPanel.Size = new Size(1424, 821);
             toolStripContainer1.Dock = DockStyle.Fill;
             toolStripContainer1.LeftToolStripPanelVisible = false;
             toolStripContainer1.Location = new Point(0, 0);
