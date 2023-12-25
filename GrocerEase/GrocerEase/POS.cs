@@ -1,33 +1,17 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace GrocerEase
 {
     public partial class POS : Form
     {
+
+        private DataRow selectedItemRow;
+
         public POS()
         {
             InitializeComponent();
             DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
-        }
-
-        private void Btn_Settings_Click(object sender, EventArgs e)
-        {
-            Settings settings = new();
-            this.Hide();
-            settings.ShowDialog();
-        }
-
-        private static Image ByteArrayToImage(byte[] byteArray)
-        {
-            using MemoryStream ms = new(byteArray);
-            Image image = Image.FromStream(ms);
-            return image;
         }
 
         private void POS_Load(object sender, EventArgs e)
@@ -136,6 +120,13 @@ namespace GrocerEase
             }
         }
 
+        private static Image ByteArrayToImage(byte[] byteArray)
+        {
+            using MemoryStream ms = new(byteArray);
+            Image image = Image.FromStream(ms);
+            return image;
+        }
+
         private void DisplayItemDetails(DataRow itemRow)
         {
             var itemName = itemRow["Item_Name"].ToString();
@@ -150,18 +141,6 @@ namespace GrocerEase
             nud_Quantity.Value = 1;
         }
 
-        private void Btn_Exit_Click(object sender, EventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        private void Lbl_Products_Click(object sender, EventArgs e)
-        {
-            Products products = new();
-            products.Show();
-            this.Close();
-        }
-
         private void Nud_Quantity_ValueChanged(object sender, EventArgs e)
         {
             if (selectedItemRow != null)
@@ -174,7 +153,5 @@ namespace GrocerEase
                 lbl_Price.Text = $"Price: ₱{totalPrice:N2}";
             }
         }
-
-        private DataRow selectedItemRow;
     }
 }

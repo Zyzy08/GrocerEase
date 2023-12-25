@@ -19,7 +19,7 @@ namespace GrocerEase
 
         private void Lbl_POS_Click(object sender, EventArgs e)
         {
-            POS pos = new();
+            UI pos = new();
             pos.Show();
             this.Close();
         }

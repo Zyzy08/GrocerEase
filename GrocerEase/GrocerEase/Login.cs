@@ -1,4 +1,3 @@
-using frmAddAcount;
 using System.Runtime.InteropServices;
 
 namespace GrocerEase
@@ -16,9 +15,18 @@ namespace GrocerEase
 
         private void Btn_Login_Click(object sender, EventArgs e)
         {
-            POS dashboard = new();
+            /**UI dashboard = new();
             this.Hide();
             dashboard.Show();
+            **/
+            POS pos = new();
+            this.Hide();
+            pos.Show();
+        }
+
+        private void Btn_Exit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
