@@ -16,10 +16,22 @@ namespace GrocerEase
             Environment.Exit(0);
         }
 
-        private void Lbl_Products_Click(object sender, EventArgs e)
+        public void Lbl_Products_Click(object sender, EventArgs e)
         {
             TabContent = "Products";
             UI_Load(sender, e);
+        }
+
+        public void RefreshProductsForm()
+        {
+            foreach (Control control in pnl_Content.Controls)
+            {
+                if (control is Products products)
+                {
+                    products.RefreshData();
+                    break;
+                }
+            }
         }
 
         private void UI_Load(object sender, EventArgs e)
@@ -75,23 +87,12 @@ namespace GrocerEase
                     pos.Show();
                     break;
 
-                case "Logout":
-                    lbl_Logout.BackColor = Color.SandyBrown;
-                    lbl_Logout.ForeColor = Color.White;
-                    lbl_Logout.BorderStyle = BorderStyle.None;
-                    break;
-
                 default:
                     lbl_Dashboard.BackColor = Color.SandyBrown;
                     lbl_Dashboard.ForeColor = Color.White;
                     lbl_Dashboard.BorderStyle = BorderStyle.None;
                     break;
             }
-        }
-
-        public void RefreshUI()
-        {
-            UI_Load(this, EventArgs.Empty);
         }
 
         private void Lbl_POS_Click(object sender, EventArgs e)
@@ -120,8 +121,9 @@ namespace GrocerEase
 
         private void Lbl_Logout_Click(object sender, EventArgs e)
         {
-            TabContent = "Logout";
-            UI_Load(sender, e);
+            Login login = new();
+            login.Show();
+            this.Close();
         }
     }
 }

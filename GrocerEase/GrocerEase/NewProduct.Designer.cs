@@ -144,7 +144,7 @@
             StockManagement_btn_Done.TabIndex = 14;
             StockManagement_btn_Done.Text = "Done";
             StockManagement_btn_Done.UseVisualStyleBackColor = true;
-            StockManagement_btn_Done.Click += StockManagement_btn_Done_Click;
+            StockManagement_btn_Done.Click += Btn_Done_Click;
             // 
             // btn_Cancel
             // 
@@ -154,7 +154,7 @@
             btn_Cancel.TabIndex = 15;
             btn_Cancel.Text = "Cancel";
             btn_Cancel.UseVisualStyleBackColor = true;
-            btn_Cancel.Click += StockManagement_btn_Cancel_Click;
+            btn_Cancel.Click += Btn_Cancel_Click;
             // 
             // nud_Price
             // 

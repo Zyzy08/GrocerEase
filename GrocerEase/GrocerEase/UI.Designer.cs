@@ -326,7 +326,6 @@
         private Label lbl_Dashboard;
         private Button btn_Exit;
         private Label lbl_Categories;
-        private Label lbl_Products;
         private FlowLayoutPanel flp_Tabs;
         private Label lbl_Users;
         private Label label6;
@@ -339,5 +338,6 @@
         private Label label13;
         private Label label14;
         private Label lbl_Logout;
+        public Label lbl_Products;
     }
 }

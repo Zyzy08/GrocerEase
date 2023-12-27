@@ -72,7 +72,42 @@ namespace GrocerEase
             }
         }
 
-        private void StockManagement_btn_Done_Click(object sender, EventArgs e)
+        private static int GetNewItemId(SqlConnection connection)
+        {
+            string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
+
+            using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
+            object latestItemID = commandLatestItemID.ExecuteScalar();
+
+            return latestItemID != null && latestItemID != DBNull.Value ? Convert.ToInt32(latestItemID) + 1 : 1;
+        }
+
+        private static bool IsDefaultImage(Image image)
+        {
+            byte[] defaultImageBytes = ImageToByteArray(Properties.Resources.Upload);
+            byte[] currentImageBytes = ImageToByteArray(image);
+            return StructuralComparisons.StructuralEqualityComparer.Equals(defaultImageBytes, currentImageBytes);
+        }
+
+        private static byte[] ImageToByteArray(Image image)
+        {
+            using MemoryStream ms = new();
+            image.Save(ms, ImageFormat.Png);
+            return ms.ToArray();
+        }
+
+        private void Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            if (this.Owner is UI ui)
+            {
+                ui.Lbl_Products_Click(sender, e);
+                ui.RefreshProductsForm();
+            }
+
+            this.Close();
+        }
+
+        private void Btn_Done_Click(object sender, EventArgs e)
         {
             int selectedCategoryIndex = cb_Category.SelectedIndex;
 
@@ -156,37 +191,12 @@ namespace GrocerEase
 
                 lbl_ID.Text = newItemID.ToString();
             }
-        }
 
-        private static int GetNewItemId(SqlConnection connection)
-        {
-            string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
-
-            using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
-            object latestItemID = commandLatestItemID.ExecuteScalar();
-
-            return latestItemID != null && latestItemID != DBNull.Value ? Convert.ToInt32(latestItemID) + 1 : 1;
-        }
-
-        private static bool IsDefaultImage(Image image)
-        {
-            byte[] defaultImageBytes = ImageToByteArray(Properties.Resources.Upload);
-            byte[] currentImageBytes = ImageToByteArray(image);
-            return StructuralComparisons.StructuralEqualityComparer.Equals(defaultImageBytes, currentImageBytes);
-        }
-
-        private static byte[] ImageToByteArray(Image image)
-        {
-            using MemoryStream ms = new();
-            image.Save(ms, ImageFormat.Png);
-            return ms.ToArray();
-        }
-
-        private void StockManagement_btn_Cancel_Click(object sender, EventArgs e)
-        {
-            UI ui = new();
-            ui.RefreshUI();
-            this.Close();
+            if (this.Owner is UI ui)
+            {
+                ui.Lbl_Products_Click(sender, e);
+                ui.RefreshProductsForm();
+            }
         }
     }
 }

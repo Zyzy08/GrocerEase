@@ -37,7 +37,7 @@ namespace GrocerEase
                         Size = new Size(819, 632)
                     };
 
-                    string queryItems = "SELECT Item_Name, Item_NetWT, Item_Icon, Item_Price FROM tbl_Items WHERE Category_ID=@categoryId";
+                    string queryItems = "SELECT Item_Name, Item_NetWT, Item_Icon, Item_Price, Item_InStock FROM tbl_Items WHERE Category_ID=@categoryId";
                     SqlDataAdapter adapterItems = new(queryItems, connection);
                     adapterItems.SelectCommand.Parameters.AddWithValue("@categoryId", categoryId);
                     DataTable itemsTable = new();
@@ -69,10 +69,13 @@ namespace GrocerEase
                             BorderStyle = BorderStyle.FixedSingle
                         };
 
-                        pb_ItemImage.Click += (pbSender, pbEvent) =>
+                        if (Convert.ToInt32(itemRow["Item_InStock"]) > 0)
                         {
-                            DisplayItemDetails(itemRow);
-                        };
+                            pb_ItemImage.Click += (pbSender, pbEvent) =>
+                            {
+                                DisplayItemDetails(itemRow);
+                            };
+                        }
 
                         if (itemRow["Item_Icon"] != DBNull.Value)
                         {
@@ -88,11 +91,26 @@ namespace GrocerEase
                                 Text = "(no image)",
                                 TextAlign = ContentAlignment.MiddleCenter,
                                 AutoSize = true,
-                                Dock = DockStyle.Fill,
+                                Dock = DockStyle.Top,
                                 ForeColor = Color.Gray
                             };
 
                             pb_ItemImage.Controls.Add(lbl_NoImage);
+                        }
+
+                        if (Convert.ToInt32(itemRow["Item_InStock"]) == 0)
+                        {
+                            Label lbl_OutOfStock = new()
+                            {
+                                Name = "lbl_OutOfStock",
+                                Text = "(out of stock)",
+                                TextAlign = ContentAlignment.MiddleCenter,
+                                AutoSize = true,
+                                Dock = DockStyle.Bottom,
+                                ForeColor = Color.Red
+                            };
+
+                            pb_ItemImage.Controls.Add(lbl_OutOfStock);
                         }
 
                         Label lbl_ItemDetails = new()
@@ -150,6 +168,44 @@ namespace GrocerEase
                 decimal totalPrice = itemPrice * quantity;
 
                 lbl_Price.Text = $"Price: ₱{totalPrice:N2}";
+            }
+        }
+
+        private void Btn_Add_Click(object sender, EventArgs e)
+        {
+            if (selectedItemRow != null)
+            {
+                var itemName = selectedItemRow["Item_Name"].ToString();
+                var itemNetWT = selectedItemRow["Item_NetWT"].ToString();
+                decimal itemPrice = Convert.ToDecimal(selectedItemRow["Item_Price"]);
+                int quantity = (int)nud_Quantity.Value;
+
+                decimal totalPrice = itemPrice * quantity;
+
+                Label lbl_ItemDetails= new()
+                {
+                    Text = itemName + " (" + itemNetWT + ")",
+                    AutoSize = true
+                };
+
+                Label lbl_Quantity = new()
+                {
+                    Text = $"x{quantity}",
+                    AutoSize = true
+                };
+
+                Label lbl_TotalPrice = new()
+                {
+                    Text = $"₱{totalPrice:N2}",
+                    AutoSize = true
+                };
+
+                tlp_Bag.RowCount++;
+                tlp_Bag.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+                tlp_Bag.Controls.Add(lbl_ItemDetails, 0, tlp_Bag.RowCount - 1);
+                tlp_Bag.Controls.Add(lbl_Quantity, 1, tlp_Bag.RowCount - 1);
+                tlp_Bag.Controls.Add(lbl_TotalPrice, 2, tlp_Bag.RowCount - 1);
             }
         }
     }
