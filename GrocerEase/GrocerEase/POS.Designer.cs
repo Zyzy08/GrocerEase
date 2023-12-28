@@ -35,14 +35,16 @@
             tc_Categories = new TabControl();
             btn_Add = new Button();
             panel1 = new Panel();
-            tlp_Bag = new TableLayoutPanel();
-            label4 = new Label();
+            lbl_VAT = new Label();
+            lbl_VATSale = new Label();
             label3 = new Label();
             label2 = new Label();
+            lv_Bag = new ListView();
             label1 = new Label();
+            lbl_Total = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
-            tlp_Bag.SuspendLayout();
             SuspendLayout();
             // 
             // lbl_Price
@@ -61,9 +63,9 @@
             lbl_Name.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lbl_Name.Location = new Point(10, 717);
             lbl_Name.Name = "lbl_Name";
-            lbl_Name.Size = new Size(80, 30);
+            lbl_Name.Size = new Size(60, 30);
             lbl_Name.TabIndex = 9;
-            lbl_Name.Text = "Name: ";
+            lbl_Name.Text = "Item:";
             // 
             // textBox1
             // 
@@ -108,60 +110,68 @@
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.Controls.Add(tlp_Bag);
+            panel1.Controls.Add(lbl_VAT);
+            panel1.Controls.Add(lbl_VATSale);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lv_Bag);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(664, 12);
             panel1.Name = "panel1";
             panel1.Size = new Size(607, 699);
             panel1.TabIndex = 11;
             // 
-            // tlp_Bag
+            // lbl_VAT
             // 
-            tlp_Bag.AutoSize = true;
-            tlp_Bag.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tlp_Bag.ColumnCount = 3;
-            tlp_Bag.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tlp_Bag.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tlp_Bag.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tlp_Bag.Controls.Add(label4, 2, 0);
-            tlp_Bag.Controls.Add(label3, 1, 0);
-            tlp_Bag.Controls.Add(label2, 0, 0);
-            tlp_Bag.Font = new Font("Comfortaa Medium", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tlp_Bag.Location = new Point(3, 37);
-            tlp_Bag.Name = "tlp_Bag";
-            tlp_Bag.RowCount = 3;
-            tlp_Bag.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlp_Bag.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlp_Bag.RowStyles.Add(new RowStyle());
-            tlp_Bag.Size = new Size(460, 52);
-            tlp_Bag.TabIndex = 14;
+            lbl_VAT.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_VAT.Location = new Point(255, 665);
+            lbl_VAT.Name = "lbl_VAT";
+            lbl_VAT.RightToLeft = RightToLeft.Yes;
+            lbl_VAT.Size = new Size(349, 34);
+            lbl_VAT.TabIndex = 18;
+            lbl_VAT.Text = "₱0.00";
             // 
-            // label4
+            // lbl_VATSale
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(371, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(54, 26);
-            label4.TabIndex = 2;
-            label4.Text = "Price";
+            lbl_VATSale.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_VATSale.Location = new Point(255, 631);
+            lbl_VATSale.Name = "lbl_VATSale";
+            lbl_VATSale.RightToLeft = RightToLeft.Yes;
+            lbl_VATSale.Size = new Size(349, 34);
+            lbl_VATSale.TabIndex = 17;
+            lbl_VATSale.Text = "₱0.00";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(279, 0);
+            label3.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(3, 631);
             label3.Name = "label3";
-            label3.Size = new Size(86, 26);
-            label3.TabIndex = 1;
-            label3.Text = "Quantity";
+            label3.Size = new Size(108, 34);
+            label3.TabIndex = 16;
+            label3.Text = "VAT Sale";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(3, 0);
+            label2.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(3, 665);
             label2.Name = "label2";
-            label2.Size = new Size(48, 26);
-            label2.TabIndex = 0;
-            label2.Text = "Item";
+            label2.Size = new Size(100, 34);
+            label2.TabIndex = 15;
+            label2.Text = "12% VAT";
+            // 
+            // lv_Bag
+            // 
+            lv_Bag.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lv_Bag.FullRowSelect = true;
+            lv_Bag.Location = new Point(3, 37);
+            lv_Bag.MultiSelect = false;
+            lv_Bag.Name = "lv_Bag";
+            lv_Bag.Size = new Size(601, 591);
+            lv_Bag.TabIndex = 14;
+            lv_Bag.UseCompatibleStateImageBehavior = false;
+            lv_Bag.View = View.List;
             // 
             // label1
             // 
@@ -175,11 +185,34 @@
             label1.Text = "ECO Bag";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lbl_Total
+            // 
+            lbl_Total.AutoSize = true;
+            lbl_Total.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Total.Location = new Point(664, 738);
+            lbl_Total.Name = "lbl_Total";
+            lbl_Total.Size = new Size(104, 39);
+            lbl_Total.TabIndex = 19;
+            lbl_Total.Text = "TOTAL:";
+            // 
+            // button1
+            // 
+            button1.AutoSize = true;
+            button1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(1137, 718);
+            button1.Name = "button1";
+            button1.Size = new Size(134, 60);
+            button1.TabIndex = 20;
+            button1.Text = "PAY";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1283, 784);
+            Controls.Add(button1);
+            Controls.Add(lbl_Total);
             Controls.Add(panel1);
             Controls.Add(lbl_Price);
             Controls.Add(lbl_Name);
@@ -194,8 +227,6 @@
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            tlp_Bag.ResumeLayout(false);
-            tlp_Bag.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -210,9 +241,14 @@
         private Button btn_Add;
         private Panel panel1;
         private Label label1;
-        private TableLayoutPanel tlp_Bag;
-        private Label label4;
+        private ListView lv_Bag;
+        //private Label lbl_VAT;
+        //private Label lbl_VATSale;
         private Label label3;
         private Label label2;
+        private Label lbl_VAT;
+        private Label lbl_VATSale;
+        private Label lbl_Total;
+        private Button button1;
     }
 }
