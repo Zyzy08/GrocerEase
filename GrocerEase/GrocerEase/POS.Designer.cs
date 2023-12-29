@@ -30,7 +30,7 @@
         {
             lbl_Price = new Label();
             lbl_Name = new Label();
-            textBox1 = new TextBox();
+            tb_Search = new TextBox();
             nud_Quantity = new NumericUpDown();
             tc_Categories = new TabControl();
             btn_Add = new Button();
@@ -42,7 +42,8 @@
             lv_Bag = new ListView();
             label1 = new Label();
             lbl_Total = new Label();
-            button1 = new Button();
+            btn_Pay = new Button();
+            btn_Remove = new Button();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -67,13 +68,14 @@
             lbl_Name.TabIndex = 9;
             lbl_Name.Text = "Item:";
             // 
-            // textBox1
+            // tb_Search
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(8, 10);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(330, 29);
-            textBox1.TabIndex = 6;
+            tb_Search.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Search.Location = new Point(8, 10);
+            tb_Search.Name = "tb_Search";
+            tb_Search.Size = new Size(330, 29);
+            tb_Search.TabIndex = 6;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
             // 
             // nud_Quantity
             // 
@@ -165,13 +167,14 @@
             // 
             lv_Bag.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lv_Bag.FullRowSelect = true;
+            lv_Bag.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lv_Bag.Location = new Point(3, 37);
-            lv_Bag.MultiSelect = false;
             lv_Bag.Name = "lv_Bag";
             lv_Bag.Size = new Size(601, 591);
             lv_Bag.TabIndex = 14;
             lv_Bag.UseCompatibleStateImageBehavior = false;
             lv_Bag.View = View.List;
+            lv_Bag.SelectedIndexChanged += Lv_Bag_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -195,28 +198,47 @@
             lbl_Total.TabIndex = 19;
             lbl_Total.Text = "TOTAL:";
             // 
-            // button1
+            // btn_Pay
             // 
-            button1.AutoSize = true;
-            button1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(1137, 718);
-            button1.Name = "button1";
-            button1.Size = new Size(134, 60);
-            button1.TabIndex = 20;
-            button1.Text = "PAY";
-            button1.UseVisualStyleBackColor = true;
+            btn_Pay.AutoSize = true;
+            btn_Pay.BackColor = Color.OliveDrab;
+            btn_Pay.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Pay.ForeColor = Color.White;
+            btn_Pay.Location = new Point(1137, 718);
+            btn_Pay.Name = "btn_Pay";
+            btn_Pay.Size = new Size(134, 60);
+            btn_Pay.TabIndex = 21;
+            btn_Pay.Text = "PAY";
+            btn_Pay.UseVisualStyleBackColor = false;
+            btn_Pay.Click += Btn_Pay_Click;
+            // 
+            // btn_Remove
+            // 
+            btn_Remove.AutoSize = true;
+            btn_Remove.BackColor = Color.Tomato;
+            btn_Remove.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Remove.ForeColor = Color.White;
+            btn_Remove.Location = new Point(1122, 718);
+            btn_Remove.Name = "btn_Remove";
+            btn_Remove.Size = new Size(149, 60);
+            btn_Remove.TabIndex = 22;
+            btn_Remove.Text = "- REMOVE";
+            btn_Remove.UseVisualStyleBackColor = false;
+            btn_Remove.Visible = false;
+            btn_Remove.Click += Btn_Remove_Click;
             // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1283, 784);
-            Controls.Add(button1);
+            Controls.Add(btn_Pay);
+            Controls.Add(btn_Remove);
             Controls.Add(lbl_Total);
             Controls.Add(panel1);
             Controls.Add(lbl_Price);
             Controls.Add(lbl_Name);
-            Controls.Add(textBox1);
+            Controls.Add(tb_Search);
             Controls.Add(nud_Quantity);
             Controls.Add(tc_Categories);
             Controls.Add(btn_Add);
@@ -235,20 +257,19 @@
 
         private Label lbl_Price;
         private Label lbl_Name;
-        private TextBox textBox1;
+        private TextBox tb_Search;
         private NumericUpDown nud_Quantity;
         private TabControl tc_Categories;
         private Button btn_Add;
         private Panel panel1;
         private Label label1;
         private ListView lv_Bag;
-        //private Label lbl_VAT;
-        //private Label lbl_VATSale;
         private Label label3;
         private Label label2;
         private Label lbl_VAT;
         private Label lbl_VATSale;
         private Label lbl_Total;
-        private Button button1;
+        private Button btn_Pay;
+        private Button btn_Remove;
     }
 }

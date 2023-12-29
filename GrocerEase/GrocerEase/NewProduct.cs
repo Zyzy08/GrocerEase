@@ -84,7 +84,7 @@ namespace GrocerEase
 
         private static bool IsDefaultImage(Image image)
         {
-            byte[] defaultImageBytes = ImageToByteArray(Properties.Resources.Upload);
+            byte[] defaultImageBytes = ImageToByteArray(Sayra.Properties.Resources.Upload);
             byte[] currentImageBytes = ImageToByteArray(image);
             return StructuralComparisons.StructuralEqualityComparer.Equals(defaultImageBytes, currentImageBytes);
         }
@@ -183,7 +183,7 @@ namespace GrocerEase
                 txt_Name.Text = string.Empty;
                 nud_Price.Value = 0;
                 txt_NetWT.Text = string.Empty;
-                pb_Image.Image = Properties.Resources.Upload;
+                pb_Image.Image = Sayra.Properties.Resources.Upload;
                 cb_Category.SelectedIndex = 0;
                 nud_InStock.Value = 0;
 

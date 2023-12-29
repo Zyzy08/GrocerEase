@@ -119,7 +119,7 @@
             // 
             // pb_Image
             // 
-            pb_Image.Image = Properties.Resources.Upload;
+            pb_Image.Image = Sayra.Properties.Resources.Upload;
             pb_Image.Location = new Point(99, 168);
             pb_Image.Name = "pb_Image";
             pb_Image.Size = new Size(100, 50);

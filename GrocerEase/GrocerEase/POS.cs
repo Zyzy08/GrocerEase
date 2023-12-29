@@ -15,6 +15,8 @@ namespace GrocerEase
         {
             InitializeComponent();
             InitializeVATLabels();
+
+            btn_Remove.Click += Btn_Remove_Click;
         }
 
         private void InitializeVATLabels()
@@ -151,6 +153,8 @@ namespace GrocerEase
             }
 
             UpdateVATCalculations();
+
+            lv_Bag.SelectedIndexChanged += Lv_Bag_SelectedIndexChanged;
         }
 
         private static Image ByteArrayToImage(byte[] byteArray)
@@ -253,6 +257,33 @@ namespace GrocerEase
             }
 
             return totalSale;
+        }
+
+        private void Lv_Bag_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_Remove.Visible = lv_Bag.SelectedItems.Count > 0;
+            btn_Pay.Visible = false;
+        }
+
+        private void Btn_Remove_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem selectedItem in lv_Bag.SelectedItems)
+            {
+                lv_Bag.Items.Remove(selectedItem);
+            }
+
+            UpdateVATCalculations();
+            btn_Pay.Visible = true;
+        }
+
+        private void Btn_Pay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Tb_Search_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
