@@ -72,11 +72,11 @@ namespace GrocerEase
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            ProductDetail newProductForm = new()
+            ProductDetail productdetail = new()
             {
                 Owner = this.ParentForm
             };
-            newProductForm.ShowDialog();
+            productdetail.ShowDialog();
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
