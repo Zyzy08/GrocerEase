@@ -32,6 +32,9 @@ namespace GrocerEase
 
                     using SqlCommand commandCategories = new(queryCategories, connection);
                     using SqlDataReader readerCategories = commandCategories.ExecuteReader();
+
+                    cb_Category.Items.Clear();
+
                     while (readerCategories.Read())
                     {
                         string? categoryName = readerCategories["Category_Name"].ToString();
