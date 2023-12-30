@@ -42,7 +42,7 @@ namespace GrocerEase
             {
                 if (control is Categories categories)
                 {
-                    categories.LoadCategories();
+                    categories?.LoadCategories();
                     break;
                 }
             }

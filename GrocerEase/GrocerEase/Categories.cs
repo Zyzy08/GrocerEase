@@ -22,10 +22,8 @@ namespace Sayra
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            int categoryId = 0;
-
             using CategoryDetail categoryDetailForm = new();
-            categoryDetailForm.CategoryId = categoryId;
+            categoryDetailForm.CategoryId = 0;
             categoryDetailForm.RefreshCategoriesList = LoadCategories;
             categoryDetailForm.ShowDialog();
         }
