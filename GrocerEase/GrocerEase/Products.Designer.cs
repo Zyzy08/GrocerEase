@@ -32,6 +32,7 @@
             btn_Add = new Button();
             btn_Edit = new Button();
             btn_Remove = new Button();
+            tb_Search = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgv_Items).BeginInit();
             SuspendLayout();
             // 
@@ -43,11 +44,11 @@
             dgv_Items.AllowUserToResizeRows = false;
             dgv_Items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Items.Location = new Point(1, 1);
+            dgv_Items.Location = new Point(1, 47);
             dgv_Items.Name = "dgv_Items";
             dgv_Items.ReadOnly = true;
             dgv_Items.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Items.Size = new Size(1281, 705);
+            dgv_Items.Size = new Size(1281, 659);
             dgv_Items.TabIndex = 0;
             dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
             // 
@@ -93,11 +94,21 @@
             btn_Remove.UseVisualStyleBackColor = false;
             btn_Remove.Click += Btn_Remove_Click;
             // 
+            // tb_Search
+            // 
+            tb_Search.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Search.Location = new Point(12, 12);
+            tb_Search.Name = "tb_Search";
+            tb_Search.Size = new Size(330, 29);
+            tb_Search.TabIndex = 11;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
+            // 
             // Products
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1283, 784);
+            Controls.Add(tb_Search);
             Controls.Add(btn_Remove);
             Controls.Add(btn_Edit);
             Controls.Add(btn_Add);
@@ -118,5 +129,6 @@
         private Button btn_Add;
         private Button btn_Edit;
         private Button btn_Remove;
+        private TextBox tb_Search;
     }
 }

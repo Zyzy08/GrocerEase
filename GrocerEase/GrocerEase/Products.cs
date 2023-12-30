@@ -27,6 +27,7 @@ namespace GrocerEase
         private void Products_Load(object sender, EventArgs e)
         {
             dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
 
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
@@ -125,6 +126,35 @@ namespace GrocerEase
         private void Dgv_Items_SelectionChanged(object sender, EventArgs e)
         {
             btn_Edit.Enabled = dgv_Items.SelectedRows.Count == 1;
+        }
+
+        private void Tb_Search_TextChanged(object sender, EventArgs e)
+        {
+            FilterItems(tb_Search.Text);
+        }
+
+        private void FilterItems(string searchText)
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string fetchItemsQuery = "SELECT i.Item_ID as ID, c.Category_Name as Category, " +
+                                         "i.Item_Name as Name, i.Item_NetWT as NetWT, " +
+                                         "i.Item_Price as Price, i.Item_InStock as [In-Stock] " +
+                                         "FROM tbl_Items i " +
+                                         "INNER JOIN tbl_Categories c ON i.Category_ID = c.Category_ID " +
+                                         "WHERE i.Item_Name LIKE @SearchText";
+
+                SqlCommand fetchCommand = new(fetchItemsQuery, connection);
+                fetchCommand.Parameters.AddWithValue("@SearchText", $"%{searchText}%");
+
+                SqlDataAdapter adapter = new(fetchCommand);
+                DataTable dt_Items = new();
+                adapter.Fill(dt_Items);
+                dgv_Items.DataSource = dt_Items;
+            }
         }
     }
 }
