@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GrocerEase
 {
@@ -76,9 +68,27 @@ namespace GrocerEase
             connection.Open();
 
             using ProductDetail productDetail = new();
+            productDetail.Mode = "Add";
             productDetail.lbl_ID.Text = ProductDetail.GetNextItemId(connection).ToString();
             productDetail.Owner = this.ParentForm;
             productDetail.ShowDialog();
+        }
+
+        private void Btn_Edit_Click(object sender, EventArgs e)
+        {
+            if (dgv_Items.SelectedRows.Count == 1)
+            {
+                using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                connection.Open();
+
+                int itemID = Convert.ToInt32(dgv_Items.SelectedRows[0].Cells["ID"].Value);
+
+                using ProductDetail productDetail = new();
+                productDetail.Mode = "Edit";
+                productDetail.lbl_ID.Text = itemID.ToString();
+                productDetail.Owner = this.ParentForm;
+                productDetail.ShowDialog();
+            }
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)

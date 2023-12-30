@@ -77,6 +77,7 @@
             btn_Edit.TabIndex = 9;
             btn_Edit.Text = "EDIT";
             btn_Edit.UseVisualStyleBackColor = false;
+            btn_Edit.Click += Btn_Edit_Click;
             // 
             // btn_Remove
             // 

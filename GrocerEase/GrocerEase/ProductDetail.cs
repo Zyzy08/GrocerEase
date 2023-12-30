@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Windows.Forms;
 
 namespace GrocerEase
 {
@@ -15,6 +11,8 @@ namespace GrocerEase
         {
             InitializeComponent();
         }
+
+        public string Mode { get; set; } = "Add";
 
         private void ProductDetail_Load(object sender, EventArgs e)
         {
@@ -122,7 +120,13 @@ namespace GrocerEase
                 int newItemID = GetNextItemId(connection);
 
                 string insertQuery = @"INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID)
-            VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
+                VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
+
+                if (Mode == "Edit")
+                {
+                    insertQuery = @"UPDATE tbl_Items SET Item_Name = @ItemName, Item_Price = @ItemPrice, Item_NetWT = @ItemNetWeight, 
+                    Item_Icon = @ItemIcon, Item_InStock = @ItemInStock, Category_ID = @CategoryID WHERE Item_ID = @ItemID";
+                }
 
                 using SqlCommand command = new(insertQuery, connection);
 
@@ -139,9 +143,15 @@ namespace GrocerEase
                 command.Parameters.AddWithValue("@ItemInStock", itemInStock);
                 command.Parameters.AddWithValue("@CategoryID", selectedCategoryIndex + 1);
 
+                if (Mode == "Edit")
+                {
+                    int editItemID = Convert.ToInt32(lbl_ID.Text);
+                    command.Parameters["@ItemID"].Value = editItemID;
+                }
+
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Product added successfully!");
+                MessageBox.Show("Product " + (Mode == "Add" ? "added" : "edited") + " successfully!");
 
                 ResetForm();
             }
