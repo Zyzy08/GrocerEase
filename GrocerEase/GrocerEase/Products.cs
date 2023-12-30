@@ -32,6 +32,8 @@ namespace GrocerEase
 
         private void Products_Load(object sender, EventArgs e)
         {
+            dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
+
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
             if (connection.State == ConnectionState.Open)
@@ -75,6 +77,16 @@ namespace GrocerEase
                 Owner = this.ParentForm
             };
             newProductForm.ShowDialog();
+        }
+
+        private void Btn_Remove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Dgv_Items_SelectionChanged(object sender, EventArgs e)
+        {
+            btn_Edit.Enabled = dgv_Items.SelectedRows.Count == 1;
         }
     }
 }
