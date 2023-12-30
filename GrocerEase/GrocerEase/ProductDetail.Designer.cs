@@ -34,8 +34,8 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            txt_Name = new TextBox();
-            txt_NetWT = new TextBox();
+            tb_Name = new TextBox();
+            tb_NetWT = new TextBox();
             pb_Image = new PictureBox();
             cb_Category = new ComboBox();
             StockManagement_btn_Done = new Button();
@@ -103,19 +103,19 @@
             label7.TabIndex = 6;
             label7.Text = "In-Stock";
             // 
-            // txt_Name
+            // tb_Name
             // 
-            txt_Name.Location = new Point(98, 81);
-            txt_Name.Name = "txt_Name";
-            txt_Name.Size = new Size(100, 23);
-            txt_Name.TabIndex = 7;
+            tb_Name.Location = new Point(98, 81);
+            tb_Name.Name = "tb_Name";
+            tb_Name.Size = new Size(100, 23);
+            tb_Name.TabIndex = 7;
             // 
-            // txt_NetWT
+            // tb_NetWT
             // 
-            txt_NetWT.Location = new Point(98, 110);
-            txt_NetWT.Name = "txt_NetWT";
-            txt_NetWT.Size = new Size(100, 23);
-            txt_NetWT.TabIndex = 9;
+            tb_NetWT.Location = new Point(98, 110);
+            tb_NetWT.Name = "tb_NetWT";
+            tb_NetWT.Size = new Size(100, 23);
+            tb_NetWT.TabIndex = 9;
             // 
             // pb_Image
             // 
@@ -201,8 +201,8 @@
             Controls.Add(StockManagement_btn_Done);
             Controls.Add(cb_Category);
             Controls.Add(pb_Image);
-            Controls.Add(txt_NetWT);
-            Controls.Add(txt_Name);
+            Controls.Add(tb_NetWT);
+            Controls.Add(tb_Name);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -229,8 +229,8 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox txt_Name;
-        private TextBox txt_NetWT;
+        private TextBox tb_Name;
+        private TextBox tb_NetWT;
         private PictureBox pb_Image;
         private ComboBox cb_Category;
         private Button StockManagement_btn_Done;

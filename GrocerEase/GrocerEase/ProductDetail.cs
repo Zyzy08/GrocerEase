@@ -79,9 +79,9 @@ namespace GrocerEase
         {
             int selectedCategoryIndex = cb_Category.SelectedIndex;
 
-            string? itemName = txt_Name.Text;
+            string? itemName = tb_Name.Text;
             decimal itemPrice = nud_Price.Value;
-            string? itemNetWeight = txt_NetWT.Text;
+            string? itemNetWeight = tb_NetWT.Text;
             int itemInStock = (int)nud_InStock.Value;
 
             if (string.IsNullOrWhiteSpace(itemName))
@@ -187,9 +187,9 @@ namespace GrocerEase
                 cb_Category.SelectedIndex = 0;
             }
 
-            txt_Name.Text = string.Empty;
+            tb_Name.Text = string.Empty;
             nud_Price.Value = 0;
-            txt_NetWT.Text = string.Empty;
+            tb_NetWT.Text = string.Empty;
             pb_Image.Image = Sayra.Properties.Resources.Upload;
             nud_InStock.Value = 0;
         }
