@@ -14,6 +14,8 @@ namespace GrocerEase
 
         public string Mode { get; set; } = "Add";
 
+        public int ItemId { get; internal set; }
+
         private void ProductDetail_Load(object sender, EventArgs e)
         {
             ResetForm();
@@ -42,6 +44,55 @@ namespace GrocerEase
             }
 
             cb_Category.SelectedIndex = 0;
+
+            if (Mode == "Edit")
+            {
+                LoadProductDataForEditing();
+            }
+        }
+
+        private void LoadProductDataForEditing()
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string queryItemDetails = "SELECT Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID FROM tbl_Items WHERE Item_ID = @ItemId";
+
+                using SqlCommand commandItemDetails = new(queryItemDetails, connection);
+                commandItemDetails.Parameters.AddWithValue("@ItemId", ItemId);
+
+                using SqlDataReader readerItemDetails = commandItemDetails.ExecuteReader();
+
+                if (readerItemDetails.Read())
+                {
+                    lbl_ID.Text = ItemId.ToString();
+                    tb_Name.Text = readerItemDetails["Item_Name"].ToString();
+                    nud_Price.Value = Convert.ToDecimal(readerItemDetails["Item_Price"]);
+                    tb_NetWT.Text = readerItemDetails["Item_NetWT"].ToString();
+                    nud_InStock.Value = Convert.ToInt32(readerItemDetails["Item_InStock"]);
+
+                    if (cb_Category.Items.Count > 0)
+                    {
+                        int categoryId = Convert.ToInt32(readerItemDetails["Category_ID"]);
+                        cb_Category.SelectedIndex = categoryId - 1;
+                    }
+
+                    if (readerItemDetails["Item_Icon"] != DBNull.Value)
+                    {
+                        byte[] imageBytes = (byte[])readerItemDetails["Item_Icon"];
+                        pb_Image.Image = ByteArrayToImage(imageBytes);
+                    }
+                }
+            }
+        }
+
+        private static Image ByteArrayToImage(byte[] byteArray)
+        {
+            using MemoryStream ms = new(byteArray);
+            Image image = Image.FromStream(ms);
+            return image;
         }
 
         private void Pb_Image_Click(object sender, EventArgs e)

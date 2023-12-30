@@ -76,7 +76,22 @@ namespace GrocerEase
 
         private void Btn_Edit_Click(object sender, EventArgs e)
         {
+            if (dgv_Items.SelectedRows.Count == 1)
+            {
+                int selectedRowIndex = dgv_Items.SelectedRows[0].Index;
+                int itemId = Convert.ToInt32(dgv_Items.Rows[selectedRowIndex].Cells["ID"].Value);
 
+                using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                connection.Open();
+
+                using ProductDetail productDetailForm = new();
+                productDetailForm.Mode = "Edit";
+                productDetailForm.ItemId = itemId;
+                productDetailForm.Owner = this.ParentForm;
+                productDetailForm.ShowDialog();
+
+                RefreshData();
+            }
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
