@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace GrocerEase
 {
@@ -8,6 +9,7 @@ namespace GrocerEase
         public Products()
         {
             InitializeComponent();
+            dgv_Items.DefaultCellStyle.Font = new Font("Comforta", 10, FontStyle.Regular);
         }
 
         private void Lbl_POS_Click(object sender, EventArgs e)

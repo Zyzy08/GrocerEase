@@ -168,20 +168,32 @@ namespace GrocerEase
 
             if (connection.State == ConnectionState.Open)
             {
-                int newItemID = GetNextItemId(connection);
+                string query;
 
-                string insertQuery = @"INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID)
-                VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
-
-                if (Mode == "Edit")
+                if (Mode == "Add")
                 {
-                    insertQuery = @"UPDATE tbl_Items SET Item_Name = @ItemName, Item_Price = @ItemPrice, Item_NetWT = @ItemNetWeight, 
+                    int newItemID = GetNextItemId(connection);
+
+                    query = @"INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID)
+                    VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
+                }
+                else
+                {
+                    query = @"UPDATE tbl_Items SET Item_Name = @ItemName, Item_Price = @ItemPrice, Item_NetWT = @ItemNetWeight, 
                     Item_Icon = @ItemIcon, Item_InStock = @ItemInStock, Category_ID = @CategoryID WHERE Item_ID = @ItemID";
                 }
 
-                using SqlCommand command = new(insertQuery, connection);
+                using SqlCommand command = new(query, connection);
 
-                command.Parameters.AddWithValue("@ItemID", newItemID);
+                if (Mode == "Add")
+                {
+                    command.Parameters.AddWithValue("@ItemID", GetNextItemId(connection));
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@ItemID", ItemId);
+                }
+
                 command.Parameters.AddWithValue("@ItemName", itemName);
                 command.Parameters.AddWithValue("@ItemPrice", itemPrice);
                 command.Parameters.AddWithValue("@ItemNetWeight", itemNetWeight);
@@ -194,17 +206,16 @@ namespace GrocerEase
                 command.Parameters.AddWithValue("@ItemInStock", itemInStock);
                 command.Parameters.AddWithValue("@CategoryID", selectedCategoryIndex + 1);
 
-                if (Mode == "Edit")
-                {
-                    int editItemID = Convert.ToInt32(lbl_ID.Text);
-                    command.Parameters["@ItemID"].Value = editItemID;
-                }
-
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Product " + (Mode == "Add" ? "added" : "edited") + " successfully!");
 
                 ResetForm();
+
+                if (Mode == "Edit")
+                {
+                    this.Close();
+                }
             }
 
             if (this.Owner is UI ui)

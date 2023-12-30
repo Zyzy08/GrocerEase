@@ -55,7 +55,7 @@
             // 
             btn_Add.AutoSize = true;
             btn_Add.BackColor = Color.OliveDrab;
-            btn_Add.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Add.Font = new Font("Comfortaa", 20.25F);
             btn_Add.ForeColor = Color.White;
             btn_Add.Location = new Point(1137, 712);
             btn_Add.Name = "btn_Add";
@@ -69,7 +69,7 @@
             // 
             btn_Edit.AutoSize = true;
             btn_Edit.BackColor = Color.SteelBlue;
-            btn_Edit.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Edit.Font = new Font("Comfortaa", 20.25F);
             btn_Edit.ForeColor = Color.White;
             btn_Edit.Location = new Point(997, 712);
             btn_Edit.Name = "btn_Edit";
@@ -83,11 +83,11 @@
             // 
             btn_Remove.AutoSize = true;
             btn_Remove.BackColor = Color.Tomato;
-            btn_Remove.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Remove.Font = new Font("Comfortaa", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Remove.ForeColor = Color.White;
-            btn_Remove.Location = new Point(842, 712);
+            btn_Remove.Location = new Point(818, 712);
             btn_Remove.Name = "btn_Remove";
-            btn_Remove.Size = new Size(149, 60);
+            btn_Remove.Size = new Size(173, 60);
             btn_Remove.TabIndex = 10;
             btn_Remove.Text = "- REMOVE";
             btn_Remove.UseVisualStyleBackColor = false;
