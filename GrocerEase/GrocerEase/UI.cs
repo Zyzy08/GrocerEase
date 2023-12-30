@@ -5,11 +5,28 @@ namespace GrocerEase
     public partial class UI : Form
     {
         string TabContent;
+
         public UI()
         {
             InitializeComponent();
             DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
         }
+
+        public Control GetSelectedTabContent()
+        {
+            switch (TabContent)
+            {
+                case "Products":
+                    return pnl_Content.Controls.OfType<Products>().FirstOrDefault();
+
+                // Add cases for other content types as needed
+
+                default:
+                    return null;
+            }
+        }
+
+
 
         private void Btn_Exit_Click(object sender, EventArgs e)
         {
@@ -33,6 +50,7 @@ namespace GrocerEase
                 }
             }
         }
+
 
         private void UI_Load(object sender, EventArgs e)
         {
