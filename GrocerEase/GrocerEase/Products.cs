@@ -81,7 +81,28 @@ namespace GrocerEase
 
         private void Btn_Remove_Click(object sender, EventArgs e)
         {
+            if (dgv_Items.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove the selected item(s)?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+                if (result == DialogResult.Yes)
+                {
+                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                    connection.Open();
+
+                    foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
+                    {
+                        int itemID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                        string removeItemQuery = "DELETE FROM tbl_Items WHERE Item_ID = @ItemID";
+                        using SqlCommand removeItemCommand = new(removeItemQuery, connection);
+                        removeItemCommand.Parameters.AddWithValue("@ItemID", itemID);
+                        removeItemCommand.ExecuteNonQuery();
+                    }
+
+                    RefreshData();
+                }
+            }
         }
 
         private void Dgv_Items_SelectionChanged(object sender, EventArgs e)
