@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Sayra;
+using System.Windows.Forms;
 
 namespace GrocerEase
 {
@@ -68,6 +69,12 @@ namespace GrocerEase
                     lbl_Categories.BackColor = Color.SandyBrown;
                     lbl_Categories.ForeColor = Color.White;
                     lbl_Categories.BorderStyle = BorderStyle.None;
+                    Categories categories = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(categories);
+                    categories.Show();
                     break;
 
                 case "Users":
