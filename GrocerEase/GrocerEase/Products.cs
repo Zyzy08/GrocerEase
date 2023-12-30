@@ -70,7 +70,7 @@ namespace GrocerEase
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            NewProduct newProductForm = new()
+            ProductDetail newProductForm = new()
             {
                 Owner = this.ParentForm
             };

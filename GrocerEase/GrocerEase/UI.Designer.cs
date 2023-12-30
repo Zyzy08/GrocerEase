@@ -78,15 +78,16 @@
             // 
             btn_Exit.AutoSize = true;
             btn_Exit.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_Exit.BackColor = Color.Tomato;
             btn_Exit.FlatStyle = FlatStyle.Flat;
             btn_Exit.Font = new Font("Comfortaa", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_Exit.ForeColor = Color.Red;
+            btn_Exit.ForeColor = Color.White;
             btn_Exit.Location = new Point(1397, 12);
             btn_Exit.Name = "btn_Exit";
             btn_Exit.Size = new Size(31, 33);
             btn_Exit.TabIndex = 0;
             btn_Exit.Text = "X";
-            btn_Exit.UseVisualStyleBackColor = true;
+            btn_Exit.UseVisualStyleBackColor = false;
             btn_Exit.Click += Btn_Exit_Click;
             // 
             // pnl_Content

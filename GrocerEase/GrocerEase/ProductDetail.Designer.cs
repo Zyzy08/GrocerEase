@@ -1,6 +1,6 @@
 ﻿namespace GrocerEase
 {
-    partial class NewProduct
+    partial class ProductDetail
     {
         /// <summary>
         /// Required designer variable.

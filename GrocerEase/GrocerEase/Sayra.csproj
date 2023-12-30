@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Downloads\frmUserAuthentication\frmUserAuthentication\Micah.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Downloads\GrocerEase\GrocerEase\GrocerEase\Ziel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="frmAddAcount">
       <HintPath>..\..\..\..\..\Downloads\frmAddAcount\frmAddAcount\obj\Debug\frmAddAcount.exe</HintPath>
     </Reference>

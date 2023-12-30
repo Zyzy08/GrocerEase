@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace GrocerEase
 {
-    public partial class NewProduct : Form
+    public partial class ProductDetail : Form
     {
-        public NewProduct()
+        public ProductDetail()
         {
             InitializeComponent();
         }
