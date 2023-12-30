@@ -18,7 +18,7 @@ namespace GrocerEase
 
         private void ProductDetail_Load(object sender, EventArgs e)
         {
-            lbl_ID.Text = "1";
+            ResetForm();
 
             using (SqlConnection connection = new(DatabaseManager.ConnectionString))
             {
@@ -26,25 +26,8 @@ namespace GrocerEase
 
                 if (connection.State == ConnectionState.Open)
                 {
-                    string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
+                    lbl_ID.Text = GetNextItemId(connection).ToString();
 
-                    using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
-                    object latestItemID = commandLatestItemID.ExecuteScalar();
-
-                    if (latestItemID != null && latestItemID != DBNull.Value)
-                    {
-                        int newItemID = (int)latestItemID + 1;
-                        lbl_ID.Text = newItemID.ToString();
-                    }
-                }
-            }
-
-            using (SqlConnection connection = new(DatabaseManager.ConnectionString))
-            {
-                connection.Open();
-
-                if (connection.State == ConnectionState.Open)
-                {
                     string? queryCategories = "SELECT Category_Name FROM tbl_Categories";
 
                     using SqlCommand commandCategories = new(queryCategories, connection);
@@ -72,16 +55,6 @@ namespace GrocerEase
             }
         }
 
-        private static int GetNewItemId(SqlConnection connection)
-        {
-            string queryLatestItemID = "SELECT TOP 1 Item_ID FROM tbl_Items ORDER BY Item_ID DESC";
-
-            using SqlCommand commandLatestItemID = new(queryLatestItemID, connection);
-            object latestItemID = commandLatestItemID.ExecuteScalar();
-
-            return latestItemID != null && latestItemID != DBNull.Value ? Convert.ToInt32(latestItemID) + 1 : 1;
-        }
-
         private static bool IsDefaultImage(Image image)
         {
             byte[] defaultImageBytes = ImageToByteArray(Sayra.Properties.Resources.Upload);
@@ -98,12 +71,6 @@ namespace GrocerEase
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            if (this.Owner is UI ui)
-            {
-                ui.Lbl_Products_Click(sender, e);
-                ui.RefreshProductsForm();
-            }
-
             this.Close();
         }
 
@@ -149,12 +116,10 @@ namespace GrocerEase
 
             if (connection.State == ConnectionState.Open)
             {
-                int newItemID = GetNewItemId(connection);
-
-                lbl_ID.Text = newItemID.ToString();
+                int newItemID = GetNextItemId(connection);
 
                 string insertQuery = @"INSERT INTO tbl_Items (Item_ID, Item_Name, Item_Price, Item_NetWT, Item_Icon, Item_InStock, Category_ID)
-                VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
+            VALUES (@ItemID, @ItemName, @ItemPrice, @ItemNetWeight, @ItemIcon, @ItemInStock, @CategoryID)";
 
                 using SqlCommand command = new(insertQuery, connection);
 
@@ -174,16 +139,8 @@ namespace GrocerEase
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Product added successfully!");
-                txt_Name.Text = string.Empty;
-                nud_Price.Value = 0;
-                txt_NetWT.Text = string.Empty;
-                pb_Image.Image = Sayra.Properties.Resources.Upload;
-                cb_Category.SelectedIndex = 0;
-                nud_InStock.Value = 0;
 
-                newItemID = GetNewItemId(connection);
-
-                lbl_ID.Text = newItemID.ToString();
+                ResetForm();
             }
 
             if (this.Owner is UI ui)
@@ -191,6 +148,47 @@ namespace GrocerEase
                 ui.Lbl_Products_Click(sender, e);
                 ui.RefreshProductsForm();
             }
+        }
+
+        private void ResetForm()
+        {
+            using (SqlConnection connection = new(DatabaseManager.ConnectionString))
+            {
+                connection.Open();
+                lbl_ID.Text = GetNextItemId(connection).ToString();
+
+                cb_Category.Items.Clear();
+
+                if (connection.State == ConnectionState.Open)
+                {
+                    string? queryCategories = "SELECT Category_Name FROM tbl_Categories";
+                    using SqlCommand commandCategories = new(queryCategories, connection);
+                    using SqlDataReader readerCategories = commandCategories.ExecuteReader();
+                    while (readerCategories.Read())
+                    {
+                        string? categoryName = readerCategories["Category_Name"].ToString();
+                        cb_Category.Items.Add(categoryName);
+                    }
+                }
+
+                cb_Category.SelectedIndex = 0;
+            }
+
+            txt_Name.Text = string.Empty;
+            nud_Price.Value = 0;
+            txt_NetWT.Text = string.Empty;
+            pb_Image.Image = Sayra.Properties.Resources.Upload;
+            nud_InStock.Value = 0;
+        }
+
+        public static int GetNextItemId(SqlConnection connection)
+        {
+            string queryMinItemId = "SELECT MIN(Item_ID) + 1 FROM tbl_Items WHERE NOT EXISTS (SELECT 1 FROM tbl_Items AS t2 WHERE t2.Item_ID = tbl_Items.Item_ID + 1)";
+
+            using SqlCommand commandMinItemId = new(queryMinItemId, connection);
+            object minItemId = commandMinItemId.ExecuteScalar();
+
+            return minItemId != null && minItemId != DBNull.Value ? Convert.ToInt32(minItemId) : 1;
         }
     }
 }

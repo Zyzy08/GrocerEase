@@ -72,11 +72,13 @@ namespace GrocerEase
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            ProductDetail productdetail = new()
-            {
-                Owner = this.ParentForm
-            };
-            productdetail.ShowDialog();
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            using ProductDetail productDetail = new();
+            productDetail.lbl_ID.Text = ProductDetail.GetNextItemId(connection).ToString();
+            productDetail.Owner = this.ParentForm;
+            productDetail.ShowDialog();
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)

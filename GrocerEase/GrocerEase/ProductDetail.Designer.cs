@@ -237,7 +237,7 @@
         private Button btn_Cancel;
         private NumericUpDown nud_Price;
         private Label label8;
-        private Label lbl_ID;
         private NumericUpDown nud_InStock;
+        public Label lbl_ID;
     }
 }
