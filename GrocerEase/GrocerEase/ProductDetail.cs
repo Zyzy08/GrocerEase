@@ -16,7 +16,7 @@ namespace GrocerEase
             InitializeComponent();
         }
 
-        private void NewProduct_Load(object sender, EventArgs e)
+        private void ProductDetail_Load(object sender, EventArgs e)
         {
             lbl_ID.Text = "1";
 
@@ -110,12 +110,6 @@ namespace GrocerEase
         private void Btn_Done_Click(object sender, EventArgs e)
         {
             int selectedCategoryIndex = cb_Category.SelectedIndex;
-
-            if (selectedCategoryIndex == -1)
-            {
-                MessageBox.Show("Please select a category.", "Missing Category", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             string? itemName = txt_Name.Text;
             decimal itemPrice = nud_Price.Value;

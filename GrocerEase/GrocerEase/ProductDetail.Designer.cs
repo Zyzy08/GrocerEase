@@ -188,7 +188,7 @@
             nud_InStock.Size = new Size(120, 23);
             nud_InStock.TabIndex = 19;
             // 
-            // NewProduct
+            // ProductDetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -210,10 +210,10 @@
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "NewProduct";
+            Name = "ProductDetail";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Add New Product";
-            Load += NewProduct_Load;
+            Load += ProductDetail_Load;
             ((System.ComponentModel.ISupportInitialize)pb_Image).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_Price).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_InStock).EndInit();
