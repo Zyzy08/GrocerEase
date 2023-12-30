@@ -17,6 +17,7 @@ namespace GrocerEase
             InitializeVATLabels();
 
             btn_Remove.Click += Btn_Remove_Click;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
         }
 
         private void InitializeVATLabels()
@@ -283,7 +284,36 @@ namespace GrocerEase
 
         private void Tb_Search_TextChanged(object sender, EventArgs e)
         {
+            string searchText = tb_Search.Text.Trim().ToLower();
 
+            foreach (TabPage tabPage in tc_Categories.TabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is FlowLayoutPanel flp_Category)
+                    {
+                        foreach (Control flpItemControl in flp_Category.Controls)
+                        {
+                            if (flpItemControl is FlowLayoutPanel flp_Item)
+                            {
+                                if (flp_Item.Controls.Count >= 2 && flp_Item.Controls[1] is Label lbl_ItemDetails)
+                                {
+                                    string itemDetails = lbl_ItemDetails.Text.ToLower();
+
+                                    if (itemDetails.Contains(searchText))
+                                    {
+                                        flp_Item.Visible = true;
+                                    }
+                                    else
+                                    {
+                                        flp_Item.Visible = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

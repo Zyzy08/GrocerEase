@@ -5,6 +5,7 @@ namespace GrocerEase
     public partial class UI : Form
     {
         string TabContent;
+
         public UI()
         {
             InitializeComponent();
