@@ -38,7 +38,7 @@
             tb_NetWT = new TextBox();
             pb_Image = new PictureBox();
             cb_Category = new ComboBox();
-            StockManagement_btn_Done = new Button();
+            btn_Done = new Button();
             btn_Cancel = new Button();
             nud_Price = new NumericUpDown();
             label8 = new Label();
@@ -136,15 +136,15 @@
             cb_Category.Size = new Size(121, 23);
             cb_Category.TabIndex = 12;
             // 
-            // StockManagement_btn_Done
+            // btn_Done
             // 
-            StockManagement_btn_Done.Location = new Point(12, 282);
-            StockManagement_btn_Done.Name = "StockManagement_btn_Done";
-            StockManagement_btn_Done.Size = new Size(75, 23);
-            StockManagement_btn_Done.TabIndex = 14;
-            StockManagement_btn_Done.Text = "Done";
-            StockManagement_btn_Done.UseVisualStyleBackColor = true;
-            StockManagement_btn_Done.Click += Btn_Done_Click;
+            btn_Done.Location = new Point(12, 282);
+            btn_Done.Name = "btn_Done";
+            btn_Done.Size = new Size(75, 23);
+            btn_Done.TabIndex = 14;
+            btn_Done.Text = "Done";
+            btn_Done.UseVisualStyleBackColor = true;
+            btn_Done.Click += Btn_Done_Click;
             // 
             // btn_Cancel
             // 
@@ -198,7 +198,7 @@
             Controls.Add(label8);
             Controls.Add(nud_Price);
             Controls.Add(btn_Cancel);
-            Controls.Add(StockManagement_btn_Done);
+            Controls.Add(btn_Done);
             Controls.Add(cb_Category);
             Controls.Add(pb_Image);
             Controls.Add(tb_NetWT);
@@ -212,7 +212,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "ProductDetail";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Add New Product";
             Load += ProductDetail_Load;
             ((System.ComponentModel.ISupportInitialize)pb_Image).EndInit();
             ((System.ComponentModel.ISupportInitialize)nud_Price).EndInit();
@@ -233,7 +232,7 @@
         private TextBox tb_NetWT;
         private PictureBox pb_Image;
         private ComboBox cb_Category;
-        private Button StockManagement_btn_Done;
+        private Button btn_Done;
         private Button btn_Cancel;
         private NumericUpDown nud_Price;
         private Label label8;

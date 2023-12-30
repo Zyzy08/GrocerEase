@@ -56,6 +56,7 @@
             btn_Remove.TabIndex = 15;
             btn_Remove.Text = "- REMOVE";
             btn_Remove.UseVisualStyleBackColor = false;
+            btn_Remove.Click += Btn_Remove_Click;
             // 
             // btn_Edit
             // 
@@ -82,6 +83,7 @@
             btn_Add.TabIndex = 13;
             btn_Add.Text = "+ ADD";
             btn_Add.UseVisualStyleBackColor = false;
+            btn_Add.Click += Btn_Add_Click;
             // 
             // dgv_Categories
             // 

@@ -36,6 +36,18 @@ namespace GrocerEase
             }
         }
 
+        public void RefreshCategoriesForm()
+        {
+            foreach (Control control in pnl_Content.Controls)
+            {
+                if (control is Categories categories)
+                {
+                    categories.LoadCategories();
+                    break;
+                }
+            }
+        }
+
         private void UI_Load(object sender, EventArgs e)
         {
             pnl_Content.Controls.Clear();
