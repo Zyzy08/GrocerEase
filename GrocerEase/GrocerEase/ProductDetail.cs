@@ -130,9 +130,9 @@ namespace GrocerEase
         {
             int selectedCategoryIndex = cb_Category.SelectedIndex;
 
-            string? itemName = tb_Name.Text;
+            string itemName = tb_Name.Text.Trim();
             decimal itemPrice = nud_Price.Value;
-            string? itemNetWeight = tb_NetWT.Text;
+            string itemNetWeight = tb_NetWT.Text.Trim();
             int itemInStock = (int)nud_InStock.Value;
 
             if (string.IsNullOrWhiteSpace(itemName))
@@ -153,21 +153,17 @@ namespace GrocerEase
                 return;
             }
 
-            byte[]? imageBytes;
-            if (IsDefaultImage(pb_Image.Image))
-            {
-                imageBytes = null;
-            }
-            else
-            {
-                imageBytes = ImageToByteArray(pb_Image.Image);
-            }
-
             using SqlConnection connection = new(DatabaseManager.ConnectionString ?? throw new InvalidOperationException("Connection string is not initialized."));
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
             {
+                if (ItemExists(connection, itemName, itemNetWeight))
+                {
+                    MessageBox.Show("An item with the same name and net weight already exists.", "Duplicate Item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string query;
 
                 if (Mode == "Add")
@@ -199,7 +195,7 @@ namespace GrocerEase
                 command.Parameters.AddWithValue("@ItemNetWeight", itemNetWeight);
                 SqlParameter iconParameter = new("@ItemIcon", SqlDbType.VarBinary, -1)
                 {
-                    Value = imageBytes as object ?? DBNull.Value
+                    Value = IsDefaultImage(pb_Image.Image) ? DBNull.Value : (object)ImageToByteArray(pb_Image.Image)
                 };
                 command.Parameters.Add(iconParameter);
 
@@ -223,6 +219,19 @@ namespace GrocerEase
                 ui.Lbl_Products_Click(sender, e);
                 ui.RefreshProductsForm();
             }
+        }
+
+        private static bool ItemExists(SqlConnection connection, string itemName, string itemNetWeight)
+        {
+            string query = "SELECT COUNT(*) FROM tbl_Items WHERE LOWER(Item_Name) = LOWER(@ItemName) AND LOWER(Item_NetWT) = LOWER(@ItemNetWeight)";
+
+            using SqlCommand command = new(query, connection);
+            command.Parameters.AddWithValue("@ItemName", itemName.ToLower());
+            command.Parameters.AddWithValue("@ItemNetWeight", itemNetWeight.ToLower());
+
+            int count = Convert.ToInt32(command.ExecuteScalar());
+
+            return count > 0;
         }
 
         private void ResetForm()

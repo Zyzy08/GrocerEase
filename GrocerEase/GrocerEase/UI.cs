@@ -42,7 +42,7 @@ namespace GrocerEase
             {
                 if (control is Categories categories)
                 {
-                    categories?.LoadCategories();
+                    categories.RefreshData();
                     break;
                 }
             }
@@ -127,7 +127,7 @@ namespace GrocerEase
             UI_Load(sender, e);
         }
 
-        private void Lbl_Categories_Click(object sender, EventArgs e)
+        public void Lbl_Categories_Click(object sender, EventArgs e)
         {
             TabContent = "Categories";
             UI_Load(sender, e);

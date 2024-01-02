@@ -12,18 +12,6 @@ namespace GrocerEase
             dgv_Items.DefaultCellStyle.Font = new Font("Comforta", 10, FontStyle.Regular);
         }
 
-        private void Lbl_POS_Click(object sender, EventArgs e)
-        {
-            UI pos = new();
-            pos.Show();
-            this.Close();
-        }
-
-        private void Btn_Exit_Click(object sender, EventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
         private void Products_Load(object sender, EventArgs e)
         {
             dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
@@ -126,6 +114,21 @@ namespace GrocerEase
         private void Dgv_Items_SelectionChanged(object sender, EventArgs e)
         {
             btn_Edit.Enabled = dgv_Items.SelectedRows.Count == 1;
+
+            if (dgv_Items.SelectedRows.Count == 1)
+            {
+                int selectedRowIndex = dgv_Items.SelectedRows[0].Index;
+                int inStock = Convert.ToInt32(dgv_Items.Rows[selectedRowIndex].Cells["In-Stock"].Value);
+
+                btn_Edit.Enabled = true;
+
+                btn_Remove.Enabled = (inStock == 0);
+            }
+            else
+            {
+                btn_Edit.Enabled = false;
+                btn_Remove.Enabled = false;
+            }
         }
 
         private void Tb_Search_TextChanged(object sender, EventArgs e)

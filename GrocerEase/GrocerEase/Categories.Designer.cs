@@ -43,6 +43,7 @@
             tb_Search.Name = "tb_Search";
             tb_Search.Size = new Size(330, 29);
             tb_Search.TabIndex = 16;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
             // 
             // btn_Remove
             // 
@@ -70,6 +71,7 @@
             btn_Edit.TabIndex = 14;
             btn_Edit.Text = "EDIT";
             btn_Edit.UseVisualStyleBackColor = false;
+            btn_Edit.Click += Btn_Edit_Click;
             // 
             // btn_Add
             // 
@@ -99,6 +101,7 @@
             dgv_Categories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_Categories.Size = new Size(1281, 659);
             dgv_Categories.TabIndex = 12;
+            dgv_Categories.SelectionChanged += Dgv_Categories_SelectionChanged;
             // 
             // Categories
             // 

@@ -17,43 +17,76 @@ namespace Sayra
 
         private void Categories_Load(object sender, EventArgs e)
         {
-            LoadCategories();
-        }
+            dgv_Categories.SelectionChanged += Dgv_Categories_SelectionChanged;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
 
-        private void Btn_Add_Click(object sender, EventArgs e)
-        {
-            using CategoryDetail categoryDetailForm = new();
-            categoryDetailForm.CategoryId = 0;
-            categoryDetailForm.RefreshCategoriesList = LoadCategories;
-            categoryDetailForm.ShowDialog();
-        }
-
-        public void LoadCategories()
-        {
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
-
             if (connection.State == ConnectionState.Open)
             {
                 string fetchCategoriesQuery = "SELECT Category_ID as ID, Category_Name as Name, ISNULL(InStock, 0) as [In-Stock] FROM tbl_Categories";
-
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
                 DataTable dt_Categories = new();
                 adapter.Fill(dt_Categories);
                 dgv_Categories.DataSource = dt_Categories;
             }
+        }
 
-            connection.Close();
+        private void Tb_Search_TextChanged(object sender, EventArgs e)
+        {
+            FilterCategories(tb_Search.Text);
+        }
 
-            foreach (Form form in Application.OpenForms)
+        private void Dgv_Categories_SelectionChanged(object sender, EventArgs e)
+        {
+            btn_Edit.Enabled = dgv_Categories.SelectedRows.Count == 1;
+
+            if (dgv_Categories.SelectedRows.Count == 1)
             {
-                if (form is CategoryDetail categoryDetail)
-                {
-                    categoryDetail.RefreshCategoriesList?.Invoke();
-                    break;
-                }
+                int selectedRowIndex = dgv_Categories.SelectedRows[0].Index;
+                int inStock = Convert.ToInt32(dgv_Categories.Rows[selectedRowIndex].Cells["In-Stock"].Value);
+
+                btn_Edit.Enabled = true;
+
+                btn_Remove.Enabled = (inStock == 0);
             }
+            else
+            {
+                btn_Edit.Enabled = false;
+                btn_Remove.Enabled = false;
+            }
+        }
+
+        private void FilterCategories(string searchText)
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string fetchCategoriesQuery = "SELECT Category_ID as ID, Category_Name as Name, ISNULL(InStock, 0) as [In-Stock] FROM tbl_Categories WHERE Category_Name LIKE @SearchText";
+
+                SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
+                fetchCommand.Parameters.AddWithValue("@SearchText", $"%{searchText}%");
+
+                SqlDataAdapter adapter = new(fetchCommand);
+                DataTable dt_Categories = new();
+                adapter.Fill(dt_Categories);
+                dgv_Categories.DataSource = dt_Categories;
+            }
+        }
+
+        private void Btn_Add_Click(object sender, EventArgs e)
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            using CategoryDetail categoryDetail = new();
+            categoryDetail.Mode = "Add";
+            categoryDetail.lbl_ID.Text = CategoryDetail.GetNextCategoryId(connection).ToString();
+            categoryDetail.Owner = this.ParentForm;
+            categoryDetail.ShowDialog();
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
@@ -97,8 +130,26 @@ namespace Sayra
                 adapter.Fill(dt_Categories);
                 dgv_Categories.DataSource = dt_Categories;
             }
+        }
 
-            connection.Close();
+        private void Btn_Edit_Click(object sender, EventArgs e)
+        {
+            if (dgv_Categories.SelectedRows.Count == 1)
+            {
+                int selectedRowIndex = dgv_Categories.SelectedRows[0].Index;
+                int categoryId = Convert.ToInt32(dgv_Categories.Rows[selectedRowIndex].Cells["ID"].Value);
+
+                using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                connection.Open();
+
+                using CategoryDetail categoryDetailForm = new();
+                categoryDetailForm.Mode = "Edit";
+                categoryDetailForm.CategoryId = categoryId;
+                categoryDetailForm.Owner = this.ParentForm;
+                categoryDetailForm.ShowDialog();
+
+                RefreshData();
+            }   
         }
     }
 }
