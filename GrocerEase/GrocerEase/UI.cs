@@ -111,6 +111,12 @@ namespace GrocerEase
                     lbl_Dashboard.BackColor = Color.SandyBrown;
                     lbl_Dashboard.ForeColor = Color.White;
                     lbl_Dashboard.BorderStyle = BorderStyle.None;
+                    Dashboard dashboard = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(dashboard);
+                    dashboard.Show();
                     break;
             }
         }

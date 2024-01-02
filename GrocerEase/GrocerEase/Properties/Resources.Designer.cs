@@ -73,6 +73,16 @@ namespace Sayra.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Products {
+            get {
+                object obj = ResourceManager.GetObject("Products", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Upload {
             get {
                 object obj = ResourceManager.GetObject("Upload", resourceCulture);
