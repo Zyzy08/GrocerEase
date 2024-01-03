@@ -58,9 +58,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(46, 3);
+            pictureBox1.Location = new Point(28, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(61, 67);
+            pictureBox1.Size = new Size(93, 79);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
@@ -124,9 +124,9 @@
             flp_Tabs.Controls.Add(lbl_Logout);
             flp_Tabs.FlowDirection = FlowDirection.TopDown;
             flp_Tabs.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            flp_Tabs.Location = new Point(-3, 76);
+            flp_Tabs.Location = new Point(-3, 88);
             flp_Tabs.Name = "flp_Tabs";
-            flp_Tabs.Size = new Size(154, 642);
+            flp_Tabs.Size = new Size(154, 630);
             flp_Tabs.TabIndex = 4;
             // 
             // lbl_Dashboard

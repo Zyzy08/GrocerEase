@@ -44,11 +44,11 @@
             dgv_Items.AllowUserToResizeRows = false;
             dgv_Items.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_Items.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Items.Location = new Point(1, 47);
+            dgv_Items.Location = new Point(4, 47);
             dgv_Items.Name = "dgv_Items";
             dgv_Items.ReadOnly = true;
             dgv_Items.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Items.Size = new Size(1281, 659);
+            dgv_Items.Size = new Size(1278, 659);
             dgv_Items.TabIndex = 0;
             dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
             // 
