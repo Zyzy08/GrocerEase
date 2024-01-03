@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sayra;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Imaging;
@@ -12,7 +13,7 @@ namespace GrocerEase
             InitializeComponent();
         }
 
-        public string Mode { get; set; } = "Add";
+        public string Mode { get; set; }
 
         public int ItemId { get; internal set; }
 
@@ -158,10 +159,13 @@ namespace GrocerEase
 
             if (connection.State == ConnectionState.Open)
             {
-                if (ItemExists(connection, itemName, itemNetWeight))
+                if (Mode == "Add")
                 {
-                    MessageBox.Show("An item with the same name and net weight already exists.", "Duplicate Item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    if (ItemExists(connection, itemName, itemNetWeight))
+                    {
+                        MessageBox.Show("An item with the same name and net weight already exists.", "Duplicate Item", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
 
                 string query;
@@ -203,6 +207,8 @@ namespace GrocerEase
                 command.Parameters.AddWithValue("@CategoryID", selectedCategoryIndex + 1);
 
                 command.ExecuteNonQuery();
+
+                CommonUtilities.UpdateCategoryInStock(connection);
 
                 MessageBox.Show("Product " + (Mode == "Add" ? "added" : "edited") + " successfully!");
 

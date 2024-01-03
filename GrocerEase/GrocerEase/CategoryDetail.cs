@@ -14,7 +14,7 @@ namespace Sayra
             InitializeComponent();
         }
 
-        public string Mode { get; set; } = "Add";
+        public string Mode { get; set; }
 
         public int CategoryId { get; internal set; }
 

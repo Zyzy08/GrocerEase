@@ -24,7 +24,11 @@ namespace Sayra
             connection.Open();
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT Category_ID as ID, Category_Name as Name, ISNULL(InStock, 0) as [In-Stock] FROM tbl_Categories";
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
+                              "FROM tbl_Categories c " +
+                              "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
+                              "GROUP BY c.Category_ID, c.Category_Name";
+
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
                 DataTable dt_Categories = new();
@@ -65,7 +69,10 @@ namespace Sayra
 
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT Category_ID as ID, Category_Name as Name, ISNULL(InStock, 0) as [In-Stock] FROM tbl_Categories WHERE Category_Name LIKE @SearchText";
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
+                              "FROM tbl_Categories c " +
+                              "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
+                              "GROUP BY c.Category_ID, c.Category_Name";
 
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
                 fetchCommand.Parameters.AddWithValue("@SearchText", $"%{searchText}%");
@@ -110,6 +117,8 @@ namespace Sayra
                         removeCategoryCommand.ExecuteNonQuery();
                     }
 
+                    UpdateCategoryInStock(connection);
+
                     RefreshData();
                 }
             }
@@ -122,7 +131,10 @@ namespace Sayra
 
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT Category_ID as ID, Category_Name as Name, ISNULL(InStock, 0) as [In-Stock] FROM tbl_Categories";
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
+                              "FROM tbl_Categories c " +
+                              "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
+                              "GROUP BY c.Category_ID, c.Category_Name";
 
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
@@ -150,6 +162,19 @@ namespace Sayra
 
                 RefreshData();
             }   
+        }
+
+        public static void UpdateCategoryInStock(SqlConnection connection)
+        {
+            string updateCategoryInStockQuery = @"
+                UPDATE tbl_Categories 
+                SET InStock = (
+                    SELECT SUM(Item_InStock) 
+                    FROM tbl_Items 
+                    WHERE tbl_Items.Category_ID = tbl_Categories.Category_ID)";
+
+            using SqlCommand updateCommand = new(updateCategoryInStockQuery, connection);
+            updateCommand.ExecuteNonQuery();
         }
     }
 }
