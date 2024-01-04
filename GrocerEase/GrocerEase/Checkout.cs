@@ -43,6 +43,8 @@ namespace Sayra
         {
             if (decimal.TryParse(tb_Cash.Text, out decimal cashAmount))
             {
+                tb_Cash.Text = cashAmount.ToString().TrimStart('0');
+
                 decimal change = cashAmount - totalSale;
 
                 if (change >= 0)
