@@ -285,6 +285,8 @@ namespace GrocerEase
         {
             if (lv_Bag.Items.Count > 0)
             {
+                FillReceipt.ProcessReceipt(lv_Bag);
+
                 decimal totalSale = CalculateTotalSale();
 
                 Checkout checkout = new(totalSale);
