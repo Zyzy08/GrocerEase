@@ -43,8 +43,6 @@ namespace Sayra
         {
             if (decimal.TryParse(tb_Cash.Text, out decimal cashAmount))
             {
-                tb_Cash.Text = cashAmount.ToString().TrimStart('0');
-
                 decimal change = cashAmount - totalSale;
 
                 if (change >= 0)
@@ -69,18 +67,9 @@ namespace Sayra
                 e.Handled = true;
             }
 
-            if (e.KeyChar == '.' && tb_Cash.Text.Any(c => c == '.'))
+            if (e.KeyChar == '.' && (tb_Cash.Text.Contains('.') || tb_Cash.SelectionStart == 0))
             {
                 e.Handled = true;
-            }
-
-            if (e.KeyChar == '.' && tb_Cash.Text.Contains('.'))
-            {
-                int dotPosition = tb_Cash.Text.IndexOf('.');
-                if (tb_Cash.Text.Length - dotPosition > 2)
-                {
-                    e.Handled = true;
-                }
             }
         }
     }
