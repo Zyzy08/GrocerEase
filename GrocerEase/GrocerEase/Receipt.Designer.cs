@@ -37,6 +37,7 @@
             ClientSize = new Size(607, 699);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Receipt";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Receipt";
             ResumeLayout(false);
         }

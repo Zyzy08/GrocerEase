@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sayra;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -232,6 +233,8 @@ namespace GrocerEase
                 lv_Bag.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
                 UpdateVATCalculations();
+
+                btn_Pay.Enabled = lv_Bag.Items.Count > 0;
             }
         }
 
@@ -263,7 +266,7 @@ namespace GrocerEase
         private void Lv_Bag_SelectedIndexChanged(object sender, EventArgs e)
         {
             btn_Remove.Visible = lv_Bag.SelectedItems.Count > 0;
-            btn_Pay.Visible = false;
+            btn_Pay.Visible = lv_Bag.SelectedItems.Count == 0;
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
@@ -274,12 +277,19 @@ namespace GrocerEase
             }
 
             UpdateVATCalculations();
-            btn_Pay.Visible = true;
+            btn_Pay.Enabled = lv_Bag.Items.Count > 0;
+            btn_Pay.Visible = lv_Bag.SelectedItems.Count == 0;
         }
 
         private void Btn_Pay_Click(object sender, EventArgs e)
         {
+            if (lv_Bag.Items.Count > 0)
+            {
+                decimal totalSale = CalculateTotalSale();
 
+                Checkout checkout = new(totalSale);
+                checkout.ShowDialog();
+            }
         }
 
         private void Tb_Search_TextChanged(object sender, EventArgs e)

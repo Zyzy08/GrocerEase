@@ -16,10 +16,9 @@ namespace Sayra
                 SET InStock = (
                     SELECT SUM(Item_InStock) 
                     FROM tbl_Items 
-                    WHERE tbl_Items.Category_ID = tbl_Categories.Category_ID
-                )";
+                    WHERE tbl_Items.Category_ID = tbl_Categories.Category_ID)";
 
-            using SqlCommand updateCommand = new SqlCommand(updateCategoryInStockQuery, connection);
+            using SqlCommand updateCommand = new(updateCategoryInStockQuery, connection);
             updateCommand.ExecuteNonQuery();
         }
     }

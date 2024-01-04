@@ -202,6 +202,7 @@
             // 
             btn_Pay.AutoSize = true;
             btn_Pay.BackColor = Color.OliveDrab;
+            btn_Pay.Enabled = false;
             btn_Pay.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Pay.ForeColor = Color.White;
             btn_Pay.Location = new Point(1137, 718);
