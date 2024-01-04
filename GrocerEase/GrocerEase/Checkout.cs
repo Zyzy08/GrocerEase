@@ -39,49 +39,29 @@ namespace Sayra
             receipt.ShowDialog();
         }
 
-        private const decimal MaxCash = 9999999999999.99m;
-
-        private void Tb_Cash_TextChanged(object sender, EventArgs e)
+        private void Nud_Cash_ValueChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(tb_Cash.Text, out decimal cashAmount))
-            {
-                if (cashAmount > MaxCash)
-                {
-                    lbl_Change.Text = "Exceeds maximum limit";
-                    btn_Receipt.Enabled = false;
-                }
-                else
-                {
-                    decimal change = cashAmount - totalSale;
+            UpdateChangeLabel();
+        }
 
-                    if (change >= 0)
-                    {
-                        lbl_Change.Text = $"Change: ₱{change:N2}";
-                        btn_Receipt.Enabled = true;
-                    }
-                    else
-                    {
-                        lbl_Change.Text = "Insufficient cash";
-                        btn_Receipt.Enabled = false;
-                    }
-                }
+        private void UpdateChangeLabel()
+        {
+            decimal currentValue = nud_Cash.Value;
+
+            nud_Cash.Value = currentValue;
+
+            decimal cashAmount = nud_Cash.Value;
+            decimal change = cashAmount - totalSale;
+
+            if (change >= 0)
+            {
+                lbl_Change.Text = $"Change: ₱{change:N2}";
+                btn_Receipt.Enabled = true;
             }
             else
             {
-                lbl_Change.Text = "Change: ₱0.00";
-            }
-        }
-
-        private void Tb_Cash_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.' && tb_Cash.SelectionStart != tb_Cash.Text.Length)
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == '.' && (tb_Cash.Text.Contains('.') || tb_Cash.SelectionStart == 0))
-            {
-                e.Handled = true;
+                lbl_Change.Text = "Insufficient cash";
+                btn_Receipt.Enabled = false;
             }
         }
     }

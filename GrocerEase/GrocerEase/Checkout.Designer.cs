@@ -30,10 +30,11 @@
         {
             lbl_Total = new Label();
             label2 = new Label();
-            tb_Cash = new TextBox();
             btn_Receipt = new Button();
             btn_Cancel = new Button();
             lbl_Change = new Label();
+            nud_Cash = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)nud_Cash).BeginInit();
             SuspendLayout();
             // 
             // lbl_Total
@@ -56,22 +57,11 @@
             label2.TabIndex = 1;
             label2.Text = "Cash: ₱";
             // 
-            // tb_Cash
-            // 
-            tb_Cash.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tb_Cash.Location = new Point(177, 100);
-            tb_Cash.MaxLength = 16;
-            tb_Cash.Name = "tb_Cash";
-            tb_Cash.Size = new Size(326, 57);
-            tb_Cash.TabIndex = 2;
-            tb_Cash.Text = "0";
-            tb_Cash.TextChanged += Tb_Cash_TextChanged;
-            tb_Cash.KeyPress += Tb_Cash_KeyPress;
-            // 
             // btn_Receipt
             // 
             btn_Receipt.AutoSize = true;
             btn_Receipt.BackColor = Color.OliveDrab;
+            btn_Receipt.Enabled = false;
             btn_Receipt.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Receipt.ForeColor = Color.White;
             btn_Receipt.Location = new Point(52, 272);
@@ -106,16 +96,27 @@
             lbl_Change.TabIndex = 5;
             lbl_Change.Text = "Change: ₱0.00";
             // 
+            // nud_Cash
+            // 
+            nud_Cash.DecimalPlaces = 2;
+            nud_Cash.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nud_Cash.Location = new Point(177, 97);
+            nud_Cash.Maximum = new decimal(new int[] { 99999999, 0, 0, 131072 });
+            nud_Cash.Name = "nud_Cash";
+            nud_Cash.Size = new Size(327, 54);
+            nud_Cash.TabIndex = 6;
+            nud_Cash.ValueChanged += Nud_Cash_ValueChanged;
+            // 
             // Checkout
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SandyBrown;
             ClientSize = new Size(516, 351);
+            Controls.Add(nud_Cash);
             Controls.Add(lbl_Change);
             Controls.Add(btn_Cancel);
             Controls.Add(btn_Receipt);
-            Controls.Add(tb_Cash);
             Controls.Add(label2);
             Controls.Add(lbl_Total);
             ForeColor = Color.White;
@@ -123,6 +124,7 @@
             Name = "Checkout";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Checkout";
+            ((System.ComponentModel.ISupportInitialize)nud_Cash).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -131,9 +133,9 @@
 
         private Label lbl_Total;
         private Label label2;
-        private TextBox tb_Cash;
         private Button btn_Receipt;
         private Button btn_Cancel;
         private Label lbl_Change;
+        private NumericUpDown nud_Cash;
     }
 }
