@@ -60,6 +60,7 @@
             // 
             tb_Cash.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tb_Cash.Location = new Point(177, 100);
+            tb_Cash.MaxLength = 16;
             tb_Cash.Name = "tb_Cash";
             tb_Cash.Size = new Size(326, 57);
             tb_Cash.TabIndex = 2;

@@ -39,19 +39,31 @@ namespace Sayra
             receipt.ShowDialog();
         }
 
+        private const decimal MaxCash = 9999999999999.99m;
+
         private void Tb_Cash_TextChanged(object sender, EventArgs e)
         {
             if (decimal.TryParse(tb_Cash.Text, out decimal cashAmount))
             {
-                decimal change = cashAmount - totalSale;
-
-                if (change >= 0)
+                if (cashAmount > MaxCash)
                 {
-                    lbl_Change.Text = $"Change: ₱{change:N2}";
+                    lbl_Change.Text = "Exceeds maximum limit";
+                    btn_Receipt.Enabled = false;
                 }
                 else
                 {
-                    lbl_Change.Text = "Insufficient cash";
+                    decimal change = cashAmount - totalSale;
+
+                    if (change >= 0)
+                    {
+                        lbl_Change.Text = $"Change: ₱{change:N2}";
+                        btn_Receipt.Enabled = true;
+                    }
+                    else
+                    {
+                        lbl_Change.Text = "Insufficient cash";
+                        btn_Receipt.Enabled = false;
+                    }
                 }
             }
             else
@@ -62,7 +74,7 @@ namespace Sayra
 
         private void Tb_Cash_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.' && tb_Cash.SelectionStart != tb_Cash.Text.Length)
             {
                 e.Handled = true;
             }
