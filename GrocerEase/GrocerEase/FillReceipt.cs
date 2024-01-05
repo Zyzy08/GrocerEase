@@ -22,15 +22,6 @@ namespace Sayra
                 string itemDetails = $"{itemName} - Quantity: {quantity}, Total Price: ₱{totalPrice}";
                 itemsList.Add(itemDetails);
             }
-
-            // Add code to handle the receipt processing using the list of items
-            // This could involve saving it to a file, sending it to a printer, etc.
-            // For now, let's just print to the console as an example
-            Console.WriteLine("Receipt processed:");
-            foreach (var item in itemsList)
-            {
-                Console.WriteLine(item);
-            }
         }
     }
 }
