@@ -175,6 +175,7 @@ namespace GrocerEase
 
                 foreach (DataRow discountRow in discountsTable.Rows)
                 {
+                    int discountId = Convert.ToInt32(discountRow["Discount_ID"]);
                     string discountType = discountRow["Discount_Type"].ToString();
                     decimal discountRate = Convert.ToDecimal(discountRow["Discount_Rate"]);
                     bool isActive = Convert.ToBoolean(discountRow["IsActive"]);
@@ -196,14 +197,15 @@ namespace GrocerEase
                         BackColor = System.Drawing.Color.Transparent,
                         FlatStyle = FlatStyle.Flat,
                         FlatAppearance =
-                        {
-                            BorderSize = 0,
-                            CheckedBackColor = System.Drawing.Color.Transparent
-                        },
+                {
+                    BorderSize = 0,
+                    CheckedBackColor = System.Drawing.Color.Transparent
+                },
                         Size = new Size(42, 27),
                         Checked = isActive,
                         BackgroundImage = isActive ? Sayra.Properties.Resources.Toggle_Button_Enabled : Sayra.Properties.Resources.Toggle_Button_Disabled,
-                        BackgroundImageLayout = ImageLayout.Zoom
+                        BackgroundImageLayout = ImageLayout.Zoom,
+                        Tag = discountId
                     };
 
                     Label lbl_DiscountDetails = new()
@@ -221,8 +223,36 @@ namespace GrocerEase
 
                     flp_Discounts.Controls.Add(flp_Discount);
 
+                    chk_IsActive.CheckedChanged += (sender, e) =>
+                    {
+                        bool newIsActive = ((CheckBox)sender).Checked;
+                        int currentDiscountId = (int)((CheckBox)sender).Tag;
+
+                        UpdateDiscountStatus(currentDiscountId, newIsActive);
+
+                        lbl_DiscountDetails.ForeColor = newIsActive ? SystemColors.ControlText : SystemColors.GrayText;
+                        chk_IsActive.BackgroundImage = newIsActive ? Sayra.Properties.Resources.Toggle_Button_Enabled : Sayra.Properties.Resources.Toggle_Button_Disabled;
+                    };
+
                     chk_IsActive.Invalidate();
                 }
+            }
+        }
+
+        private static void UpdateDiscountStatus(int discountId, bool newStatus)
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string updateQuery = "UPDATE tbl_Discounts SET IsActive = @IsActive WHERE Discount_ID = @DiscountID";
+
+                using SqlCommand updateCommand = new(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("@IsActive", newStatus);
+                updateCommand.Parameters.AddWithValue("@DiscountID", discountId);
+
+                updateCommand.ExecuteNonQuery();
             }
         }
 
