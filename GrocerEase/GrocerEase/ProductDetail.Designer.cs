@@ -211,6 +211,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ProductDetail";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Load += ProductDetail_Load;
             ((System.ComponentModel.ISupportInitialize)pb_Image).EndInit();

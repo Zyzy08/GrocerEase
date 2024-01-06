@@ -102,6 +102,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "CategoryDetail";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CategoryDetail";
             Load += CategoryDetail_Load;

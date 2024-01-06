@@ -133,7 +133,7 @@ namespace GrocerEase
                             Label lbl_ItemDetails = new()
                             {
                                 Name = "lbl_ItemDetails",
-                                Text = $"{itemRow["Item_Name"]} ({itemRow["Item_NetWT"]})\nPrice: {itemRow["Item_Price"]}",
+                                Text = $"{itemRow["Item_Name"]} ({itemRow["Item_NetWT"]})\nPrice: ₱{itemRow["Item_Price"]}",
                                 TextAlign = ContentAlignment.MiddleCenter,
                                 AutoSize = true
                             };

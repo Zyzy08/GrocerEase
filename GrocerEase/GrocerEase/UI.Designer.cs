@@ -307,6 +307,7 @@
             Controls.Add(pnl_Content);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UI";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
