@@ -37,6 +37,8 @@ namespace GrocerEase
 
                 if (connection.State == ConnectionState.Open)
                 {
+                    FetchAndDisplayDiscounts();
+
                     string queryCategories = "SELECT Category_ID, Category_Name FROM tbl_Categories";
                     SqlDataAdapter adapterCategories = new(queryCategories, connection);
                     DataTable categoriesTable = new();
@@ -157,6 +159,67 @@ namespace GrocerEase
             UpdateVATCalculations();
 
             lv_Bag.SelectedIndexChanged += Lv_Bag_SelectedIndexChanged;
+        }
+
+        private void FetchAndDisplayDiscounts()
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string queryDiscounts = "SELECT Discount_ID, Discount_Type, IsActive FROM tbl_Discounts";
+                SqlDataAdapter adapterDiscounts = new(queryDiscounts, connection);
+                DataTable discountsTable = new();
+                adapterDiscounts.Fill(discountsTable);
+
+                foreach (DataRow discountRow in discountsTable.Rows)
+                {
+                    string discountType = discountRow["Discount_Type"].ToString();
+                    bool isActive = Convert.ToBoolean(discountRow["IsActive"]);
+
+                    FlowLayoutPanel flp_Discount = new()
+                    {
+                        Name = "flp_Discount",
+                        FlowDirection = FlowDirection.TopDown,
+                        Size = new Size(200, 50),
+                        Margin = new Padding(5),
+                        AutoSize = true
+                    };
+
+                    CheckBox chk_IsActive = new()
+                    {
+                        Name = "chk_IsActive",
+                        Text = " ",
+                        Appearance = Appearance.Button,
+                        BackColor = System.Drawing.Color.Transparent,
+                        BackgroundImage = Sayra.Properties.Resources.Toggle_Button_Disabled,
+                        BackgroundImageLayout = ImageLayout.Zoom,
+                        FlatStyle = FlatStyle.Flat,
+                        FlatAppearance =
+                        {
+                            BorderSize = 0,
+                            CheckedBackColor = System.Drawing.Color.Transparent
+                        },
+                        Checked = isActive,
+                        Size = new Size(42, 27)
+                    };
+
+                    Label lbl_DiscountType = new()
+                    {
+                        Name = "lbl_DiscountType",
+                        Text = discountType,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        AutoSize = true,
+                        Font = new Font("Comfortaa", 12)
+                    };
+
+                    flp_Discount.Controls.Add(chk_IsActive);
+                    flp_Discount.Controls.Add(lbl_DiscountType);
+
+                    flp_Discounts.Controls.Add(flp_Discount);
+                }
+            }
         }
 
         private static Image ByteArrayToImage(byte[] byteArray)

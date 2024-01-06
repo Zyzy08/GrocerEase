@@ -33,6 +33,7 @@
             lbl_Date = new Label();
             lbl_Time = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            panel6 = new Panel();
             panel1 = new Panel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
@@ -44,14 +45,13 @@
             pictureBox3 = new PictureBox();
             lbl_Inventory = new Label();
             label5 = new Label();
-            t_DateTime = new System.Windows.Forms.Timer(components);
             panel4 = new Panel();
             panel5 = new Panel();
             flowLayoutPanel3 = new FlowLayoutPanel();
             pictureBox2 = new PictureBox();
             lbl_OutOfStocks = new Label();
             label3 = new Label();
-            panel6 = new Panel();
+            t_DateTime = new System.Windows.Forms.Timer(components);
             flowLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -76,7 +76,7 @@
             // lbl_Time
             // 
             lbl_Time.Font = new Font("Comfortaa", 23.9999962F, FontStyle.Bold);
-            lbl_Time.Location = new Point(660, 9);
+            lbl_Time.Location = new Point(702, 9);
             lbl_Time.Name = "lbl_Time";
             lbl_Time.RightToLeft = RightToLeft.Yes;
             lbl_Time.Size = new Size(611, 52);
@@ -93,8 +93,16 @@
             flowLayoutPanel1.Controls.Add(panel5);
             flowLayoutPanel1.Location = new Point(4, 64);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1274, 708);
+            flowLayoutPanel1.Size = new Size(1309, 708);
             flowLayoutPanel1.TabIndex = 2;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = SystemColors.Control;
+            panel6.Location = new Point(3, 3);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(71, 270);
+            panel6.TabIndex = 2;
             // 
             // panel1
             // 
@@ -208,12 +216,6 @@
             label5.Text = "Inventory";
             label5.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // t_DateTime
-            // 
-            t_DateTime.Enabled = true;
-            t_DateTime.Interval = 1000;
-            t_DateTime.Tick += DateTime_Tick;
-            // 
             // panel4
             // 
             panel4.BackColor = SystemColors.Control;
@@ -274,24 +276,23 @@
             label3.Text = "Out of Stocks";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel6
+            // t_DateTime
             // 
-            panel6.BackColor = SystemColors.Control;
-            panel6.Location = new Point(3, 3);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(71, 270);
-            panel6.TabIndex = 2;
+            t_DateTime.Enabled = true;
+            t_DateTime.Interval = 1000;
+            t_DateTime.Tick += DateTime_Tick;
             // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1283, 784);
+            ClientSize = new Size(1317, 784);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(lbl_Time);
             Controls.Add(lbl_Date);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Dashboard";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
             Load += Dashboard_Load;
             flowLayoutPanel1.ResumeLayout(false);

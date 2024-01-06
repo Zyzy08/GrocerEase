@@ -48,7 +48,7 @@
             dgv_Items.Name = "dgv_Items";
             dgv_Items.ReadOnly = true;
             dgv_Items.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_Items.Size = new Size(1278, 659);
+            dgv_Items.Size = new Size(1301, 659);
             dgv_Items.TabIndex = 0;
             dgv_Items.SelectionChanged += Dgv_Items_SelectionChanged;
             // 
@@ -58,7 +58,7 @@
             btn_Add.BackColor = Color.OliveDrab;
             btn_Add.Font = new Font("Comfortaa", 20.25F);
             btn_Add.ForeColor = Color.White;
-            btn_Add.Location = new Point(1137, 712);
+            btn_Add.Location = new Point(1171, 712);
             btn_Add.Name = "btn_Add";
             btn_Add.Size = new Size(134, 60);
             btn_Add.TabIndex = 8;
@@ -72,7 +72,7 @@
             btn_Edit.BackColor = Color.SteelBlue;
             btn_Edit.Font = new Font("Comfortaa", 20.25F);
             btn_Edit.ForeColor = Color.White;
-            btn_Edit.Location = new Point(997, 712);
+            btn_Edit.Location = new Point(1031, 712);
             btn_Edit.Name = "btn_Edit";
             btn_Edit.Size = new Size(134, 60);
             btn_Edit.TabIndex = 9;
@@ -86,7 +86,7 @@
             btn_Remove.BackColor = Color.Tomato;
             btn_Remove.Font = new Font("Comfortaa", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Remove.ForeColor = Color.White;
-            btn_Remove.Location = new Point(818, 712);
+            btn_Remove.Location = new Point(852, 712);
             btn_Remove.Name = "btn_Remove";
             btn_Remove.Size = new Size(173, 60);
             btn_Remove.TabIndex = 10;
@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1283, 784);
+            ClientSize = new Size(1317, 784);
             Controls.Add(tb_Search);
             Controls.Add(btn_Remove);
             Controls.Add(btn_Edit);

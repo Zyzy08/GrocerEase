@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POS));
             lbl_Price = new Label();
             lbl_Name = new Label();
             tb_Search = new TextBox();
@@ -36,8 +35,9 @@
             tc_Categories = new TabControl();
             btn_Add = new Button();
             panel1 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            checkBox1 = new CheckBox();
+            lbl_Discounts = new Label();
+            label5 = new Label();
+            flp_Discounts = new FlowLayoutPanel();
             lbl_VAT = new Label();
             lbl_VATSale = new Label();
             label3 = new Label();
@@ -49,7 +49,6 @@
             btn_Remove = new Button();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // lbl_Price
@@ -116,7 +115,9 @@
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.Controls.Add(flowLayoutPanel1);
+            panel1.Controls.Add(lbl_Discounts);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(flp_Discounts);
             panel1.Controls.Add(lbl_VAT);
             panel1.Controls.Add(lbl_VATSale);
             panel1.Controls.Add(label3);
@@ -128,35 +129,42 @@
             panel1.Size = new Size(657, 699);
             panel1.TabIndex = 11;
             // 
-            // flowLayoutPanel1
+            // lbl_Discounts
             // 
-            flowLayoutPanel1.BackColor = SystemColors.Window;
-            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
-            flowLayoutPanel1.Controls.Add(checkBox1);
-            flowLayoutPanel1.Location = new Point(3, 37);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(202, 591);
-            flowLayoutPanel1.TabIndex = 19;
+            lbl_Discounts.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Discounts.Location = new Point(305, 665);
+            lbl_Discounts.Name = "lbl_Discounts";
+            lbl_Discounts.RightToLeft = RightToLeft.Yes;
+            lbl_Discounts.Size = new Size(349, 34);
+            lbl_Discounts.TabIndex = 21;
+            lbl_Discounts.Text = "₱0.00-";
             // 
-            // checkBox1
+            // label5
             // 
-            checkBox1.Appearance = Appearance.Button;
-            checkBox1.BackColor = Color.Transparent;
-            checkBox1.BackgroundImage = (Image)resources.GetObject("checkBox1.BackgroundImage");
-            checkBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            checkBox1.FlatAppearance.BorderSize = 0;
-            checkBox1.FlatAppearance.CheckedBackColor = Color.Transparent;
-            checkBox1.FlatStyle = FlatStyle.Flat;
-            checkBox1.Location = new Point(3, 3);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(42, 27);
-            checkBox1.TabIndex = 1;
-            checkBox1.UseVisualStyleBackColor = false;
+            label5.AutoSize = true;
+            label5.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(3, 665);
+            label5.Name = "label5";
+            label5.Size = new Size(122, 34);
+            label5.TabIndex = 20;
+            label5.Text = "Discounts";
+            // 
+            // flp_Discounts
+            // 
+            flp_Discounts.BackColor = SystemColors.Window;
+            flp_Discounts.BorderStyle = BorderStyle.FixedSingle;
+            flp_Discounts.FlowDirection = FlowDirection.TopDown;
+            flp_Discounts.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            flp_Discounts.ForeColor = SystemColors.GrayText;
+            flp_Discounts.Location = new Point(3, 37);
+            flp_Discounts.Name = "flp_Discounts";
+            flp_Discounts.Size = new Size(202, 557);
+            flp_Discounts.TabIndex = 19;
             // 
             // lbl_VAT
             // 
             lbl_VAT.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_VAT.Location = new Point(305, 665);
+            lbl_VAT.Location = new Point(305, 631);
             lbl_VAT.Name = "lbl_VAT";
             lbl_VAT.RightToLeft = RightToLeft.Yes;
             lbl_VAT.Size = new Size(349, 34);
@@ -166,7 +174,7 @@
             // lbl_VATSale
             // 
             lbl_VATSale.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_VATSale.Location = new Point(305, 631);
+            lbl_VATSale.Location = new Point(305, 597);
             lbl_VATSale.Name = "lbl_VATSale";
             lbl_VATSale.RightToLeft = RightToLeft.Yes;
             lbl_VATSale.Size = new Size(349, 34);
@@ -177,7 +185,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(3, 631);
+            label3.Location = new Point(3, 597);
             label3.Name = "label3";
             label3.Size = new Size(108, 34);
             label3.TabIndex = 16;
@@ -187,7 +195,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(3, 665);
+            label2.Location = new Point(3, 631);
             label2.Name = "label2";
             label2.Size = new Size(100, 34);
             label2.TabIndex = 15;
@@ -200,7 +208,7 @@
             lv_Bag.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lv_Bag.Location = new Point(204, 37);
             lv_Bag.Name = "lv_Bag";
-            lv_Bag.Size = new Size(450, 591);
+            lv_Bag.Size = new Size(450, 557);
             lv_Bag.TabIndex = 14;
             lv_Bag.UseCompatibleStateImageBehavior = false;
             lv_Bag.View = View.List;
@@ -280,7 +288,6 @@
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -303,7 +310,8 @@
         private Label lbl_Total;
         private Button btn_Pay;
         private Button btn_Remove;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private CheckBox checkBox1;
+        private FlowLayoutPanel flp_Discounts;
+        private Label label5;
+        private Label lbl_Discounts;
     }
 }

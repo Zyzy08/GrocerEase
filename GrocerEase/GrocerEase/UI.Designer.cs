@@ -41,15 +41,15 @@
             label7 = new Label();
             lbl_Categories = new Label();
             label8 = new Label();
-            lbl_Users = new Label();
+            lbl_Discounts = new Label();
             label9 = new Label();
+            lbl_Users = new Label();
             label10 = new Label();
-            lbl_POS = new Label();
             label12 = new Label();
+            lbl_POS = new Label();
             label13 = new Label();
             label14 = new Label();
             lbl_Logout = new Label();
-            lbl_Discounts = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -93,6 +93,7 @@
             // 
             // pnl_Content
             // 
+            pnl_Content.BorderStyle = BorderStyle.FixedSingle;
             pnl_Content.Location = new Point(111, 64);
             pnl_Content.Name = "pnl_Content";
             pnl_Content.Size = new Size(1317, 784);
@@ -205,6 +206,31 @@
             label8.Size = new Size(154, 38);
             label8.TabIndex = 3;
             // 
+            // lbl_Discounts
+            // 
+            lbl_Discounts.BackColor = SystemColors.Control;
+            lbl_Discounts.BorderStyle = BorderStyle.FixedSingle;
+            lbl_Discounts.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
+            lbl_Discounts.ForeColor = Color.SandyBrown;
+            lbl_Discounts.Location = new Point(3, 228);
+            lbl_Discounts.Name = "lbl_Discounts";
+            lbl_Discounts.Size = new Size(119, 38);
+            lbl_Discounts.TabIndex = 11;
+            lbl_Discounts.Tag = "Tab";
+            lbl_Discounts.Text = "Discounts";
+            lbl_Discounts.TextAlign = ContentAlignment.TopCenter;
+            lbl_Discounts.Click += Lbl_Discounts_Click;
+            // 
+            // label9
+            // 
+            label9.BackColor = SystemColors.Control;
+            label9.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.White;
+            label9.Location = new Point(3, 266);
+            label9.Name = "label9";
+            label9.Size = new Size(154, 38);
+            label9.TabIndex = 4;
+            // 
             // lbl_Users
             // 
             lbl_Users.BackColor = SystemColors.Control;
@@ -220,16 +246,6 @@
             lbl_Users.TextAlign = ContentAlignment.TopCenter;
             lbl_Users.Click += Lbl_Users_Click;
             // 
-            // label9
-            // 
-            label9.BackColor = SystemColors.Control;
-            label9.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(3, 266);
-            label9.Name = "label9";
-            label9.Size = new Size(154, 38);
-            label9.TabIndex = 4;
-            // 
             // label10
             // 
             label10.BackColor = SystemColors.Control;
@@ -239,6 +255,16 @@
             label10.Name = "label10";
             label10.Size = new Size(154, 38);
             label10.TabIndex = 5;
+            // 
+            // label12
+            // 
+            label12.BackColor = SystemColors.Control;
+            label12.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(3, 380);
+            label12.Name = "label12";
+            label12.Size = new Size(154, 38);
+            label12.TabIndex = 7;
             // 
             // lbl_POS
             // 
@@ -254,16 +280,6 @@
             lbl_POS.Text = "POS";
             lbl_POS.TextAlign = ContentAlignment.TopCenter;
             lbl_POS.Click += Lbl_POS_Click;
-            // 
-            // label12
-            // 
-            label12.BackColor = SystemColors.Control;
-            label12.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.White;
-            label12.Location = new Point(3, 380);
-            label12.Name = "label12";
-            label12.Size = new Size(154, 38);
-            label12.TabIndex = 7;
             // 
             // label13
             // 
@@ -299,21 +315,6 @@
             lbl_Logout.Text = "Logout";
             lbl_Logout.TextAlign = ContentAlignment.TopCenter;
             lbl_Logout.Click += Lbl_Logout_Click;
-            // 
-            // lbl_Discounts
-            // 
-            lbl_Discounts.BackColor = SystemColors.Control;
-            lbl_Discounts.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Discounts.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
-            lbl_Discounts.ForeColor = Color.SandyBrown;
-            lbl_Discounts.Location = new Point(3, 228);
-            lbl_Discounts.Name = "lbl_Discounts";
-            lbl_Discounts.Size = new Size(119, 38);
-            lbl_Discounts.TabIndex = 11;
-            lbl_Discounts.Tag = "Tab";
-            lbl_Discounts.Text = "Discounts";
-            lbl_Discounts.TextAlign = ContentAlignment.TopCenter;
-            lbl_Discounts.Click += Lbl_Discounts_Click;
             // 
             // UI
             // 

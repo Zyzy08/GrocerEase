@@ -89,6 +89,12 @@ namespace GrocerEase
                     categories.Show();
                     break;
 
+                case "Discounts":
+                    lbl_Discounts.BackColor = Color.SandyBrown;
+                    lbl_Discounts.ForeColor = Color.White;
+                    lbl_Discounts.BorderStyle = BorderStyle.None;
+                    break;
+
                 case "Users":
                     lbl_Users.BackColor = Color.SandyBrown;
                     lbl_Users.ForeColor = Color.White;
@@ -139,6 +145,12 @@ namespace GrocerEase
             UI_Load(sender, e);
         }
 
+        private void Lbl_Discounts_Click(object sender, EventArgs e)
+        {
+            TabContent = "Discounts";
+            UI_Load(sender, e);
+        }
+
         private void Lbl_Users_Click(object sender, EventArgs e)
         {
             TabContent = "Users";
@@ -150,11 +162,6 @@ namespace GrocerEase
             Login login = new();
             login.Show();
             this.Close();
-        }
-
-        private void Lbl_Discounts_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
