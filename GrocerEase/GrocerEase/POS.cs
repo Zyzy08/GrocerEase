@@ -37,7 +37,7 @@ namespace GrocerEase
 
                 if (connection.State == ConnectionState.Open)
                 {
-                    FetchAndDisplayDiscounts();
+                    DisplayDiscounts();
 
                     string queryCategories = "SELECT Category_ID, Category_Name FROM tbl_Categories";
                     SqlDataAdapter adapterCategories = new(queryCategories, connection);
@@ -161,14 +161,14 @@ namespace GrocerEase
             lv_Bag.SelectedIndexChanged += Lv_Bag_SelectedIndexChanged;
         }
 
-        private void FetchAndDisplayDiscounts()
+        private void DisplayDiscounts()
         {
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
             {
-                string queryDiscounts = "SELECT Discount_ID, Discount_Type, IsActive FROM tbl_Discounts";
+                string queryDiscounts = "SELECT Discount_ID, Discount_Type, Discount_Rate, IsActive FROM tbl_Discounts";
                 SqlDataAdapter adapterDiscounts = new(queryDiscounts, connection);
                 DataTable discountsTable = new();
                 adapterDiscounts.Fill(discountsTable);
@@ -176,6 +176,7 @@ namespace GrocerEase
                 foreach (DataRow discountRow in discountsTable.Rows)
                 {
                     string discountType = discountRow["Discount_Type"].ToString();
+                    decimal discountRate = Convert.ToDecimal(discountRow["Discount_Rate"]);
                     bool isActive = Convert.ToBoolean(discountRow["IsActive"]);
 
                     FlowLayoutPanel flp_Discount = new()
@@ -193,31 +194,34 @@ namespace GrocerEase
                         Text = " ",
                         Appearance = Appearance.Button,
                         BackColor = System.Drawing.Color.Transparent,
-                        BackgroundImage = Sayra.Properties.Resources.Toggle_Button_Disabled,
-                        BackgroundImageLayout = ImageLayout.Zoom,
                         FlatStyle = FlatStyle.Flat,
                         FlatAppearance =
                         {
                             BorderSize = 0,
                             CheckedBackColor = System.Drawing.Color.Transparent
                         },
+                        Size = new Size(42, 27),
                         Checked = isActive,
-                        Size = new Size(42, 27)
+                        BackgroundImage = isActive ? Sayra.Properties.Resources.Toggle_Button_Enabled : Sayra.Properties.Resources.Toggle_Button_Disabled,
+                        BackgroundImageLayout = ImageLayout.Zoom
                     };
 
-                    Label lbl_DiscountType = new()
+                    Label lbl_DiscountDetails = new()
                     {
-                        Name = "lbl_DiscountType",
-                        Text = discountType,
+                        Name = "lbl_DiscountDetails",
+                        Text = $"{discountType} ({discountRate}%)",
                         TextAlign = ContentAlignment.MiddleCenter,
                         AutoSize = true,
-                        Font = new Font("Comfortaa", 12)
+                        Font = new Font("Comfortaa", 12),
+                        ForeColor = isActive ? SystemColors.ControlText : SystemColors.GrayText
                     };
 
                     flp_Discount.Controls.Add(chk_IsActive);
-                    flp_Discount.Controls.Add(lbl_DiscountType);
+                    flp_Discount.Controls.Add(lbl_DiscountDetails);
 
                     flp_Discounts.Controls.Add(flp_Discount);
+
+                    chk_IsActive.Invalidate();
                 }
             }
         }
