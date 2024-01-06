@@ -197,10 +197,10 @@ namespace GrocerEase
                         BackColor = System.Drawing.Color.Transparent,
                         FlatStyle = FlatStyle.Flat,
                         FlatAppearance =
-                {
-                    BorderSize = 0,
-                    CheckedBackColor = System.Drawing.Color.Transparent
-                },
+                        {
+                            BorderSize = 0,
+                            CheckedBackColor = System.Drawing.Color.Transparent
+                        },
                         Size = new Size(42, 27),
                         Checked = isActive,
                         BackgroundImage = isActive ? Sayra.Properties.Resources.Toggle_Button_Enabled : Sayra.Properties.Resources.Toggle_Button_Disabled,
