@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POS));
             lbl_Price = new Label();
             lbl_Name = new Label();
             tb_Search = new TextBox();
@@ -35,6 +36,8 @@
             tc_Categories = new TabControl();
             btn_Add = new Button();
             panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            checkBox1 = new CheckBox();
             lbl_VAT = new Label();
             lbl_VATSale = new Label();
             label3 = new Label();
@@ -46,25 +49,26 @@
             btn_Remove = new Button();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // lbl_Price
             // 
             lbl_Price.AutoSize = true;
-            lbl_Price.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Price.Location = new Point(8, 747);
+            lbl_Price.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_Price.Location = new Point(8, 744);
             lbl_Price.Name = "lbl_Price";
-            lbl_Price.Size = new Size(119, 30);
+            lbl_Price.Size = new Size(132, 34);
             lbl_Price.TabIndex = 10;
             lbl_Price.Text = "Price: ₱0.00";
             // 
             // lbl_Name
             // 
             lbl_Name.AutoSize = true;
-            lbl_Name.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Name.Location = new Point(10, 717);
+            lbl_Name.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_Name.Location = new Point(8, 714);
             lbl_Name.Name = "lbl_Name";
-            lbl_Name.Size = new Size(60, 30);
+            lbl_Name.Size = new Size(50, 26);
             lbl_Name.TabIndex = 9;
             lbl_Name.Text = "Item:";
             // 
@@ -80,7 +84,7 @@
             // nud_Quantity
             // 
             nud_Quantity.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nud_Quantity.Location = new Point(443, 728);
+            nud_Quantity.Location = new Point(433, 729);
             nud_Quantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nud_Quantity.Name = "nud_Quantity";
             nud_Quantity.Size = new Size(75, 43);
@@ -94,14 +98,14 @@
             tc_Categories.Location = new Point(1, 45);
             tc_Categories.Name = "tc_Categories";
             tc_Categories.SelectedIndex = 0;
-            tc_Categories.Size = new Size(657, 666);
+            tc_Categories.Size = new Size(647, 666);
             tc_Categories.TabIndex = 5;
             // 
             // btn_Add
             // 
             btn_Add.AutoSize = true;
-            btn_Add.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_Add.Location = new Point(524, 717);
+            btn_Add.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_Add.Location = new Point(514, 718);
             btn_Add.Name = "btn_Add";
             btn_Add.Size = new Size(134, 60);
             btn_Add.TabIndex = 7;
@@ -112,21 +116,47 @@
             // panel1
             // 
             panel1.AutoScroll = true;
+            panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(lbl_VAT);
             panel1.Controls.Add(lbl_VATSale);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lv_Bag);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(664, 12);
+            panel1.Location = new Point(648, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(607, 699);
+            panel1.Size = new Size(657, 699);
             panel1.TabIndex = 11;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = SystemColors.Window;
+            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Controls.Add(checkBox1);
+            flowLayoutPanel1.Location = new Point(3, 37);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(202, 591);
+            flowLayoutPanel1.TabIndex = 19;
+            // 
+            // checkBox1
+            // 
+            checkBox1.Appearance = Appearance.Button;
+            checkBox1.BackColor = Color.Transparent;
+            checkBox1.BackgroundImage = (Image)resources.GetObject("checkBox1.BackgroundImage");
+            checkBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            checkBox1.FlatAppearance.BorderSize = 0;
+            checkBox1.FlatAppearance.CheckedBackColor = Color.Transparent;
+            checkBox1.FlatStyle = FlatStyle.Flat;
+            checkBox1.Location = new Point(3, 3);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(42, 27);
+            checkBox1.TabIndex = 1;
+            checkBox1.UseVisualStyleBackColor = false;
             // 
             // lbl_VAT
             // 
             lbl_VAT.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_VAT.Location = new Point(255, 665);
+            lbl_VAT.Location = new Point(305, 665);
             lbl_VAT.Name = "lbl_VAT";
             lbl_VAT.RightToLeft = RightToLeft.Yes;
             lbl_VAT.Size = new Size(349, 34);
@@ -136,7 +166,7 @@
             // lbl_VATSale
             // 
             lbl_VATSale.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_VATSale.Location = new Point(255, 631);
+            lbl_VATSale.Location = new Point(305, 631);
             lbl_VATSale.Name = "lbl_VATSale";
             lbl_VATSale.RightToLeft = RightToLeft.Yes;
             lbl_VATSale.Size = new Size(349, 34);
@@ -165,12 +195,12 @@
             // 
             // lv_Bag
             // 
-            lv_Bag.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lv_Bag.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lv_Bag.FullRowSelect = true;
             lv_Bag.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lv_Bag.Location = new Point(3, 37);
+            lv_Bag.Location = new Point(204, 37);
             lv_Bag.Name = "lv_Bag";
-            lv_Bag.Size = new Size(601, 591);
+            lv_Bag.Size = new Size(450, 591);
             lv_Bag.TabIndex = 14;
             lv_Bag.UseCompatibleStateImageBehavior = false;
             lv_Bag.View = View.List;
@@ -183,7 +213,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(607, 34);
+            label1.Size = new Size(657, 34);
             label1.TabIndex = 13;
             label1.Text = "ECO Bag";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -192,7 +222,7 @@
             // 
             lbl_Total.AutoSize = true;
             lbl_Total.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Total.Location = new Point(664, 738);
+            lbl_Total.Location = new Point(647, 738);
             lbl_Total.Name = "lbl_Total";
             lbl_Total.Size = new Size(104, 39);
             lbl_Total.TabIndex = 19;
@@ -205,7 +235,7 @@
             btn_Pay.Enabled = false;
             btn_Pay.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Pay.ForeColor = Color.White;
-            btn_Pay.Location = new Point(1137, 718);
+            btn_Pay.Location = new Point(1168, 719);
             btn_Pay.Name = "btn_Pay";
             btn_Pay.Size = new Size(134, 60);
             btn_Pay.TabIndex = 21;
@@ -219,7 +249,7 @@
             btn_Remove.BackColor = Color.Tomato;
             btn_Remove.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_Remove.ForeColor = Color.White;
-            btn_Remove.Location = new Point(1122, 718);
+            btn_Remove.Location = new Point(1153, 719);
             btn_Remove.Name = "btn_Remove";
             btn_Remove.Size = new Size(149, 60);
             btn_Remove.TabIndex = 22;
@@ -232,7 +262,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1283, 784);
+            ClientSize = new Size(1317, 784);
             Controls.Add(btn_Pay);
             Controls.Add(btn_Remove);
             Controls.Add(lbl_Total);
@@ -250,6 +280,7 @@
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,5 +303,7 @@
         private Label lbl_Total;
         private Button btn_Pay;
         private Button btn_Remove;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private CheckBox checkBox1;
     }
 }

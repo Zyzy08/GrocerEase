@@ -58,7 +58,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(28, 3);
+            pictureBox1.Location = new Point(12, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(93, 79);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -92,9 +92,9 @@
             // 
             // pnl_Content
             // 
-            pnl_Content.Location = new Point(145, 64);
+            pnl_Content.Location = new Point(111, 64);
             pnl_Content.Name = "pnl_Content";
-            pnl_Content.Size = new Size(1283, 784);
+            pnl_Content.Size = new Size(1317, 784);
             pnl_Content.TabIndex = 5;
             // 
             // panel4
@@ -103,7 +103,7 @@
             panel4.Controls.Add(pictureBox1);
             panel4.Location = new Point(0, 64);
             panel4.Name = "panel4";
-            panel4.Size = new Size(149, 784);
+            panel4.Size = new Size(122, 784);
             panel4.TabIndex = 7;
             // 
             // flp_Tabs
@@ -126,18 +126,18 @@
             flp_Tabs.Font = new Font("Segoe UI", 72F, FontStyle.Regular, GraphicsUnit.Point, 0);
             flp_Tabs.Location = new Point(-3, 88);
             flp_Tabs.Name = "flp_Tabs";
-            flp_Tabs.Size = new Size(154, 630);
+            flp_Tabs.Size = new Size(124, 630);
             flp_Tabs.TabIndex = 4;
             // 
             // lbl_Dashboard
             // 
             lbl_Dashboard.BackColor = SystemColors.Control;
             lbl_Dashboard.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Dashboard.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Dashboard.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
             lbl_Dashboard.ForeColor = Color.SandyBrown;
             lbl_Dashboard.Location = new Point(3, 0);
             lbl_Dashboard.Name = "lbl_Dashboard";
-            lbl_Dashboard.Size = new Size(154, 38);
+            lbl_Dashboard.Size = new Size(119, 38);
             lbl_Dashboard.TabIndex = 0;
             lbl_Dashboard.Tag = "Tab";
             lbl_Dashboard.Text = " Dashboard";
@@ -157,11 +157,11 @@
             // 
             lbl_Products.BackColor = SystemColors.Control;
             lbl_Products.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Products.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Products.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
             lbl_Products.ForeColor = Color.SandyBrown;
             lbl_Products.Location = new Point(3, 76);
             lbl_Products.Name = "lbl_Products";
-            lbl_Products.Size = new Size(154, 38);
+            lbl_Products.Size = new Size(119, 38);
             lbl_Products.TabIndex = 1;
             lbl_Products.Tag = "Tab";
             lbl_Products.Text = "Products";
@@ -182,11 +182,11 @@
             // 
             lbl_Categories.BackColor = SystemColors.Control;
             lbl_Categories.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Categories.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Categories.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
             lbl_Categories.ForeColor = Color.SandyBrown;
             lbl_Categories.Location = new Point(3, 152);
             lbl_Categories.Name = "lbl_Categories";
-            lbl_Categories.Size = new Size(154, 38);
+            lbl_Categories.Size = new Size(119, 38);
             lbl_Categories.TabIndex = 2;
             lbl_Categories.Tag = "Tab";
             lbl_Categories.Text = "Categories";
@@ -207,11 +207,11 @@
             // 
             lbl_Users.BackColor = SystemColors.Control;
             lbl_Users.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Users.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Users.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
             lbl_Users.ForeColor = Color.SandyBrown;
             lbl_Users.Location = new Point(3, 228);
             lbl_Users.Name = "lbl_Users";
-            lbl_Users.Size = new Size(154, 38);
+            lbl_Users.Size = new Size(119, 38);
             lbl_Users.TabIndex = 3;
             lbl_Users.Tag = "Tab";
             lbl_Users.Text = "Users";
@@ -242,11 +242,11 @@
             // 
             lbl_POS.BackColor = SystemColors.Control;
             lbl_POS.BorderStyle = BorderStyle.FixedSingle;
-            lbl_POS.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_POS.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold);
             lbl_POS.ForeColor = Color.SandyBrown;
             lbl_POS.Location = new Point(3, 342);
             lbl_POS.Name = "lbl_POS";
-            lbl_POS.Size = new Size(154, 38);
+            lbl_POS.Size = new Size(121, 38);
             lbl_POS.TabIndex = 6;
             lbl_POS.Tag = "Tab";
             lbl_POS.Text = "POS";
@@ -287,11 +287,11 @@
             // 
             lbl_Logout.BackColor = SystemColors.Control;
             lbl_Logout.BorderStyle = BorderStyle.FixedSingle;
-            lbl_Logout.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Logout.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_Logout.ForeColor = Color.SandyBrown;
             lbl_Logout.Location = new Point(3, 494);
             lbl_Logout.Name = "lbl_Logout";
-            lbl_Logout.Size = new Size(154, 38);
+            lbl_Logout.Size = new Size(119, 38);
             lbl_Logout.TabIndex = 10;
             lbl_Logout.Tag = "Tab";
             lbl_Logout.Text = "Logout";
@@ -303,8 +303,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1440, 860);
-            Controls.Add(panel4);
             Controls.Add(pnl_Content);
+            Controls.Add(panel4);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
