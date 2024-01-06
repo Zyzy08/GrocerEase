@@ -43,7 +43,6 @@ namespace Sayra
 
                 if (Mode == "Add")
                 {
-                    // Use the GetNextCategoryId function to get the smallest available Category_ID
                     int newCategoryId = GetNextCategoryId(connection);
                     query = "INSERT INTO tbl_Categories (Category_ID, Category_Name) VALUES (@CategoryId, @CategoryName)";
                 }
@@ -56,7 +55,6 @@ namespace Sayra
 
                 if (Mode == "Add")
                 {
-                    // Set the parameter value to the obtained new Category_ID
                     command.Parameters.AddWithValue("@CategoryId", GetNextCategoryId(connection));
                 }
                 else
@@ -89,31 +87,26 @@ namespace Sayra
         {
             int newCategoryId = 1;
 
-            // Check if the tbl_Categories table is empty
             string queryCountCategories = "SELECT COUNT(*) FROM tbl_Categories";
-            using (SqlCommand commandCountCategories = new SqlCommand(queryCountCategories, connection))
+            using (SqlCommand commandCountCategories = new(queryCountCategories, connection))
             {
                 int categoryCount = Convert.ToInt32(commandCountCategories.ExecuteScalar());
 
                 if (categoryCount > 0)
                 {
-                    // If not empty, find the next available ID
                     string queryAllCategoryIds = "SELECT Category_ID FROM tbl_Categories";
-                    using (SqlCommand commandAllCategoryIds = new SqlCommand(queryAllCategoryIds, connection))
-                    using (SqlDataReader reader = commandAllCategoryIds.ExecuteReader())
+                    using SqlCommand commandAllCategoryIds = new(queryAllCategoryIds, connection);
+                    using SqlDataReader reader = commandAllCategoryIds.ExecuteReader();
+                    HashSet<int> existingIds = [];
+
+                    while (reader.Read())
                     {
-                        HashSet<int> existingIds = new HashSet<int>();
+                        existingIds.Add(reader.GetInt32(0));
+                    }
 
-                        while (reader.Read())
-                        {
-                            existingIds.Add(reader.GetInt32(0));
-                        }
-
-                        // Find the next available ID
-                        while (existingIds.Contains(newCategoryId))
-                        {
-                            newCategoryId++;
-                        }
+                    while (existingIds.Contains(newCategoryId))
+                    {
+                        newCategoryId++;
                     }
                 }
             }
@@ -129,7 +122,6 @@ namespace Sayra
             {
                 command.Parameters.AddWithValue("@CategoryName", categoryName.ToLower());
 
-                // ExecuteScalar without using SqlDataReader
                 int count = Convert.ToInt32(command.ExecuteScalar());
 
                 return count > 0;

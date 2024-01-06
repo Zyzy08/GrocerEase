@@ -32,24 +32,19 @@ namespace GrocerEase
                 adapter.Fill(dt_Items);
                 dgv_Items.DataSource = dt_Items;
 
-                // Check if there are any categories before enabling the Add button
                 btn_Add.Enabled = CategoriesExist();
             }
         }
 
-        private bool CategoriesExist()
+        private static bool CategoriesExist()
         {
-            using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
-            {
-                connection.Open();
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
 
-                string checkCategoriesQuery = "SELECT COUNT(*) FROM tbl_Categories";
-                using (SqlCommand checkCommand = new SqlCommand(checkCategoriesQuery, connection))
-                {
-                    int categoryCount = (int)checkCommand.ExecuteScalar();
-                    return categoryCount > 0;
-                }
-            }
+            string checkCategoriesQuery = "SELECT COUNT(*) FROM tbl_Categories";
+            using SqlCommand checkCommand = new(checkCategoriesQuery, connection);
+            int categoryCount = (int)checkCommand.ExecuteScalar();
+            return categoryCount > 0;
         }
 
         public void RefreshData()
@@ -111,24 +106,20 @@ namespace GrocerEase
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
+                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                    connection.Open();
+
+                    foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
                     {
-                        connection.Open();
+                        int itemID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
 
-                        foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
-                        {
-                            int itemID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
-
-                            string removeItemQuery = "DELETE FROM tbl_Items WHERE Item_ID = @ItemID";
-                            using (SqlCommand removeItemCommand = new SqlCommand(removeItemQuery, connection))
-                            {
-                                removeItemCommand.Parameters.AddWithValue("@ItemID", itemID);
-                                removeItemCommand.ExecuteNonQuery();
-                            }
-                        }
-
-                        RefreshData();
+                        string removeItemQuery = "DELETE FROM tbl_Items WHERE Item_ID = @ItemID";
+                        using SqlCommand removeItemCommand = new(removeItemQuery, connection);
+                        removeItemCommand.Parameters.AddWithValue("@ItemID", itemID);
+                        removeItemCommand.ExecuteNonQuery();
                     }
+
+                    RefreshData();
                 }
             }
         }
@@ -141,14 +132,13 @@ namespace GrocerEase
             {
                 btn_Remove.Enabled = true;
 
-                // Check if any selected row has In-Stock not equal to 0
                 foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
                 {
                     int inStock = Convert.ToInt32(selectedRow.Cells["In-Stock"].Value);
                     if (inStock != 0)
                     {
                         btn_Remove.Enabled = false;
-                        break; // No need to check further if one row has In-Stock greater than 0
+                        break;
                     }
                 }
             }

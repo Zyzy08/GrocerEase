@@ -275,31 +275,26 @@ namespace GrocerEase
         {
             int newItemId = 1;
 
-            // Check if the tbl_Items table is empty
             string queryCountItems = "SELECT COUNT(*) FROM tbl_Items";
-            using (SqlCommand commandCountItems = new SqlCommand(queryCountItems, connection))
+            using (SqlCommand commandCountItems = new(queryCountItems, connection))
             {
                 int itemCount = Convert.ToInt32(commandCountItems.ExecuteScalar());
 
                 if (itemCount > 0)
                 {
-                    // If not empty, find the next available ID
                     string queryAllItemIds = "SELECT Item_ID FROM tbl_Items";
-                    using (SqlCommand commandAllItemIds = new SqlCommand(queryAllItemIds, connection))
-                    using (SqlDataReader reader = commandAllItemIds.ExecuteReader())
+                    using SqlCommand commandAllItemIds = new(queryAllItemIds, connection);
+                    using SqlDataReader reader = commandAllItemIds.ExecuteReader();
+                    HashSet<int> existingIds = [];
+
+                    while (reader.Read())
                     {
-                        HashSet<int> existingIds = new HashSet<int>();
+                        existingIds.Add(reader.GetInt32(0));
+                    }
 
-                        while (reader.Read())
-                        {
-                            existingIds.Add(reader.GetInt32(0));
-                        }
-
-                        // Find the next available ID
-                        while (existingIds.Contains(newItemId))
-                        {
-                            newItemId++;
-                        }
+                    while (existingIds.Contains(newItemId))
+                    {
+                        newItemId++;
                     }
                 }
             }

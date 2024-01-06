@@ -50,14 +50,13 @@ namespace Sayra
             {
                 btn_Remove.Enabled = true;
 
-                // Check if any selected row has Products count greater than 0
                 foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
                 {
                     int productsCount = Convert.ToInt32(selectedRow.Cells["Products"].Value);
                     if (productsCount > 0)
                     {
                         btn_Remove.Enabled = false;
-                        break; // No need to check further if one row has Products count greater than 0
+                        break;
                     }
                 }
             }
@@ -110,27 +109,23 @@ namespace Sayra
 
                 if (result == DialogResult.Yes)
                 {
-                    using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
+                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                    connection.Open();
+
+                    foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
                     {
-                        connection.Open();
+                        int categoryID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
 
-                        foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
-                        {
-                            int categoryID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
-
-                            string removeCategoryQuery = "DELETE FROM tbl_Categories WHERE Category_ID = @CategoryID";
-                            using (SqlCommand removeCategoryCommand = new SqlCommand(removeCategoryQuery, connection))
-                            {
-                                removeCategoryCommand.Parameters.AddWithValue("@CategoryID", categoryID);
-                                removeCategoryCommand.ExecuteNonQuery();
-                            }
-                        }
-
-                        UpdateCategoryInStock(connection);
-                        UpdateCategoryProductsCount(connection);
-
-                        RefreshData();
+                        string removeCategoryQuery = "DELETE FROM tbl_Categories WHERE Category_ID = @CategoryID";
+                        using SqlCommand removeCategoryCommand = new(removeCategoryQuery, connection);
+                        removeCategoryCommand.Parameters.AddWithValue("@CategoryID", categoryID);
+                        removeCategoryCommand.ExecuteNonQuery();
                     }
+
+                    UpdateCategoryInStock(connection);
+                    UpdateCategoryProductsCount(connection);
+
+                    RefreshData();
                 }
             }
         }
