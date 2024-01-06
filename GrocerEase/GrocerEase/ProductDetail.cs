@@ -273,12 +273,38 @@ namespace GrocerEase
 
         public static int GetNextItemId(SqlConnection connection)
         {
-            string queryMinItemId = "SELECT MIN(Item_ID) + 1 FROM tbl_Items WHERE NOT EXISTS (SELECT 1 FROM tbl_Items AS t2 WHERE t2.Item_ID = tbl_Items.Item_ID + 1)";
+            int newItemId = 1;
 
-            using SqlCommand commandMinItemId = new(queryMinItemId, connection);
-            object minItemId = commandMinItemId.ExecuteScalar();
+            // Check if the tbl_Items table is empty
+            string queryCountItems = "SELECT COUNT(*) FROM tbl_Items";
+            using (SqlCommand commandCountItems = new SqlCommand(queryCountItems, connection))
+            {
+                int itemCount = Convert.ToInt32(commandCountItems.ExecuteScalar());
 
-            return minItemId != null && minItemId != DBNull.Value ? Convert.ToInt32(minItemId) : 1;
+                if (itemCount > 0)
+                {
+                    // If not empty, find the next available ID
+                    string queryAllItemIds = "SELECT Item_ID FROM tbl_Items";
+                    using (SqlCommand commandAllItemIds = new SqlCommand(queryAllItemIds, connection))
+                    using (SqlDataReader reader = commandAllItemIds.ExecuteReader())
+                    {
+                        HashSet<int> existingIds = new HashSet<int>();
+
+                        while (reader.Read())
+                        {
+                            existingIds.Add(reader.GetInt32(0));
+                        }
+
+                        // Find the next available ID
+                        while (existingIds.Contains(newItemId))
+                        {
+                            newItemId++;
+                        }
+                    }
+                }
+            }
+
+            return newItemId;
         }
     }
 }

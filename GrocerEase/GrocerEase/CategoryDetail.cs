@@ -43,8 +43,8 @@ namespace Sayra
 
                 if (Mode == "Add")
                 {
+                    // Use the GetNextCategoryId function to get the smallest available Category_ID
                     int newCategoryId = GetNextCategoryId(connection);
-
                     query = "INSERT INTO tbl_Categories (Category_ID, Category_Name) VALUES (@CategoryId, @CategoryName)";
                 }
                 else
@@ -56,6 +56,7 @@ namespace Sayra
 
                 if (Mode == "Add")
                 {
+                    // Set the parameter value to the obtained new Category_ID
                     command.Parameters.AddWithValue("@CategoryId", GetNextCategoryId(connection));
                 }
                 else
@@ -84,16 +85,55 @@ namespace Sayra
             }
         }
 
+        public static int GetNextCategoryId(SqlConnection connection)
+        {
+            int newCategoryId = 1;
+
+            // Check if the tbl_Categories table is empty
+            string queryCountCategories = "SELECT COUNT(*) FROM tbl_Categories";
+            using (SqlCommand commandCountCategories = new SqlCommand(queryCountCategories, connection))
+            {
+                int categoryCount = Convert.ToInt32(commandCountCategories.ExecuteScalar());
+
+                if (categoryCount > 0)
+                {
+                    // If not empty, find the next available ID
+                    string queryAllCategoryIds = "SELECT Category_ID FROM tbl_Categories";
+                    using (SqlCommand commandAllCategoryIds = new SqlCommand(queryAllCategoryIds, connection))
+                    using (SqlDataReader reader = commandAllCategoryIds.ExecuteReader())
+                    {
+                        HashSet<int> existingIds = new HashSet<int>();
+
+                        while (reader.Read())
+                        {
+                            existingIds.Add(reader.GetInt32(0));
+                        }
+
+                        // Find the next available ID
+                        while (existingIds.Contains(newCategoryId))
+                        {
+                            newCategoryId++;
+                        }
+                    }
+                }
+            }
+
+            return newCategoryId;
+        }
+
         private static bool CategoryExists(SqlConnection connection, string categoryName)
         {
             string query = "SELECT COUNT(*) FROM tbl_Categories WHERE LOWER(Category_Name) = LOWER(@CategoryName)";
 
-            using SqlCommand command = new(query, connection);
-            command.Parameters.AddWithValue("@CategoryName", categoryName.ToLower());
+            using (SqlCommand command = new(query, connection))
+            {
+                command.Parameters.AddWithValue("@CategoryName", categoryName.ToLower());
 
-            int count = Convert.ToInt32(command.ExecuteScalar());
+                // ExecuteScalar without using SqlDataReader
+                int count = Convert.ToInt32(command.ExecuteScalar());
 
-            return count > 0;
+                return count > 0;
+            }
         }
 
         private void ResetForm()
@@ -130,16 +170,6 @@ namespace Sayra
             {
                 LoadCategoryDataForEditing();
             }
-        }
-
-        public static int GetNextCategoryId(SqlConnection connection)
-        {
-            string queryMinCategoryId = "SELECT MIN(Category_ID) + 1 FROM tbl_Categories WHERE NOT EXISTS (SELECT 1 FROM tbl_Categories AS t2 WHERE t2.Category_ID = tbl_Categories.Category_ID + 1)";
-
-            using SqlCommand commandMinCategoryId = new(queryMinCategoryId, connection);
-            object minCategoryId = commandMinCategoryId.ExecuteScalar();
-
-            return minCategoryId != null && minCategoryId != DBNull.Value ? Convert.ToInt32(minCategoryId) : 1;
         }
 
         private void LoadCategoryDataForEditing()
