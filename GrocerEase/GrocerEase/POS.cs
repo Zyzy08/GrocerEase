@@ -337,14 +337,47 @@ namespace GrocerEase
 
         private void UpdateVATCalculations()
         {
-            decimal vatSale = CalculateTotalSale();
-            decimal vat = vatSale * 0.12m;
+            decimal totalSale = CalculateTotalSale();
+            decimal vat = totalSale * 0.12m;
 
-            lbl_VATSale.Text = $"₱{vatSale:N2}";
+            lbl_VATSale.Text = $"₱{totalSale:N2}";
+
+            decimal discountedTotalSale = ApplyDiscounts(totalSale);
+
+            decimal discountAmount = totalSale - discountedTotalSale;
+
+            lbl_Discounts.Text = $"₱{discountAmount:N2}-";
+
+            decimal total = discountedTotalSale + vat;
             lbl_VAT.Text = $"₱{vat:N2}";
-
-            decimal total = vatSale + vat;
             lbl_Total.Text = $"TOTAL: ₱{total:N2}";
+        }
+
+        private decimal ApplyDiscounts(decimal totalSale)
+        {
+            decimal discountedTotalSale = totalSale;
+
+            foreach (Control control in flp_Discounts.Controls)
+            {
+                if (control is FlowLayoutPanel flp_Discount)
+                {
+                    CheckBox chk_IsActive = flp_Discount.Controls.OfType<CheckBox>().FirstOrDefault();
+                    Label lbl_DiscountDetails = flp_Discount.Controls.OfType<Label>().FirstOrDefault();
+
+                    if (chk_IsActive != null && lbl_DiscountDetails != null)
+                    {
+                        if (chk_IsActive.Checked)
+                        {
+                            string discountRateText = lbl_DiscountDetails.Text.Split('(')[1].Split('%')[0];
+                            decimal discountRate = Convert.ToDecimal(discountRateText);
+
+                            discountedTotalSale *= (1 - (discountRate / 100));
+                        }
+                    }
+                }
+            }
+
+            return discountedTotalSale;
         }
 
         private decimal CalculateTotalSale()
