@@ -151,5 +151,10 @@ namespace GrocerEase
             login.Show();
             this.Close();
         }
+
+        private void Lbl_Discounts_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
