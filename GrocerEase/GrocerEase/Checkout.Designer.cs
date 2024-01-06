@@ -134,6 +134,7 @@
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Checkout";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Checkout";
             ((System.ComponentModel.ISupportInitialize)nud_Cash).EndInit();

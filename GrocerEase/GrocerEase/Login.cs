@@ -5,11 +5,13 @@ namespace GrocerEase
     public partial class Login : Form
     {
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
         public Login()
         {
             InitializeComponent();
+
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
         }
 

@@ -1,16 +1,24 @@
 ﻿using GrocerEase;
 using System;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Sayra
 {
     public partial class Checkout : Form
     {
+        [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
+
         private readonly Label lbl_TotalPOS;
 
         public Checkout(Label lbl_TotalPOS)
         {
             InitializeComponent();
+
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
+
             this.lbl_TotalPOS = lbl_TotalPOS;
             UpdateTotal();
         }

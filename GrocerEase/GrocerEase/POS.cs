@@ -232,6 +232,8 @@ namespace GrocerEase
 
                         lbl_DiscountDetails.ForeColor = newIsActive ? SystemColors.ControlText : SystemColors.GrayText;
                         chk_IsActive.BackgroundImage = newIsActive ? Sayra.Properties.Resources.Toggle_Button_Enabled : Sayra.Properties.Resources.Toggle_Button_Disabled;
+
+                        UpdateVATCalculations();
                     };
 
                     chk_IsActive.Invalidate();
