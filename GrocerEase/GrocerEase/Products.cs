@@ -22,15 +22,33 @@ namespace GrocerEase
             if (connection.State == ConnectionState.Open)
             {
                 string fetchItemsQuery = "SELECT i.Item_ID as ID, c.Category_Name as Category, " +
-                                 "i.Item_Name as Name, i.Item_NetWT as NetWT, " +
-                                 "i.Item_Price as Price, i.Item_InStock as [In-Stock] " +
-                                 "FROM tbl_Items i " +
-                                 "INNER JOIN tbl_Categories c ON i.Category_ID = c.Category_ID";
+                                     "i.Item_Name as Name, i.Item_NetWT as NetWT, " +
+                                     "i.Item_Price as Price, i.Item_InStock as [In-Stock] " +
+                                     "FROM tbl_Items i " +
+                                     "INNER JOIN tbl_Categories c ON i.Category_ID = c.Category_ID";
                 SqlCommand fetchCommand = new(fetchItemsQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
                 DataTable dt_Items = new();
                 adapter.Fill(dt_Items);
                 dgv_Items.DataSource = dt_Items;
+
+                // Check if there are any categories before enabling the Add button
+                btn_Add.Enabled = CategoriesExist();
+            }
+        }
+
+        private bool CategoriesExist()
+        {
+            using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
+            {
+                connection.Open();
+
+                string checkCategoriesQuery = "SELECT COUNT(*) FROM tbl_Categories";
+                using (SqlCommand checkCommand = new SqlCommand(checkCategoriesQuery, connection))
+                {
+                    int categoryCount = (int)checkCommand.ExecuteScalar();
+                    return categoryCount > 0;
+                }
             }
         }
 
@@ -93,20 +111,24 @@ namespace GrocerEase
 
                 if (result == DialogResult.Yes)
                 {
-                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
-                    connection.Open();
-
-                    foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
+                    using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
                     {
-                        int itemID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                        connection.Open();
 
-                        string removeItemQuery = "DELETE FROM tbl_Items WHERE Item_ID = @ItemID";
-                        using SqlCommand removeItemCommand = new(removeItemQuery, connection);
-                        removeItemCommand.Parameters.AddWithValue("@ItemID", itemID);
-                        removeItemCommand.ExecuteNonQuery();
+                        foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
+                        {
+                            int itemID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                            string removeItemQuery = "DELETE FROM tbl_Items WHERE Item_ID = @ItemID";
+                            using (SqlCommand removeItemCommand = new SqlCommand(removeItemQuery, connection))
+                            {
+                                removeItemCommand.Parameters.AddWithValue("@ItemID", itemID);
+                                removeItemCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        RefreshData();
                     }
-
-                    RefreshData();
                 }
             }
         }
@@ -115,18 +137,23 @@ namespace GrocerEase
         {
             btn_Edit.Enabled = dgv_Items.SelectedRows.Count == 1;
 
-            if (dgv_Items.SelectedRows.Count == 1)
+            if (dgv_Items.SelectedRows.Count > 0)
             {
-                int selectedRowIndex = dgv_Items.SelectedRows[0].Index;
-                int inStock = Convert.ToInt32(dgv_Items.Rows[selectedRowIndex].Cells["In-Stock"].Value);
+                btn_Remove.Enabled = true;
 
-                btn_Edit.Enabled = true;
-
-                btn_Remove.Enabled = (inStock == 0);
+                // Check if any selected row has In-Stock not equal to 0
+                foreach (DataGridViewRow selectedRow in dgv_Items.SelectedRows)
+                {
+                    int inStock = Convert.ToInt32(selectedRow.Cells["In-Stock"].Value);
+                    if (inStock != 0)
+                    {
+                        btn_Remove.Enabled = false;
+                        break; // No need to check further if one row has In-Stock greater than 0
+                    }
+                }
             }
             else
             {
-                btn_Edit.Enabled = false;
                 btn_Remove.Enabled = false;
             }
         }

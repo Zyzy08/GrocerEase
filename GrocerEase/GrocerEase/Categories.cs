@@ -24,7 +24,7 @@ namespace Sayra
             connection.Open();
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock], ISNULL(COUNT(i.Item_ID), 0) as Products " +
                               "FROM tbl_Categories c " +
                               "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
                               "GROUP BY c.Category_ID, c.Category_Name";
@@ -46,18 +46,23 @@ namespace Sayra
         {
             btn_Edit.Enabled = dgv_Categories.SelectedRows.Count == 1;
 
-            if (dgv_Categories.SelectedRows.Count == 1)
+            if (dgv_Categories.SelectedRows.Count > 0)
             {
-                int selectedRowIndex = dgv_Categories.SelectedRows[0].Index;
-                int inStock = Convert.ToInt32(dgv_Categories.Rows[selectedRowIndex].Cells["In-Stock"].Value);
+                btn_Remove.Enabled = true;
 
-                btn_Edit.Enabled = true;
-
-                btn_Remove.Enabled = (inStock == 0);
+                // Check if any selected row has Products count greater than 0
+                foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
+                {
+                    int productsCount = Convert.ToInt32(selectedRow.Cells["Products"].Value);
+                    if (productsCount > 0)
+                    {
+                        btn_Remove.Enabled = false;
+                        break; // No need to check further if one row has Products count greater than 0
+                    }
+                }
             }
             else
             {
-                btn_Edit.Enabled = false;
                 btn_Remove.Enabled = false;
             }
         }
@@ -69,9 +74,10 @@ namespace Sayra
 
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock], ISNULL(COUNT(i.Item_ID), 0) as Products " +
                               "FROM tbl_Categories c " +
                               "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
+                              "WHERE c.Category_Name LIKE @SearchText " +
                               "GROUP BY c.Category_ID, c.Category_Name";
 
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
@@ -104,22 +110,27 @@ namespace Sayra
 
                 if (result == DialogResult.Yes)
                 {
-                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
-                    connection.Open();
-
-                    foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
+                    using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
                     {
-                        int categoryID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                        connection.Open();
 
-                        string removeCategoryQuery = "DELETE FROM tbl_Categories WHERE Category_ID = @CategoryID";
-                        using SqlCommand removeCategoryCommand = new(removeCategoryQuery, connection);
-                        removeCategoryCommand.Parameters.AddWithValue("@CategoryID", categoryID);
-                        removeCategoryCommand.ExecuteNonQuery();
+                        foreach (DataGridViewRow selectedRow in dgv_Categories.SelectedRows)
+                        {
+                            int categoryID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                            string removeCategoryQuery = "DELETE FROM tbl_Categories WHERE Category_ID = @CategoryID";
+                            using (SqlCommand removeCategoryCommand = new SqlCommand(removeCategoryQuery, connection))
+                            {
+                                removeCategoryCommand.Parameters.AddWithValue("@CategoryID", categoryID);
+                                removeCategoryCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        UpdateCategoryInStock(connection);
+                        UpdateCategoryProductsCount(connection);
+
+                        RefreshData();
                     }
-
-                    UpdateCategoryInStock(connection);
-
-                    RefreshData();
                 }
             }
         }
@@ -131,16 +142,18 @@ namespace Sayra
 
             if (connection.State == ConnectionState.Open)
             {
-                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock] " +
-                              "FROM tbl_Categories c " +
-                              "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
-                              "GROUP BY c.Category_ID, c.Category_Name";
+                string fetchCategoriesQuery = "SELECT c.Category_ID as ID, c.Category_Name as Name, ISNULL(SUM(i.Item_InStock), 0) as [In-Stock], ISNULL(COUNT(i.Item_ID), 0) as Products " +
+                                              "FROM tbl_Categories c " +
+                                              "LEFT JOIN tbl_Items i ON c.Category_ID = i.Category_ID " +
+                                              "GROUP BY c.Category_ID, c.Category_Name";
 
                 SqlCommand fetchCommand = new(fetchCategoriesQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
                 DataTable dt_Categories = new();
                 adapter.Fill(dt_Categories);
                 dgv_Categories.DataSource = dt_Categories;
+
+                UpdateCategoryProductsCount(connection);
             }
         }
 
@@ -174,6 +187,19 @@ namespace Sayra
                     WHERE tbl_Items.Category_ID = tbl_Categories.Category_ID)";
 
             using SqlCommand updateCommand = new(updateCategoryInStockQuery, connection);
+            updateCommand.ExecuteNonQuery();
+        }
+
+        public static void UpdateCategoryProductsCount(SqlConnection connection)
+        {
+            string updateCategoryProductsCountQuery = @"
+            UPDATE tbl_Categories 
+            SET Products_Count = (
+                SELECT COUNT(Item_ID) 
+                FROM tbl_Items 
+                WHERE tbl_Items.Category_ID = tbl_Categories.Category_ID)";
+
+            using SqlCommand updateCommand = new(updateCategoryProductsCountQuery, connection);
             updateCommand.ExecuteNonQuery();
         }
     }
