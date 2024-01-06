@@ -34,6 +34,7 @@
             btn_Cancel = new Button();
             lbl_Change = new Label();
             nud_Cash = new NumericUpDown();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)nud_Cash).BeginInit();
             SuspendLayout();
             // 
@@ -41,11 +42,10 @@
             // 
             lbl_Total.AutoSize = true;
             lbl_Total.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Total.Location = new Point(12, 9);
+            lbl_Total.Location = new Point(157, 9);
             lbl_Total.Name = "lbl_Total";
-            lbl_Total.Size = new Size(157, 57);
+            lbl_Total.Size = new Size(0, 57);
             lbl_Total.TabIndex = 0;
-            lbl_Total.Text = "Total: ₱";
             // 
             // label2
             // 
@@ -100,12 +100,23 @@
             // 
             nud_Cash.DecimalPlaces = 2;
             nud_Cash.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nud_Cash.Location = new Point(177, 97);
+            nud_Cash.Location = new Point(157, 97);
             nud_Cash.Maximum = new decimal(new int[] { 99999999, 0, 0, 131072 });
             nud_Cash.Name = "nud_Cash";
             nud_Cash.Size = new Size(327, 54);
             nud_Cash.TabIndex = 6;
             nud_Cash.ValueChanged += Nud_Cash_ValueChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(157, 57);
+            label1.TabIndex = 7;
+            label1.Text = "Total: ₱";
             // 
             // Checkout
             // 
@@ -113,6 +124,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SandyBrown;
             ClientSize = new Size(516, 351);
+            Controls.Add(label1);
             Controls.Add(nud_Cash);
             Controls.Add(lbl_Change);
             Controls.Add(btn_Cancel);
@@ -137,5 +149,6 @@
         private Button btn_Cancel;
         private Label lbl_Change;
         private NumericUpDown nud_Cash;
+        private Label label1;
     }
 }

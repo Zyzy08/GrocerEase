@@ -47,6 +47,7 @@
             lbl_Total = new Label();
             btn_Pay = new Button();
             btn_Remove = new Button();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -230,11 +231,10 @@
             // 
             lbl_Total.AutoSize = true;
             lbl_Total.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Total.Location = new Point(647, 738);
+            lbl_Total.Location = new Point(775, 740);
             lbl_Total.Name = "lbl_Total";
-            lbl_Total.Size = new Size(104, 39);
+            lbl_Total.Size = new Size(0, 39);
             lbl_Total.TabIndex = 19;
-            lbl_Total.Text = "TOTAL:";
             // 
             // btn_Pay
             // 
@@ -266,11 +266,24 @@
             btn_Remove.Visible = false;
             btn_Remove.Click += Btn_Remove_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.FlatStyle = FlatStyle.Flat;
+            label4.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(651, 740);
+            label4.Name = "label4";
+            label4.Size = new Size(127, 39);
+            label4.TabIndex = 23;
+            label4.Text = "TOTAL: ₱";
+            // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1317, 784);
+            Controls.Add(label4);
             Controls.Add(btn_Pay);
             Controls.Add(btn_Remove);
             Controls.Add(lbl_Total);
@@ -313,5 +326,6 @@
         private FlowLayoutPanel flp_Discounts;
         private Label label5;
         private Label lbl_Discounts;
+        private Label label4;
     }
 }

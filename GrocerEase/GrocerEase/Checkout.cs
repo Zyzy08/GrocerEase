@@ -1,30 +1,23 @@
 ﻿using GrocerEase;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sayra
 {
     public partial class Checkout : Form
     {
-        private readonly decimal totalSale;
+        private readonly Label lbl_TotalPOS;
 
-        public Checkout(decimal totalSale)
+        public Checkout(Label lbl_TotalPOS)
         {
             InitializeComponent();
-            this.totalSale = totalSale;
+            this.lbl_TotalPOS = lbl_TotalPOS;
             UpdateTotal();
         }
 
         private void UpdateTotal()
         {
-            lbl_Total.Text = $"Total: ₱{totalSale:N2}";
+            lbl_Total.Text = lbl_TotalPOS.Text;
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
@@ -51,7 +44,7 @@ namespace Sayra
             nud_Cash.Value = currentValue;
 
             decimal cashAmount = nud_Cash.Value;
-            decimal change = cashAmount - totalSale;
+            decimal change = cashAmount - Convert.ToDecimal(lbl_Total.Text);
 
             if (change >= 0)
             {

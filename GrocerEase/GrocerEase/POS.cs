@@ -350,7 +350,7 @@ namespace GrocerEase
 
             decimal total = discountedTotalSale + vat;
             lbl_VAT.Text = $"₱{vat:N2}";
-            lbl_Total.Text = $"TOTAL: ₱{total:N2}";
+            lbl_Total.Text = $"{total:N2}";
         }
 
         private decimal ApplyDiscounts(decimal totalSale)
@@ -417,9 +417,7 @@ namespace GrocerEase
             {
                 FillReceipt.ProcessReceipt(lv_Bag);
 
-                decimal totalSale = CalculateTotalSale();
-
-                Checkout checkout = new(totalSale);
+                Checkout checkout = new(lbl_Total);
                 checkout.ShowDialog();
             }
         }
