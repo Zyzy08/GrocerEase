@@ -24,12 +24,6 @@ namespace GrocerEase
             this.checkoutForm = checkoutForm;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Receipt receipt &&
-                   EqualityComparer<Label>.Default.Equals(lbl_TotalPOS, receipt.lbl_TotalPOS);
-        }
-
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             checkoutForm.Visible = true;
