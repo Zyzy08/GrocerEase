@@ -39,7 +39,7 @@
             label5 = new Label();
             flp_Discounts = new FlowLayoutPanel();
             lbl_VAT = new Label();
-            lbl_VATSale = new Label();
+            lbl_Subtotal = new Label();
             label3 = new Label();
             label2 = new Label();
             lv_Bag = new ListView();
@@ -120,7 +120,7 @@
             panel1.Controls.Add(label5);
             panel1.Controls.Add(flp_Discounts);
             panel1.Controls.Add(lbl_VAT);
-            panel1.Controls.Add(lbl_VATSale);
+            panel1.Controls.Add(lbl_Subtotal);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lv_Bag);
@@ -172,15 +172,15 @@
             lbl_VAT.TabIndex = 18;
             lbl_VAT.Text = "₱0.00";
             // 
-            // lbl_VATSale
+            // lbl_Subtotal
             // 
-            lbl_VATSale.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_VATSale.Location = new Point(305, 597);
-            lbl_VATSale.Name = "lbl_VATSale";
-            lbl_VATSale.RightToLeft = RightToLeft.Yes;
-            lbl_VATSale.Size = new Size(349, 34);
-            lbl_VATSale.TabIndex = 17;
-            lbl_VATSale.Text = "₱0.00";
+            lbl_Subtotal.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Subtotal.Location = new Point(305, 597);
+            lbl_Subtotal.Name = "lbl_Subtotal";
+            lbl_Subtotal.RightToLeft = RightToLeft.Yes;
+            lbl_Subtotal.Size = new Size(349, 34);
+            lbl_Subtotal.TabIndex = 17;
+            lbl_Subtotal.Text = "₱0.00";
             // 
             // label3
             // 
@@ -190,7 +190,7 @@
             label3.Name = "label3";
             label3.Size = new Size(108, 34);
             label3.TabIndex = 16;
-            label3.Text = "VAT Sale";
+            label3.Text = "Subtotal";
             // 
             // label2
             // 
@@ -198,9 +198,9 @@
             label2.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(3, 631);
             label2.Name = "label2";
-            label2.Size = new Size(100, 34);
+            label2.Size = new Size(110, 34);
             label2.TabIndex = 15;
-            label2.Text = "12% VAT";
+            label2.Text = "VAT (12%)";
             // 
             // lv_Bag
             // 
@@ -319,7 +319,7 @@
         private Label label3;
         private Label label2;
         private Label lbl_VAT;
-        private Label lbl_VATSale;
+        private Label lbl_Subtotal;
         private Label lbl_Total;
         private Button btn_Pay;
         private Button btn_Remove;

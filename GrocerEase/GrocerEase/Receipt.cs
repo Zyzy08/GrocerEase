@@ -28,6 +28,8 @@ namespace GrocerEase
             this.checkoutForm = checkoutForm;
 
             ReceiptData();
+
+            lbl_DateTime.Text = "Date: " + DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss");
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)

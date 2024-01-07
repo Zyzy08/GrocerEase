@@ -342,7 +342,7 @@ namespace GrocerEase
             decimal totalSale = CalculateTotalSale();
             decimal vat = totalSale * 0.12m;
 
-            lbl_VATSale.Text = $"₱{totalSale:N2}";
+            lbl_Subtotal.Text = $"₱{totalSale:N2}";
 
             decimal discountedTotalSale = ApplyDiscounts(totalSale);
 
