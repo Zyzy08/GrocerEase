@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sayra;
+using System;
 using System.Windows.Forms;
 
 namespace GrocerEase
 {
     public partial class Receipt : Form
     {
-        public Receipt()
+        private readonly Label lbl_TotalPOS;
+        private readonly Checkout checkoutForm;
+
+        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm)
         {
             InitializeComponent();
+
+            this.lbl_TotalPOS = lbl_TotalPOS;
+            this.checkoutForm = checkoutForm;
+        }
+
+        private void Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            checkoutForm.Visible = true;
+            this.Close();
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Sayra
     public partial class Checkout : Form
     {
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
         private readonly Label lbl_TotalPOS;
@@ -35,8 +34,8 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new();
-            this.Hide();
+            Receipt receipt = new(lbl_TotalPOS, this);
+            this.Visible = false;
             receipt.ShowDialog();
         }
 
