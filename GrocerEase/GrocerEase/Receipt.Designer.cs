@@ -53,9 +53,11 @@
             lbl_Subtotal = new Label();
             label11 = new Label();
             lbl_Cashier = new Label();
-            label13 = new Label();
             label14 = new Label();
             lbl_Change = new Label();
+            lbl_Cash = new Label();
+            label15 = new Label();
+            label12 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -89,13 +91,16 @@
             // 
             // lv_List
             // 
+            lv_List.BackColor = Color.White;
             lv_List.BorderStyle = BorderStyle.None;
+            lv_List.Enabled = false;
             lv_List.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lv_List.FullRowSelect = true;
+            lv_List.ForeColor = Color.Black;
             lv_List.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lv_List.Location = new Point(2, 203);
+            lv_List.Location = new Point(2, 164);
+            lv_List.MultiSelect = false;
             lv_List.Name = "lv_List";
-            lv_List.Size = new Size(602, 330);
+            lv_List.Size = new Size(602, 307);
             lv_List.TabIndex = 18;
             lv_List.UseCompatibleStateImageBehavior = false;
             lv_List.View = View.List;
@@ -176,7 +181,7 @@
             // 
             lbl_ReceiptNo.BackColor = SystemColors.Window;
             lbl_ReceiptNo.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_ReceiptNo.Location = new Point(2, 154);
+            lbl_ReceiptNo.Location = new Point(2, 113);
             lbl_ReceiptNo.Name = "lbl_ReceiptNo";
             lbl_ReceiptNo.Size = new Size(602, 36);
             lbl_ReceiptNo.TabIndex = 22;
@@ -187,7 +192,7 @@
             // 
             label4.BackColor = SystemColors.Window;
             label4.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(2, 181);
+            label4.Location = new Point(2, 140);
             label4.Name = "label4";
             label4.Size = new Size(602, 36);
             label4.TabIndex = 23;
@@ -198,7 +203,7 @@
             // 
             label3.BackColor = SystemColors.Window;
             label3.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(2, 659);
+            label3.Location = new Point(2, 629);
             label3.Name = "label3";
             label3.Size = new Size(602, 36);
             label3.TabIndex = 24;
@@ -242,7 +247,7 @@
             // 
             label7.BackColor = SystemColors.Window;
             label7.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(2, 614);
+            label7.Location = new Point(2, 552);
             label7.Name = "label7";
             label7.Size = new Size(200, 36);
             label7.TabIndex = 28;
@@ -253,7 +258,7 @@
             // 
             label8.BackColor = SystemColors.Window;
             label8.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(2, 586);
+            label8.Location = new Point(2, 524);
             label8.Name = "label8";
             label8.Size = new Size(200, 36);
             label8.TabIndex = 29;
@@ -264,7 +269,7 @@
             // 
             label9.BackColor = SystemColors.Window;
             label9.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(2, 561);
+            label9.Location = new Point(2, 499);
             label9.Name = "label9";
             label9.Size = new Size(200, 36);
             label9.TabIndex = 30;
@@ -275,7 +280,7 @@
             // 
             label10.BackColor = SystemColors.Window;
             label10.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(2, 536);
+            label10.Location = new Point(2, 474);
             label10.Name = "label10";
             label10.Size = new Size(200, 36);
             label10.TabIndex = 31;
@@ -286,7 +291,7 @@
             // 
             lbl_Total.BackColor = SystemColors.Window;
             lbl_Total.Font = new Font("Comfortaa", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Total.Location = new Point(199, 614);
+            lbl_Total.Location = new Point(199, 552);
             lbl_Total.Name = "lbl_Total";
             lbl_Total.RightToLeft = RightToLeft.Yes;
             lbl_Total.Size = new Size(405, 36);
@@ -298,7 +303,7 @@
             // 
             lbl_Discounts.BackColor = SystemColors.Window;
             lbl_Discounts.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Discounts.Location = new Point(198, 586);
+            lbl_Discounts.Location = new Point(198, 524);
             lbl_Discounts.Name = "lbl_Discounts";
             lbl_Discounts.RightToLeft = RightToLeft.Yes;
             lbl_Discounts.Size = new Size(406, 36);
@@ -310,7 +315,7 @@
             // 
             lbl_VAT.BackColor = SystemColors.Window;
             lbl_VAT.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_VAT.Location = new Point(198, 561);
+            lbl_VAT.Location = new Point(198, 499);
             lbl_VAT.Name = "lbl_VAT";
             lbl_VAT.RightToLeft = RightToLeft.Yes;
             lbl_VAT.Size = new Size(406, 36);
@@ -322,7 +327,7 @@
             // 
             lbl_Subtotal.BackColor = SystemColors.Window;
             lbl_Subtotal.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Subtotal.Location = new Point(198, 536);
+            lbl_Subtotal.Location = new Point(198, 474);
             lbl_Subtotal.Name = "lbl_Subtotal";
             lbl_Subtotal.RightToLeft = RightToLeft.Yes;
             lbl_Subtotal.Size = new Size(406, 36);
@@ -334,7 +339,7 @@
             // 
             label11.BackColor = SystemColors.Window;
             label11.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(2, 514);
+            label11.Location = new Point(2, 452);
             label11.Name = "label11";
             label11.Size = new Size(602, 36);
             label11.TabIndex = 36;
@@ -345,28 +350,18 @@
             // 
             lbl_Cashier.BackColor = SystemColors.Window;
             lbl_Cashier.Font = new Font("Comfortaa", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lbl_Cashier.Location = new Point(2, 112);
+            lbl_Cashier.Location = new Point(2, 646);
             lbl_Cashier.Name = "lbl_Cashier";
             lbl_Cashier.Size = new Size(602, 36);
             lbl_Cashier.TabIndex = 37;
-            lbl_Cashier.Text = "Cashier: Sayra Jackson #000001";
-            // 
-            // label13
-            // 
-            label13.BackColor = SystemColors.Window;
-            label13.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label13.Location = new Point(2, 132);
-            label13.Name = "label13";
-            label13.Size = new Size(602, 36);
-            label13.TabIndex = 38;
-            label13.Text = "========================================================================";
-            label13.TextAlign = ContentAlignment.TopCenter;
+            lbl_Cashier.Text = "   Cashier: Sayra Jackson #000001";
+            lbl_Cashier.TextAlign = ContentAlignment.BottomLeft;
             // 
             // label14
             // 
             label14.BackColor = SystemColors.Window;
-            label14.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.Location = new Point(2, 646);
+            label14.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold);
+            label14.Location = new Point(2, 616);
             label14.Name = "label14";
             label14.Size = new Size(200, 36);
             label14.TabIndex = 39;
@@ -376,8 +371,8 @@
             // lbl_Change
             // 
             lbl_Change.BackColor = SystemColors.Window;
-            lbl_Change.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Change.Location = new Point(199, 646);
+            lbl_Change.Font = new Font("Comfortaa", 17.9999981F, FontStyle.Bold);
+            lbl_Change.Location = new Point(199, 616);
             lbl_Change.Name = "lbl_Change";
             lbl_Change.RightToLeft = RightToLeft.Yes;
             lbl_Change.Size = new Size(405, 36);
@@ -385,18 +380,55 @@
             lbl_Change.Text = "₱0.00";
             lbl_Change.TextAlign = ContentAlignment.BottomLeft;
             // 
+            // lbl_Cash
+            // 
+            lbl_Cash.BackColor = SystemColors.Window;
+            lbl_Cash.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold);
+            lbl_Cash.Location = new Point(199, 584);
+            lbl_Cash.Name = "lbl_Cash";
+            lbl_Cash.RightToLeft = RightToLeft.Yes;
+            lbl_Cash.Size = new Size(405, 36);
+            lbl_Cash.TabIndex = 42;
+            lbl_Cash.Text = "₱0.00";
+            lbl_Cash.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // label15
+            // 
+            label15.BackColor = SystemColors.Window;
+            label15.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold);
+            label15.Location = new Point(2, 584);
+            label15.Name = "label15";
+            label15.Size = new Size(200, 36);
+            label15.TabIndex = 41;
+            label15.Text = "Cash:";
+            label15.TextAlign = ContentAlignment.BottomLeft;
+            // 
+            // label12
+            // 
+            label12.BackColor = SystemColors.Window;
+            label12.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(2, 661);
+            label12.Name = "label12";
+            label12.Size = new Size(602, 36);
+            label12.TabIndex = 43;
+            label12.Text = "--------------------------------------------------------------------------------------------------";
+            label12.TextAlign = ContentAlignment.BottomCenter;
+            // 
             // Receipt
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(141, 161, 175);
             ClientSize = new Size(607, 860);
-            Controls.Add(lv_List);
             Controls.Add(lbl_Change);
             Controls.Add(label14);
-            Controls.Add(lbl_ReceiptNo);
-            Controls.Add(label13);
+            Controls.Add(label3);
             Controls.Add(lbl_Cashier);
+            Controls.Add(label12);
+            Controls.Add(lbl_Cash);
+            Controls.Add(label15);
+            Controls.Add(lv_List);
+            Controls.Add(lbl_ReceiptNo);
             Controls.Add(label11);
             Controls.Add(lbl_Subtotal);
             Controls.Add(lbl_VAT);
@@ -406,7 +438,6 @@
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(label3);
             Controls.Add(lbl_DateTime);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -459,8 +490,10 @@
         private Label lbl_Subtotal;
         private Label label11;
         private Label lbl_Cashier;
-        private Label label13;
         private Label label14;
         private Label lbl_Change;
+        private Label lbl_Cash;
+        private Label label15;
+        private Label label12;
     }
 }

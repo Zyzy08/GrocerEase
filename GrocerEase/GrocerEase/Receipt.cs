@@ -10,14 +10,16 @@ namespace GrocerEase
     public partial class Receipt : Form
     {
         private readonly Label lbl_TotalPOS;
-
         private readonly Checkout checkoutForm;
+        private readonly string TotalText;
+        private readonly string CashText;
+        private readonly string ChangeText;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm)
+        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm, string TotalText, string CashText, string ChangeText)
         {
             InitializeComponent();
             InitializeVATLabels();
@@ -26,10 +28,16 @@ namespace GrocerEase
 
             this.lbl_TotalPOS = lbl_TotalPOS;
             this.checkoutForm = checkoutForm;
+            this.TotalText = TotalText;
+            this.CashText = CashText;
+            this.ChangeText = ChangeText;
 
             ReceiptData();
 
             lbl_DateTime.Text = "Date: " + DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss");
+            lbl_Total.Text = "₱" + this.TotalText;
+            lbl_Cash.Text = "₱" + this.CashText;
+            lbl_Change.Text = "₱" + this.ChangeText;
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)

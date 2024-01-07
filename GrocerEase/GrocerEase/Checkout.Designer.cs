@@ -32,13 +32,14 @@
             label2 = new Label();
             btn_Receipt = new Button();
             btn_Cancel = new Button();
-            lbl_Change = new Label();
+            label3 = new Label();
             nud_Cash = new NumericUpDown();
             label1 = new Label();
             panel1 = new Panel();
             btn_Exit = new Button();
             lbl_Title = new Label();
             button1 = new Button();
+            lbl_Change = new Label();
             ((System.ComponentModel.ISupportInitialize)nud_Cash).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -91,15 +92,15 @@
             btn_Cancel.UseVisualStyleBackColor = false;
             btn_Cancel.Click += Btn_Cancel_Click;
             // 
-            // lbl_Change
+            // label3
             // 
-            lbl_Change.AutoSize = true;
-            lbl_Change.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Change.Location = new Point(12, 202);
-            lbl_Change.Name = "lbl_Change";
-            lbl_Change.Size = new Size(277, 57);
-            lbl_Change.TabIndex = 5;
-            lbl_Change.Text = "Change: ₱0.00";
+            label3.AutoSize = true;
+            label3.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(12, 202);
+            label3.Name = "label3";
+            label3.Size = new Size(211, 57);
+            label3.TabIndex = 5;
+            label3.Text = "Change: ₱";
             // 
             // nud_Cash
             // 
@@ -173,16 +174,26 @@
             button1.Text = "X";
             button1.UseVisualStyleBackColor = true;
             // 
+            // lbl_Change
+            // 
+            lbl_Change.AutoSize = true;
+            lbl_Change.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Change.Location = new Point(211, 202);
+            lbl_Change.Name = "lbl_Change";
+            lbl_Change.Size = new Size(0, 57);
+            lbl_Change.TabIndex = 9;
+            // 
             // Checkout
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(220, 200, 148);
             ClientSize = new Size(516, 349);
+            Controls.Add(lbl_Change);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(nud_Cash);
-            Controls.Add(lbl_Change);
+            Controls.Add(label3);
             Controls.Add(btn_Cancel);
             Controls.Add(btn_Receipt);
             Controls.Add(label2);
@@ -206,12 +217,13 @@
         private Label label2;
         private Button btn_Receipt;
         private Button btn_Cancel;
-        private Label lbl_Change;
+        private Label label3;
         private NumericUpDown nud_Cash;
         private Label label1;
         private Panel panel1;
         private Button btn_Exit;
         private Label lbl_Title;
         private Button button1;
+        private Label lbl_Change;
     }
 }

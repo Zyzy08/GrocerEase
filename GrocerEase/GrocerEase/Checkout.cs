@@ -35,7 +35,7 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new(lbl_TotalPOS, this)
+            Receipt receipt = new(lbl_TotalPOS, this, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
             {
                 Owner = this
             };
@@ -59,7 +59,7 @@ namespace Sayra
 
             if (change >= 0)
             {
-                lbl_Change.Text = $"Change: ₱{change:N2}";
+                lbl_Change.Text = $"{change:N2}";
                 btn_Receipt.Enabled = true;
             }
             else
