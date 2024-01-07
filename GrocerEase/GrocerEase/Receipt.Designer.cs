@@ -94,5 +94,10 @@
         private ListView lv_Bag;
         private Button btn_Cancel;
         private Button btn_Print;
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
