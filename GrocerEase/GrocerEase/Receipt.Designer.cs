@@ -76,6 +76,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(141, 161, 175);
             ClientSize = new Size(607, 860);
             Controls.Add(lv_List);
             Controls.Add(btn_Print);

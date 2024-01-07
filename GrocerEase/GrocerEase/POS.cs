@@ -417,7 +417,7 @@ namespace GrocerEase
         {
             if (lv_Bag.Items.Count > 0)
             {
-                FillReceipt.ProcessReceipt(lv_Bag);
+                StoreItemsInTempList();
 
                 Checkout checkout = new(lbl_Total);
                 checkout.ShowDialog();
@@ -454,6 +454,37 @@ namespace GrocerEase
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void StoreItemsInTempList()
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string clearTempListQuery = "DELETE FROM tbl_TempList";
+                using (SqlCommand clearTempListCommand = new(clearTempListQuery, connection))
+                {
+                    clearTempListCommand.ExecuteNonQuery();
+                }
+
+                string insertTempListQuery = "INSERT INTO tbl_TempList (Item, Quantity, Price) VALUES (@ItemName, @Quantity, @Price)";
+                using SqlCommand insertTempListCommand = new(insertTempListQuery, connection);
+                foreach (ListViewItem item in lv_Bag.Items)
+                {
+                    string itemName = item.Text;
+                    int quantity = int.Parse(item.SubItems[1].Text.Replace("x", ""));
+                    decimal price = decimal.Parse(item.SubItems[2].Text.Replace("₱", ""));
+
+                    insertTempListCommand.Parameters.Clear();
+                    insertTempListCommand.Parameters.AddWithValue("@ItemName", itemName);
+                    insertTempListCommand.Parameters.AddWithValue("@Quantity", quantity);
+                    insertTempListCommand.Parameters.AddWithValue("@Price", price);
+
+                    insertTempListCommand.ExecuteNonQuery();
                 }
             }
         }
