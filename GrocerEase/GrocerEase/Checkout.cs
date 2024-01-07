@@ -35,8 +35,11 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new(lbl_TotalPOS, this);
-            this.Visible = false;
+            Receipt receipt = new(lbl_TotalPOS, this)
+            {
+                Owner = this
+            };
+            this.Hide();
             receipt.ShowDialog();
         }
 
