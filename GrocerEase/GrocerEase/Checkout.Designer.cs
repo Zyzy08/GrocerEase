@@ -35,14 +35,19 @@
             lbl_Change = new Label();
             nud_Cash = new NumericUpDown();
             label1 = new Label();
+            panel1 = new Panel();
+            btn_Exit = new Button();
+            lbl_Title = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)nud_Cash).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lbl_Total
             // 
             lbl_Total.AutoSize = true;
             lbl_Total.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Total.Location = new Point(157, 9);
+            lbl_Total.Location = new Point(157, 63);
             lbl_Total.Name = "lbl_Total";
             lbl_Total.Size = new Size(0, 57);
             lbl_Total.TabIndex = 0;
@@ -51,7 +56,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(12, 92);
+            label2.Location = new Point(12, 130);
             label2.Name = "label2";
             label2.Size = new Size(159, 57);
             label2.TabIndex = 1;
@@ -64,7 +69,7 @@
             btn_Receipt.Enabled = false;
             btn_Receipt.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Receipt.ForeColor = Color.White;
-            btn_Receipt.Location = new Point(52, 272);
+            btn_Receipt.Location = new Point(314, 270);
             btn_Receipt.Name = "btn_Receipt";
             btn_Receipt.Size = new Size(190, 67);
             btn_Receipt.TabIndex = 3;
@@ -78,7 +83,7 @@
             btn_Cancel.BackColor = Color.Tomato;
             btn_Cancel.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Cancel.ForeColor = Color.White;
-            btn_Cancel.Location = new Point(281, 272);
+            btn_Cancel.Location = new Point(12, 270);
             btn_Cancel.Name = "btn_Cancel";
             btn_Cancel.Size = new Size(190, 67);
             btn_Cancel.TabIndex = 4;
@@ -90,7 +95,7 @@
             // 
             lbl_Change.AutoSize = true;
             lbl_Change.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Change.Location = new Point(12, 181);
+            lbl_Change.Location = new Point(12, 202);
             lbl_Change.Name = "lbl_Change";
             lbl_Change.Size = new Size(277, 57);
             lbl_Change.TabIndex = 5;
@@ -100,10 +105,10 @@
             // 
             nud_Cash.DecimalPlaces = 2;
             nud_Cash.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nud_Cash.Location = new Point(157, 97);
+            nud_Cash.Location = new Point(157, 135);
             nud_Cash.Maximum = new decimal(new int[] { 99999999, 0, 0, 131072 });
             nud_Cash.Name = "nud_Cash";
-            nud_Cash.Size = new Size(327, 54);
+            nud_Cash.Size = new Size(347, 54);
             nud_Cash.TabIndex = 6;
             nud_Cash.ValueChanged += Nud_Cash_ValueChanged;
             // 
@@ -112,18 +117,69 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(12, 63);
             label1.Name = "label1";
             label1.Size = new Size(157, 57);
             label1.TabIndex = 7;
             label1.Text = "Total: ₱";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.SandyBrown;
+            panel1.Controls.Add(btn_Exit);
+            panel1.Controls.Add(lbl_Title);
+            panel1.Controls.Add(button1);
+            panel1.Location = new Point(0, -1);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(519, 61);
+            panel1.TabIndex = 8;
+            // 
+            // btn_Exit
+            // 
+            btn_Exit.AutoSize = true;
+            btn_Exit.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_Exit.FlatStyle = FlatStyle.Flat;
+            btn_Exit.Font = new Font("Comfortaa", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_Exit.ForeColor = Color.Red;
+            btn_Exit.Location = new Point(757, 12);
+            btn_Exit.Name = "btn_Exit";
+            btn_Exit.Size = new Size(31, 33);
+            btn_Exit.TabIndex = 6;
+            btn_Exit.Text = "X";
+            btn_Exit.UseVisualStyleBackColor = true;
+            // 
+            // lbl_Title
+            // 
+            lbl_Title.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Title.ForeColor = Color.White;
+            lbl_Title.Location = new Point(12, 0);
+            lbl_Title.Name = "lbl_Title";
+            lbl_Title.Size = new Size(492, 58);
+            lbl_Title.TabIndex = 8;
+            lbl_Title.Text = "GrocerEase - Checkout";
+            lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            button1.AutoSize = true;
+            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Comfortaa", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.Red;
+            button1.Location = new Point(1397, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(31, 33);
+            button1.TabIndex = 0;
+            button1.Text = "X";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Checkout
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.SandyBrown;
-            ClientSize = new Size(516, 351);
+            BackColor = Color.FromArgb(220, 200, 148);
+            ClientSize = new Size(516, 349);
+            Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(nud_Cash);
             Controls.Add(lbl_Change);
@@ -138,6 +194,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Checkout";
             ((System.ComponentModel.ISupportInitialize)nud_Cash).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -151,5 +209,9 @@
         private Label lbl_Change;
         private NumericUpDown nud_Cash;
         private Label label1;
+        private Panel panel1;
+        private Button btn_Exit;
+        private Label lbl_Title;
+        private Button button1;
     }
 }

@@ -50,6 +50,7 @@
             label13 = new Label();
             label14 = new Label();
             lbl_Logout = new Label();
+            lbl_Title = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             panel1.BackColor = Color.SandyBrown;
             panel1.Controls.Add(btn_Exit);
+            panel1.Controls.Add(lbl_Title);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1442, 58);
@@ -316,6 +318,16 @@
             lbl_Logout.TextAlign = ContentAlignment.TopCenter;
             lbl_Logout.Click += Lbl_Logout_Click;
             // 
+            // lbl_Title
+            // 
+            lbl_Title.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Title.ForeColor = Color.White;
+            lbl_Title.Location = new Point(12, 0);
+            lbl_Title.Name = "lbl_Title";
+            lbl_Title.Size = new Size(1416, 58);
+            lbl_Title.TabIndex = 1;
+            lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -360,5 +372,6 @@
         private Label lbl_Logout;
         public Label lbl_Products;
         private Label lbl_Discounts;
+        private Label lbl_Title;
     }
 }

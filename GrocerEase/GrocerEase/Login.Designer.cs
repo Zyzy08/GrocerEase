@@ -37,6 +37,7 @@
             btn_Login = new Button();
             btn_Exit = new Button();
             panel1 = new Panel();
+            lbl_Title = new Label();
             button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
@@ -117,12 +118,24 @@
             // panel1
             // 
             panel1.BackColor = Color.SandyBrown;
-            panel1.Controls.Add(button1);
             panel1.Controls.Add(btn_Exit);
+            panel1.Controls.Add(lbl_Title);
+            panel1.Controls.Add(button1);
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(802, 58);
             panel1.TabIndex = 7;
+            // 
+            // lbl_Title
+            // 
+            lbl_Title.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Title.ForeColor = Color.White;
+            lbl_Title.Location = new Point(12, 0);
+            lbl_Title.Name = "lbl_Title";
+            lbl_Title.Size = new Size(776, 58);
+            lbl_Title.TabIndex = 8;
+            lbl_Title.Text = "GrocerEase - Login";
+            lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
@@ -174,5 +187,6 @@
         private Button btn_Exit;
         private Panel panel1;
         private Button button1;
+        private Label lbl_Title;
     }
 }

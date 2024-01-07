@@ -21,6 +21,8 @@ namespace GrocerEase
         public void Lbl_Products_Click(object sender, EventArgs e)
         {
             TabContent = "Products";
+            lbl_Title.Text = "GrocerEase - Products";
+            Text = "Products";
             UI_Load(sender, e);
         }
 
@@ -130,30 +132,40 @@ namespace GrocerEase
         private void Lbl_POS_Click(object sender, EventArgs e)
         {
             TabContent = "POS";
+            lbl_Title.Text = "GrocerEase - POS";
+            Text = "POS";
             UI_Load(sender, e);
         }
 
         private void Lbl_Dashboard_Click(object sender, EventArgs e)
         {
             TabContent = "Dashboard";
+            lbl_Title.Text = "GrocerEase - Dashboard";
+            Text = "Dashboard";
             UI_Load(sender, e);
         }
 
         public void Lbl_Categories_Click(object sender, EventArgs e)
         {
             TabContent = "Categories";
+            lbl_Title.Text = "GrocerEase - Categories";
+            Text = "Categories";
             UI_Load(sender, e);
         }
 
         private void Lbl_Discounts_Click(object sender, EventArgs e)
         {
             TabContent = "Discounts";
+            lbl_Title.Text = "GrocerEase - Discounts";
+            Text = "Discounts";
             UI_Load(sender, e);
         }
 
         private void Lbl_Users_Click(object sender, EventArgs e)
         {
             TabContent = "Users";
+            lbl_Title.Text = "GrocerEase - Users";
+            Text = "Users";
             UI_Load(sender, e);
         }
 
