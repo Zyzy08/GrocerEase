@@ -37,7 +37,7 @@
             button1 = new Button();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
+            lbl_ReceiptNo = new Label();
             label4 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -155,16 +155,16 @@
             label2.Text = "========================================================================";
             label2.TextAlign = ContentAlignment.TopCenter;
             // 
-            // label3
+            // lbl_ReceiptNo
             // 
-            label3.BackColor = SystemColors.Window;
-            label3.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(2, 112);
-            label3.Name = "label3";
-            label3.Size = new Size(602, 36);
-            label3.TabIndex = 22;
-            label3.Text = "Receipt #:";
-            label3.TextAlign = ContentAlignment.TopCenter;
+            lbl_ReceiptNo.BackColor = SystemColors.Window;
+            lbl_ReceiptNo.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbl_ReceiptNo.Location = new Point(2, 112);
+            lbl_ReceiptNo.Name = "lbl_ReceiptNo";
+            lbl_ReceiptNo.Size = new Size(602, 36);
+            lbl_ReceiptNo.TabIndex = 22;
+            lbl_ReceiptNo.Text = "Receipt #:";
+            lbl_ReceiptNo.TextAlign = ContentAlignment.TopCenter;
             // 
             // label4
             // 
@@ -184,7 +184,7 @@
             BackColor = Color.FromArgb(141, 161, 175);
             ClientSize = new Size(607, 860);
             Controls.Add(label4);
-            Controls.Add(label3);
+            Controls.Add(lbl_ReceiptNo);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(panel1);
@@ -218,7 +218,7 @@
         private Button button1;
         private Label label1;
         private Label label2;
-        private Label label3;
+        private Label lbl_ReceiptNo;
         private Label label4;
     }
 }

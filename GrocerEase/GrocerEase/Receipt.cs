@@ -27,7 +27,7 @@ namespace GrocerEase
             this.lbl_TotalPOS = lbl_TotalPOS;
             this.checkoutForm = checkoutForm;
 
-            DisplayTempListData();
+            ReceiptData();
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
@@ -44,13 +44,31 @@ namespace GrocerEase
             lv_List.Columns.Add("Price", -2, HorizontalAlignment.Left);
         }
 
-        private void DisplayTempListData()
+        private void ReceiptData()
         {
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
 
             if (connection.State == ConnectionState.Open)
             {
+                string receiptIDQuery = "SELECT TOP 1 RIGHT('0000000000' + CAST(Receipt_ID AS VARCHAR(10)), 10) AS FormattedReceiptID FROM tbl_Receipts ORDER BY Receipt_ID DESC";
+
+                using SqlCommand receiptIDCommand = new(receiptIDQuery, connection);
+                object result = receiptIDCommand.ExecuteScalar();
+
+                string Receipt_ID;
+
+                if (result != null)
+                {
+                    Receipt_ID = result.ToString();
+                }
+                else
+                {
+                    Receipt_ID = "0000000001";
+                }
+
+                lbl_ReceiptNo.Text = "Receipt #: " + Receipt_ID;
+
                 string query = "SELECT Item, Quantity, Price FROM tbl_TempList";
 
                 using SqlCommand command = new(query, connection);
