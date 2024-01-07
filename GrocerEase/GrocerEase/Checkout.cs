@@ -8,19 +8,23 @@ namespace Sayra
     public partial class Checkout : Form
     {
         private readonly Label lbl_SubtotalPOS;
+        private readonly Label lbl_VATPOS;
+        private readonly Label lbl_DiscountsPOS;
         private readonly Label lbl_TotalPOS;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Checkout(Label lbl_SubtotalPOS, Label lbl_TotalPOS)
+        public Checkout(Label lbl_SubtotalPOS, Label lbl_VATPOS, Label lbl_DiscountsPOS, Label lbl_TotalPOS)
         {
             InitializeComponent();
 
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
 
             this.lbl_SubtotalPOS = lbl_SubtotalPOS;
+            this.lbl_VATPOS = lbl_VATPOS;
+            this.lbl_DiscountsPOS = lbl_DiscountsPOS;
             this.lbl_TotalPOS = lbl_TotalPOS;
 
             UpdateTotal();
@@ -29,6 +33,16 @@ namespace Sayra
         public string SubtotalText
         {
             get { return lbl_SubtotalPOS.Text; }
+        }
+
+        public string VATText
+        {
+            get { return lbl_VATPOS.Text; }
+        }
+
+        public string DiscountsText
+        {
+            get { return lbl_DiscountsPOS.Text; }
         }
 
         private void UpdateTotal()
@@ -43,7 +57,7 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new(lbl_TotalPOS, this, SubtotalText, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
+            Receipt receipt = new(lbl_TotalPOS, this, SubtotalText, VATText, DiscountsText, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
             {
                 Owner = this
             };

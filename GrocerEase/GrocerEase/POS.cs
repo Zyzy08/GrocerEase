@@ -419,7 +419,7 @@ namespace GrocerEase
             {
                 StoreItemsInTempList();
 
-                Checkout checkout = new(lbl_Subtotal, lbl_Total);
+                Checkout checkout = new(lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total);
                 checkout.ShowDialog();
             }
         }
