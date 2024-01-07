@@ -28,22 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lv_List = new ListView();
             btn_Cancel = new Button();
             btn_Print = new Button();
+            lv_Bag = new ListView();
             SuspendLayout();
-            // 
-            // lv_List
-            // 
-            lv_List.Font = new Font("Comfortaa Medium", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lv_List.FullRowSelect = true;
-            lv_List.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lv_List.Location = new Point(3, 3);
-            lv_List.Name = "lv_List";
-            lv_List.Size = new Size(601, 772);
-            lv_List.TabIndex = 15;
-            lv_List.UseCompatibleStateImageBehavior = false;
-            lv_List.View = View.List;
             // 
             // btn_Cancel
             // 
@@ -72,14 +60,26 @@
             btn_Print.Text = "PRINT";
             btn_Print.UseVisualStyleBackColor = false;
             // 
+            // lv_Bag
+            // 
+            lv_Bag.Font = new Font("Comfortaa", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lv_Bag.FullRowSelect = true;
+            lv_Bag.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lv_Bag.Location = new Point(2, 2);
+            lv_Bag.Name = "lv_Bag";
+            lv_Bag.Size = new Size(602, 773);
+            lv_Bag.TabIndex = 18;
+            lv_Bag.UseCompatibleStateImageBehavior = false;
+            lv_Bag.View = View.List;
+            // 
             // Receipt
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(607, 860);
+            Controls.Add(lv_Bag);
             Controls.Add(btn_Print);
             Controls.Add(btn_Cancel);
-            Controls.Add(lv_List);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Receipt";
             ShowInTaskbar = false;
@@ -90,8 +90,6 @@
         }
 
         #endregion
-
-        private ListView lv_List;
         private Button btn_Cancel;
         private Button btn_Print;
 
@@ -99,5 +97,7 @@
         {
             throw new NotImplementedException();
         }
+
+        private ListView lv_Bag;
     }
 }
