@@ -11,6 +11,7 @@ namespace GrocerEase
     {
         private readonly Label lbl_TotalPOS;
         private readonly Checkout checkoutForm;
+        private readonly string SubtotalText;
         private readonly string TotalText;
         private readonly string CashText;
         private readonly string ChangeText;
@@ -19,7 +20,7 @@ namespace GrocerEase
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm, string TotalText, string CashText, string ChangeText)
+        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm, string SubtotalText, string TotalText, string CashText, string ChangeText)
         {
             InitializeComponent();
             InitializeVATLabels();
@@ -28,6 +29,7 @@ namespace GrocerEase
 
             this.lbl_TotalPOS = lbl_TotalPOS;
             this.checkoutForm = checkoutForm;
+            this.SubtotalText = SubtotalText;
             this.TotalText = TotalText;
             this.CashText = CashText;
             this.ChangeText = ChangeText;
@@ -35,6 +37,7 @@ namespace GrocerEase
             ReceiptData();
 
             lbl_DateTime.Text = "Date: " + DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss");
+            lbl_Subtotal.Text = this.SubtotalText;
             lbl_Total.Text = "₱" + this.TotalText;
             lbl_Cash.Text = "₱" + this.CashText;
             lbl_Change.Text = "₱" + this.ChangeText;

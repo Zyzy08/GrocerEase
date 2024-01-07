@@ -7,20 +7,28 @@ namespace Sayra
 {
     public partial class Checkout : Form
     {
+        private readonly Label lbl_SubtotalPOS;
+        private readonly Label lbl_TotalPOS;
+
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        private readonly Label lbl_TotalPOS;
-
-        public Checkout(Label lbl_TotalPOS)
+        public Checkout(Label lbl_SubtotalPOS, Label lbl_TotalPOS)
         {
             InitializeComponent();
 
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
 
+            this.lbl_SubtotalPOS = lbl_SubtotalPOS;
             this.lbl_TotalPOS = lbl_TotalPOS;
+
             UpdateTotal();
+        }
+
+        public string SubtotalText
+        {
+            get { return lbl_SubtotalPOS.Text; }
         }
 
         private void UpdateTotal()
@@ -35,7 +43,7 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new(lbl_TotalPOS, this, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
+            Receipt receipt = new(lbl_TotalPOS, this, SubtotalText, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
             {
                 Owner = this
             };
