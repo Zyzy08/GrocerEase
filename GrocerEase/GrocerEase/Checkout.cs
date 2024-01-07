@@ -8,6 +8,7 @@ namespace Sayra
     public partial class Checkout : Form
     {
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
         private readonly Label lbl_TotalPOS;

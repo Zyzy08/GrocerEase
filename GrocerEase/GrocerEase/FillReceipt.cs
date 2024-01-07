@@ -11,7 +11,7 @@ namespace Sayra
     {
         public static void ProcessReceipt(ListView lvBag)
         {
-            List<string> itemsList = new List<string>();
+            List<string> itemsList = [];
 
             foreach (ListViewItem item in lvBag.Items)
             {
