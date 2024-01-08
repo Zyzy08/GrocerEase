@@ -32,8 +32,8 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            tb_Username = new TextBox();
+            tb_Password = new TextBox();
             btn_Login = new Button();
             btn_Exit = new Button();
             panel1 = new Panel();
@@ -46,17 +46,17 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F);
+            label1.Font = new Font("Comfortaa", 17.9999981F);
             label1.Location = new Point(148, 266);
             label1.Name = "label1";
-            label1.Size = new Size(121, 32);
+            label1.Size = new Size(146, 39);
             label1.TabIndex = 0;
             label1.Text = "Username";
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(322, 82);
+            pictureBox1.Location = new Point(336, 82);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(161, 159);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -66,38 +66,42 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F);
-            label2.Location = new Point(158, 336);
+            label2.Font = new Font("Comfortaa", 17.9999981F);
+            label2.Location = new Point(148, 328);
             label2.Name = "label2";
-            label2.Size = new Size(111, 32);
+            label2.Size = new Size(135, 39);
             label2.TabIndex = 2;
             label2.Text = "Password";
             // 
-            // textBox1
+            // tb_Username
             // 
-            textBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(299, 263);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(257, 39);
-            textBox1.TabIndex = 3;
+            tb_Username.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Username.Location = new Point(299, 268);
+            tb_Username.Name = "tb_Username";
+            tb_Username.Size = new Size(257, 39);
+            tb_Username.TabIndex = 3;
             // 
-            // textBox2
+            // tb_Password
             // 
-            textBox2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(299, 333);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(257, 39);
-            textBox2.TabIndex = 4;
+            tb_Password.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Password.Location = new Point(299, 330);
+            tb_Password.Name = "tb_Password";
+            tb_Password.PasswordChar = '*';
+            tb_Password.Size = new Size(257, 39);
+            tb_Password.TabIndex = 4;
             // 
             // btn_Login
             // 
-            btn_Login.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Login.AutoSize = true;
+            btn_Login.BackColor = Color.OliveDrab;
+            btn_Login.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_Login.ForeColor = Color.White;
             btn_Login.Location = new Point(336, 407);
             btn_Login.Name = "btn_Login";
-            btn_Login.Size = new Size(172, 45);
+            btn_Login.Size = new Size(172, 54);
             btn_Login.TabIndex = 5;
             btn_Login.Text = "LOGIN";
-            btn_Login.UseVisualStyleBackColor = true;
+            btn_Login.UseVisualStyleBackColor = false;
             btn_Login.Click += Btn_Login_Click;
             // 
             // btn_Exit
@@ -159,8 +163,8 @@
             ClientSize = new Size(800, 482);
             Controls.Add(panel1);
             Controls.Add(btn_Login);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(tb_Password);
+            Controls.Add(tb_Username);
             Controls.Add(label2);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
@@ -181,8 +185,8 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox tb_Username;
+        private TextBox tb_Password;
         private Button btn_Login;
         private Button btn_Exit;
         private Panel panel1;

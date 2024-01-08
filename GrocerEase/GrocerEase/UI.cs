@@ -8,10 +8,12 @@ namespace GrocerEase
     {
         string TabContent;
 
-        public UI()
+        private readonly Login.EmployeeData employeeData;
+
+        public UI(Login.EmployeeData employeeData)
         {
             InitializeComponent();
-            DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
+            this.employeeData = employeeData;
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
@@ -57,6 +59,10 @@ namespace GrocerEase
 
         private void UI_Load(object sender, EventArgs e)
         {
+            DisableAllTabs();
+
+            EnableTabsBasedOnRole();
+
             pnl_Content.Controls.Clear();
 
             foreach (Control control in flp_Tabs.Controls)
@@ -137,6 +143,42 @@ namespace GrocerEase
                     pnl_Content.Controls.Add(dashboard);
                     dashboard.Show();
                     break;
+            }
+        }
+
+        private void EnableTabsBasedOnRole()
+        {
+            switch (employeeData.Role)
+            {
+                case "Cashier":
+                    lbl_POS.Enabled = true;
+                    Lbl_POS_Click(this, EventArgs.Empty);
+                    break;
+                default:
+                    EnableAllTabs();
+                    break;
+            }
+        }
+
+        private void DisableAllTabs()
+        {
+            foreach (Control control in flp_Tabs.Controls)
+            {
+                if (control is Label label && label.Tag != null && label.Tag.ToString() == "Tab")
+                {
+                    label.Enabled = false;
+                }
+            }
+        }
+
+        private void EnableAllTabs()
+        {
+            foreach (Control control in flp_Tabs.Controls)
+            {
+                if (control is Label label && label.Tag != null && label.Tag.ToString() == "Tab")
+                {
+                    label.Enabled = true;
+                }
             }
         }
 
