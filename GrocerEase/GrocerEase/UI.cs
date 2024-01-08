@@ -10,10 +10,13 @@ namespace GrocerEase
 
         private readonly Login.EmployeeData employeeData;
 
+        private readonly int cashierID;
+
         public UI(Login.EmployeeData employeeData)
         {
             InitializeComponent();
             this.employeeData = employeeData;
+            cashierID = employeeData.EmployeeID;
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
@@ -124,7 +127,7 @@ namespace GrocerEase
                     lbl_POS.BackColor = Color.SandyBrown;
                     lbl_POS.ForeColor = Color.White;
                     lbl_POS.BorderStyle = BorderStyle.None;
-                    POS pos = new()
+                    POS pos = new(cashierID)
                     {
                         TopLevel = false
                     };

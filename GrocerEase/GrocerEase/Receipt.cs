@@ -17,12 +17,13 @@ namespace GrocerEase
         private readonly string TotalText;
         private readonly string CashText;
         private readonly string ChangeText;
+        private readonly int cashierID;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm, string SubtotalText, string VATText, string DiscountsText, string TotalText, string CashText, string ChangeText)
+        public Receipt(Label lbl_TotalPOS, Checkout checkoutForm, string SubtotalText, string VATText, string DiscountsText, string TotalText, string CashText, string ChangeText, int cashierID)
         {
             InitializeComponent();
             InitializeVATLabels();
@@ -37,6 +38,7 @@ namespace GrocerEase
             this.TotalText = TotalText;
             this.CashText = CashText;
             this.ChangeText = ChangeText;
+            this.cashierID = cashierID;
 
             ReceiptData();
 
@@ -47,6 +49,31 @@ namespace GrocerEase
             lbl_Total.Text = "₱" + this.TotalText;
             lbl_Cash.Text = "₱" + this.CashText;
             lbl_Change.Text = "₱" + this.ChangeText;
+
+            DisplayCashierInformation();
+        }
+
+        private void DisplayCashierInformation()
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string query = "SELECT Employee_FirstName, Employee_LastName FROM tbl_Employee WHERE Employee_ID = @EmployeeID";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@EmployeeID", cashierID);
+
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    string firstName = reader["Employee_FirstName"].ToString();
+                    string lastName = reader["Employee_LastName"].ToString();
+
+                    lbl_Cashier.Text = $"Cashier: {firstName}, {lastName} #{cashierID:D8}";
+                }
+            }
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
@@ -109,7 +136,7 @@ namespace GrocerEase
 
         private void Btn_Print_Click(object sender, EventArgs e)
         {
-            //Fetch the 
+            // Implement the print functionality
         }
     }
 }

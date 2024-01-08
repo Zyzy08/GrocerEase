@@ -338,7 +338,7 @@
             lbl_Cashier.Name = "lbl_Cashier";
             lbl_Cashier.Size = new Size(602, 36);
             lbl_Cashier.TabIndex = 37;
-            lbl_Cashier.Text = "   Cashier: Sayra Jackson #000001";
+            lbl_Cashier.Text = "   Cashier: ";
             lbl_Cashier.TextAlign = ContentAlignment.BottomLeft;
             // 
             // label14

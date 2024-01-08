@@ -12,13 +12,17 @@ namespace GrocerEase
     {
         private DataRow selectedItemRow;
 
-        public POS()
+        private readonly int cashierID;
+
+        public POS(int cashierID)
         {
             InitializeComponent();
             InitializeVATLabels();
 
             btn_Remove.Click += Btn_Remove_Click;
             tb_Search.TextChanged += Tb_Search_TextChanged;
+
+            this.cashierID = cashierID;
         }
 
         private void InitializeVATLabels()
@@ -419,7 +423,7 @@ namespace GrocerEase
             {
                 StoreItemsInTempList();
 
-                Checkout checkout = new(lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total);
+                Checkout checkout = new(lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total, cashierID);
                 checkout.ShowDialog();
             }
         }

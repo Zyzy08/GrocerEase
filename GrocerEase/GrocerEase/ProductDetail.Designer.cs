@@ -272,25 +272,16 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label5;
-        private Label label6;
-        private Label label7;
         private PictureBox pb_Image;
         private Button btn_Done;
         private Button btn_Cancel;
-        private Label label8;
         public Label lbl_ID;
         private Panel pnl_Title;
         private Label lbl_Title;
         private Label label4;
         public Label label9;
-        private TextBox textBox1;
         private Label label10;
         private Label label11;
-        private TextBox textBox2;
         private NumericUpDown nud_Price;
         private Label label12;
         private Label label13;

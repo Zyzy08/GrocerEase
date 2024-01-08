@@ -11,12 +11,13 @@ namespace Sayra
         private readonly Label lbl_VATPOS;
         private readonly Label lbl_DiscountsPOS;
         private readonly Label lbl_TotalPOS;
+        private readonly int cashierID;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Checkout(Label lbl_SubtotalPOS, Label lbl_VATPOS, Label lbl_DiscountsPOS, Label lbl_TotalPOS)
+        public Checkout(Label lbl_SubtotalPOS, Label lbl_VATPOS, Label lbl_DiscountsPOS, Label lbl_TotalPOS, int cashierID)
         {
             InitializeComponent();
 
@@ -26,6 +27,7 @@ namespace Sayra
             this.lbl_VATPOS = lbl_VATPOS;
             this.lbl_DiscountsPOS = lbl_DiscountsPOS;
             this.lbl_TotalPOS = lbl_TotalPOS;
+            this.cashierID = cashierID;
 
             UpdateTotal();
         }
@@ -57,7 +59,7 @@ namespace Sayra
 
         private void Btn_Receipt_Click(object sender, EventArgs e)
         {
-            Receipt receipt = new(lbl_TotalPOS, this, SubtotalText, VATText, DiscountsText, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text)
+            Receipt receipt = new(lbl_TotalPOS, this, SubtotalText, VATText, DiscountsText, lbl_Total.Text, nud_Cash.Value.ToString(), lbl_Change.Text, cashierID)
             {
                 Owner = this
             };
