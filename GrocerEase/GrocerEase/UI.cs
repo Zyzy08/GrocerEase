@@ -120,6 +120,12 @@ namespace GrocerEase
                     lbl_Users.BackColor = Color.SandyBrown;
                     lbl_Users.ForeColor = Color.White;
                     lbl_Users.BorderStyle = BorderStyle.None;
+                    Users users = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(users);
+                    users.Show();
                     break;
 
                 case "POS":

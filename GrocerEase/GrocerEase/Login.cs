@@ -52,7 +52,7 @@ namespace GrocerEase
             using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
 
-            string query = "SELECT * FROM tbl_Employee WHERE Employee_Username = @Username AND Employee_Password = @Password";
+            string query = "SELECT * FROM tbl_Users WHERE Employee_Username = @Username AND Employee_Password = @Password";
 
             using SqlCommand command = new(query, connection);
             command.Parameters.AddWithValue("@Username", username);
