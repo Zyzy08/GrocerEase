@@ -18,14 +18,6 @@ namespace GrocerEase
             Environment.Exit(0);
         }
 
-        public void Lbl_Products_Click(object sender, EventArgs e)
-        {
-            TabContent = "Products";
-            lbl_Title.Text = "GrocerEase - Products";
-            Text = "Products";
-            UI_Load(sender, e);
-        }
-
         public void RefreshProductsForm()
         {
             foreach (Control control in pnl_Content.Controls)
@@ -95,6 +87,12 @@ namespace GrocerEase
                     lbl_Discounts.BackColor = Color.SandyBrown;
                     lbl_Discounts.ForeColor = Color.White;
                     lbl_Discounts.BorderStyle = BorderStyle.None;
+                    Discounts discounts = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(discounts);
+                    discounts.Show();
                     break;
 
                 case "Users":
@@ -129,19 +127,19 @@ namespace GrocerEase
             }
         }
 
-        private void Lbl_POS_Click(object sender, EventArgs e)
-        {
-            TabContent = "POS";
-            lbl_Title.Text = "GrocerEase - POS";
-            Text = "POS";
-            UI_Load(sender, e);
-        }
-
         private void Lbl_Dashboard_Click(object sender, EventArgs e)
         {
             TabContent = "Dashboard";
             lbl_Title.Text = "GrocerEase - Dashboard";
             Text = "Dashboard";
+            UI_Load(sender, e);
+        }
+
+        public void Lbl_Products_Click(object sender, EventArgs e)
+        {
+            TabContent = "Products";
+            lbl_Title.Text = "GrocerEase - Products";
+            Text = "Products";
             UI_Load(sender, e);
         }
 
@@ -166,6 +164,14 @@ namespace GrocerEase
             TabContent = "Users";
             lbl_Title.Text = "GrocerEase - Users";
             Text = "Users";
+            UI_Load(sender, e);
+        }
+
+        private void Lbl_POS_Click(object sender, EventArgs e)
+        {
+            TabContent = "POS";
+            lbl_Title.Text = "GrocerEase - POS";
+            Text = "POS";
             UI_Load(sender, e);
         }
 
