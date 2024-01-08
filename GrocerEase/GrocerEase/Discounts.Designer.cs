@@ -28,22 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tb_Search = new TextBox();
             btn_Remove = new Button();
             btn_Edit = new Button();
             btn_Add = new Button();
             dgv_Discounts = new DataGridView();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            pictureBox1 = new PictureBox();
+            tb_Search = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgv_Discounts).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // tb_Search
-            // 
-            tb_Search.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tb_Search.Location = new Point(16, 12);
-            tb_Search.Name = "tb_Search";
-            tb_Search.Size = new Size(330, 29);
-            tb_Search.TabIndex = 16;
-            tb_Search.TextChanged += Tb_Search_TextChanged;
             // 
             // btn_Remove
             // 
@@ -103,12 +98,44 @@
             dgv_Discounts.TabIndex = 12;
             dgv_Discounts.SelectionChanged += Dgv_Discounts_SelectionChanged;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.BackColor = SystemColors.Window;
+            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Controls.Add(pictureBox1);
+            flowLayoutPanel1.Controls.Add(tb_Search);
+            flowLayoutPanel1.Location = new Point(12, 7);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(445, 34);
+            flowLayoutPanel1.TabIndex = 25;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Search;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(28, 26);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
+            // tb_Search
+            // 
+            tb_Search.BorderStyle = BorderStyle.None;
+            tb_Search.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Search.Location = new Point(37, 3);
+            tb_Search.Name = "tb_Search";
+            tb_Search.Size = new Size(399, 26);
+            tb_Search.TabIndex = 6;
+            tb_Search.TextChanged += Tb_Search_TextChanged;
+            // 
             // Discounts
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1317, 784);
-            Controls.Add(tb_Search);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(btn_Remove);
             Controls.Add(btn_Edit);
             Controls.Add(btn_Add);
@@ -119,16 +146,20 @@
             Text = "Discounts";
             Load += Discounts_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_Discounts).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox tb_Search;
         private Button btn_Remove;
         private Button btn_Edit;
         private Button btn_Add;
         private DataGridView dgv_Discounts;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private PictureBox pictureBox1;
+        private TextBox tb_Search;
     }
 }

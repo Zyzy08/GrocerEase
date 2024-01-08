@@ -48,8 +48,12 @@
             btn_Pay = new Button();
             btn_Remove = new Button();
             label4 = new Label();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).BeginInit();
             panel1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lbl_Price
@@ -74,10 +78,11 @@
             // 
             // tb_Search
             // 
-            tb_Search.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tb_Search.Location = new Point(8, 10);
+            tb_Search.BorderStyle = BorderStyle.None;
+            tb_Search.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_Search.Location = new Point(37, 3);
             tb_Search.Name = "tb_Search";
-            tb_Search.Size = new Size(330, 29);
+            tb_Search.Size = new Size(399, 26);
             tb_Search.TabIndex = 6;
             tb_Search.TextChanged += Tb_Search_TextChanged;
             // 
@@ -242,7 +247,7 @@
             btn_Pay.AutoSize = true;
             btn_Pay.BackColor = Color.OliveDrab;
             btn_Pay.Enabled = false;
-            btn_Pay.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Pay.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Pay.ForeColor = Color.White;
             btn_Pay.Location = new Point(1168, 719);
             btn_Pay.Name = "btn_Pay";
@@ -256,11 +261,11 @@
             // 
             btn_Remove.AutoSize = true;
             btn_Remove.BackColor = Color.Tomato;
-            btn_Remove.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_Remove.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Remove.ForeColor = Color.White;
-            btn_Remove.Location = new Point(1153, 719);
+            btn_Remove.Location = new Point(1127, 719);
             btn_Remove.Name = "btn_Remove";
-            btn_Remove.Size = new Size(149, 60);
+            btn_Remove.Size = new Size(175, 60);
             btn_Remove.TabIndex = 22;
             btn_Remove.Text = "- REMOVE";
             btn_Remove.UseVisualStyleBackColor = false;
@@ -279,11 +284,34 @@
             label4.TabIndex = 23;
             label4.Text = "TOTAL: ₱";
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.BackColor = SystemColors.Window;
+            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Controls.Add(pictureBox1);
+            flowLayoutPanel1.Controls.Add(tb_Search);
+            flowLayoutPanel1.Location = new Point(12, 5);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(445, 34);
+            flowLayoutPanel1.TabIndex = 24;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Sayra.Properties.Resources.Search;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(28, 26);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1317, 784);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(label4);
             Controls.Add(btn_Pay);
             Controls.Add(btn_Remove);
@@ -291,7 +319,6 @@
             Controls.Add(panel1);
             Controls.Add(lbl_Price);
             Controls.Add(lbl_Name);
-            Controls.Add(tb_Search);
             Controls.Add(nud_Quantity);
             Controls.Add(tc_Categories);
             Controls.Add(btn_Add);
@@ -302,6 +329,9 @@
             ((System.ComponentModel.ISupportInitialize)nud_Quantity).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -328,5 +358,7 @@
         private Label label5;
         private Label lbl_Discounts;
         private Label label4;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private PictureBox pictureBox1;
     }
 }
