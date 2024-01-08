@@ -3,14 +3,21 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace GrocerEase
 {
     public partial class ProductDetail : Form
     {
+        [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
+
         public ProductDetail()
         {
             InitializeComponent();
+
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
         }
 
         public string Mode { get; set; }
@@ -48,6 +55,9 @@ namespace GrocerEase
 
             if (Mode == "Edit")
             {
+                lbl_Title.Text = "Edit product";
+                pnl_Title.BackColor = Color.SteelBlue;
+                this.BackColor = Color.AliceBlue;
                 LoadProductDataForEditing();
             }
         }
@@ -197,10 +207,12 @@ namespace GrocerEase
                 command.Parameters.AddWithValue("@ItemName", itemName);
                 command.Parameters.AddWithValue("@ItemPrice", itemPrice);
                 command.Parameters.AddWithValue("@ItemNetWeight", itemNetWeight);
+
                 SqlParameter iconParameter = new("@ItemIcon", SqlDbType.VarBinary, -1)
                 {
                     Value = IsDefaultImage(pb_Image.Image) ? DBNull.Value : (object)ImageToByteArray(pb_Image.Image)
                 };
+
                 command.Parameters.Add(iconParameter);
 
                 command.Parameters.AddWithValue("@ItemInStock", itemInStock);

@@ -3,15 +3,22 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Sayra
 {
     public partial class CategoryDetail : Form
     {
+        [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
+        
         public CategoryDetail()
         {
             InitializeComponent();
+
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
         }
 
         public string Mode { get; set; }
@@ -160,6 +167,10 @@ namespace Sayra
 
             if (Mode == "Edit")
             {
+                lbl_Title.Text = "Edit category";
+                pnl_Title.BackColor = Color.SteelBlue;
+                this.BackColor = Color.AliceBlue;
+
                 LoadCategoryDataForEditing();
             }
         }

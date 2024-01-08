@@ -36,7 +36,6 @@
             nud_Cash = new NumericUpDown();
             label1 = new Label();
             panel1 = new Panel();
-            btn_Exit = new Button();
             lbl_Title = new Label();
             button1 = new Button();
             lbl_Change = new Label();
@@ -127,27 +126,12 @@
             // panel1
             // 
             panel1.BackColor = Color.SandyBrown;
-            panel1.Controls.Add(btn_Exit);
             panel1.Controls.Add(lbl_Title);
             panel1.Controls.Add(button1);
             panel1.Location = new Point(0, -1);
             panel1.Name = "panel1";
             panel1.Size = new Size(519, 61);
             panel1.TabIndex = 8;
-            // 
-            // btn_Exit
-            // 
-            btn_Exit.AutoSize = true;
-            btn_Exit.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_Exit.FlatStyle = FlatStyle.Flat;
-            btn_Exit.Font = new Font("Comfortaa", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_Exit.ForeColor = Color.Red;
-            btn_Exit.Location = new Point(757, 12);
-            btn_Exit.Name = "btn_Exit";
-            btn_Exit.Size = new Size(31, 33);
-            btn_Exit.TabIndex = 6;
-            btn_Exit.Text = "X";
-            btn_Exit.UseVisualStyleBackColor = true;
             // 
             // lbl_Title
             // 
@@ -221,7 +205,6 @@
         private NumericUpDown nud_Cash;
         private Label label1;
         private Panel panel1;
-        private Button btn_Exit;
         private Label lbl_Title;
         private Button button1;
         private Label lbl_Change;

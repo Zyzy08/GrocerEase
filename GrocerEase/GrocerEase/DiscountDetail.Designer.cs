@@ -30,7 +30,6 @@
         {
             label1 = new Label();
             pnl_Title = new Panel();
-            btn_Exit = new Button();
             lbl_Title = new Label();
             button1 = new Button();
             label2 = new Label();
@@ -62,7 +61,6 @@
             // pnl_Title
             // 
             pnl_Title.BackColor = Color.OliveDrab;
-            pnl_Title.Controls.Add(btn_Exit);
             pnl_Title.Controls.Add(lbl_Title);
             pnl_Title.Controls.Add(button1);
             pnl_Title.Location = new Point(0, 0);
@@ -70,21 +68,6 @@
             pnl_Title.Name = "pnl_Title";
             pnl_Title.Size = new Size(321, 51);
             pnl_Title.TabIndex = 20;
-            // 
-            // btn_Exit
-            // 
-            btn_Exit.AutoSize = true;
-            btn_Exit.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btn_Exit.FlatStyle = FlatStyle.Flat;
-            btn_Exit.Font = new Font("Comfortaa", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_Exit.ForeColor = Color.Red;
-            btn_Exit.Location = new Point(694, 10);
-            btn_Exit.Margin = new Padding(3, 2, 3, 2);
-            btn_Exit.Name = "btn_Exit";
-            btn_Exit.Size = new Size(31, 33);
-            btn_Exit.TabIndex = 6;
-            btn_Exit.Text = "X";
-            btn_Exit.UseVisualStyleBackColor = true;
             // 
             // lbl_Title
             // 
@@ -267,7 +250,6 @@
 
         private Label label1;
         private Panel pnl_Title;
-        private Button btn_Exit;
         private Label lbl_Title;
         private Button button1;
         private Label label2;

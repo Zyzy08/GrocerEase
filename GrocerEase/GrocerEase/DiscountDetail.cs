@@ -11,6 +11,7 @@ namespace Sayra
     public partial class DiscountDetail : Form
     {
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
         public DiscountDetail()
@@ -28,7 +29,7 @@ namespace Sayra
         {
             string discountType = tb_Type.Text.Trim();
             string discountRate = nud_Rate.Text.Trim();
-            int status = cb_Status.SelectedIndex == 0 ? 1 : 0; // Map the selected index to IsActive
+            int status = cb_Status.SelectedIndex == 0 ? 1 : 0;
 
             if (string.IsNullOrWhiteSpace(discountType) || string.IsNullOrWhiteSpace(discountRate))
             {
@@ -107,7 +108,7 @@ namespace Sayra
                     string queryAllDiscountIds = "SELECT Discount_ID FROM tbl_Discounts";
                     using SqlCommand commandAllDiscountIds = new(queryAllDiscountIds, connection);
                     using SqlDataReader reader = commandAllDiscountIds.ExecuteReader();
-                    HashSet<int> existingIds = new();
+                    HashSet<int> existingIds = [];
 
                     while (reader.Read())
                     {
@@ -128,14 +129,12 @@ namespace Sayra
         {
             string query = "SELECT COUNT(*) FROM tbl_Discounts WHERE LOWER(Discount_Type) = LOWER(@DiscountType)";
 
-            using (SqlCommand command = new(query, connection))
-            {
-                command.Parameters.AddWithValue("@DiscountType", discountType.ToLower());
+            using SqlCommand command = new(query, connection);
+            command.Parameters.AddWithValue("@DiscountType", discountType.ToLower());
 
-                int count = Convert.ToInt32(command.ExecuteScalar());
+            int count = Convert.ToInt32(command.ExecuteScalar());
 
-                return count > 0;
-            }
+            return count > 0;
         }
 
         private void ResetForm()
@@ -200,7 +199,6 @@ namespace Sayra
                     tb_Type.Text = readerDiscountDetails["Discount_Type"].ToString();
                     nud_Rate.Text = readerDiscountDetails["Discount_Rate"].ToString();
 
-                    // Map IsActive to the ComboBox selection
                     cb_Status.SelectedIndex = Convert.ToInt32(readerDiscountDetails["IsActive"]) == 1 ? 0 : 1;
                 }
             }
