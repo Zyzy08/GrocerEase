@@ -16,6 +16,16 @@ namespace GrocerEase
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
 
             DatabaseManager.Initialize("Data Source=DESKTOP-BB2GC4I;Initial Catalog=db_GrocerEase;Integrated Security=True;Encrypt=False;");
+            
+            this.KeyPress += Login_KeyPress;
+        }
+
+        private void Login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Btn_Login_Click(sender, e);
+            }
         }
 
         private void Btn_Login_Click(object sender, EventArgs e)

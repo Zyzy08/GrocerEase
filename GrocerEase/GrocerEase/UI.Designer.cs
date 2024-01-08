@@ -32,6 +32,7 @@
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
             btn_Exit = new Button();
+            lbl_Title = new Label();
             pnl_Content = new Panel();
             panel4 = new Panel();
             flp_Tabs = new FlowLayoutPanel();
@@ -50,7 +51,6 @@
             label13 = new Label();
             label14 = new Label();
             lbl_Logout = new Label();
-            lbl_Title = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -92,6 +92,16 @@
             btn_Exit.Text = "X";
             btn_Exit.UseVisualStyleBackColor = false;
             btn_Exit.Click += Btn_Exit_Click;
+            // 
+            // lbl_Title
+            // 
+            lbl_Title.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Title.ForeColor = Color.White;
+            lbl_Title.Location = new Point(12, 0);
+            lbl_Title.Name = "lbl_Title";
+            lbl_Title.Size = new Size(1416, 58);
+            lbl_Title.TabIndex = 1;
+            lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnl_Content
             // 
@@ -313,20 +323,10 @@
             lbl_Logout.Name = "lbl_Logout";
             lbl_Logout.Size = new Size(119, 38);
             lbl_Logout.TabIndex = 10;
-            lbl_Logout.Tag = "Tab";
+            lbl_Logout.Tag = "";
             lbl_Logout.Text = "Logout";
             lbl_Logout.TextAlign = ContentAlignment.TopCenter;
             lbl_Logout.Click += Lbl_Logout_Click;
-            // 
-            // lbl_Title
-            // 
-            lbl_Title.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbl_Title.ForeColor = Color.White;
-            lbl_Title.Location = new Point(12, 0);
-            lbl_Title.Name = "lbl_Title";
-            lbl_Title.Size = new Size(1416, 58);
-            lbl_Title.TabIndex = 1;
-            lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // UI
             // 

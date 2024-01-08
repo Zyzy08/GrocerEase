@@ -152,7 +152,7 @@ namespace GrocerEase
             {
                 case "Cashier":
                     lbl_POS.Enabled = true;
-                    Lbl_POS_Click(this, EventArgs.Empty);
+                    TabContent = "POS";
                     break;
                 default:
                     EnableAllTabs();

@@ -89,6 +89,7 @@
             tb_Password.PasswordChar = '*';
             tb_Password.Size = new Size(257, 39);
             tb_Password.TabIndex = 4;
+            tb_Password.KeyPress += Login_KeyPress;
             // 
             // btn_Login
             // 
