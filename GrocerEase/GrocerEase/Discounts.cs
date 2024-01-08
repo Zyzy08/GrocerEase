@@ -102,7 +102,19 @@ namespace Sayra
 
         private void Dgv_Discounts_SelectionChanged(object sender, EventArgs e)
         {
-            // Add your code for handling selection changes
+            btn_Edit.Enabled = dgv_Discounts.SelectedRows.Count == 1;
+
+            btn_Remove.Enabled = dgv_Discounts.SelectedRows.Count > 0;
+
+            if (btn_Remove.Enabled)
+            {
+                foreach (DataGridViewRow selectedRow in dgv_Discounts.SelectedRows)
+                {
+                    string status = selectedRow.Cells["Status"].Value?.ToString();
+
+                    btn_Remove.Enabled = string.Equals(status, "Disabled", StringComparison.OrdinalIgnoreCase);
+                }
+            }
         }
     }
 }
