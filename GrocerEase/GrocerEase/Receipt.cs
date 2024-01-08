@@ -71,7 +71,7 @@ namespace GrocerEase
                     string firstName = reader["Employee_FirstName"].ToString();
                     string lastName = reader["Employee_LastName"].ToString();
 
-                    lbl_Cashier.Text = $"Cashier: {firstName}, {lastName} #{cashierID:D8}";
+                    lbl_Cashier.Text = $"Cashier: {lastName}, {firstName} #{cashierID:D8}";
                 }
             }
         }
