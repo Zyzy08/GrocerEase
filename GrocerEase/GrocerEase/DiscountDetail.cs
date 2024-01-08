@@ -33,7 +33,7 @@ namespace Sayra
 
             if (string.IsNullOrWhiteSpace(discountType) || string.IsNullOrWhiteSpace(discountRate))
             {
-                MessageBox.Show("Please enter valid discount type and rate.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter valid discount type, rate, and status.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -42,9 +42,9 @@ namespace Sayra
 
             if (connection.State == ConnectionState.Open)
             {
-                if (Mode == "Add" && DiscountExists(connection, discountType))
+                if (Mode == "Add" && DiscountExists(connection, discountType, discountRate))
                 {
-                    MessageBox.Show("Discount with the same type already exists.", "Duplicate Discount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Discount with the same type and rate already exists.", "Duplicate Discount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -73,7 +73,9 @@ namespace Sayra
 
                 command.Parameters.AddWithValue("@DiscountType", discountType);
                 command.Parameters.AddWithValue("@DiscountRate", discountRate);
-                command.Parameters.AddWithValue("@Status", status);
+
+                int statusValue = cb_Status.SelectedIndex == 0 ? 1 : 0;
+                command.Parameters.AddWithValue("@Status", statusValue);
 
                 command.ExecuteNonQuery();
 
@@ -125,12 +127,13 @@ namespace Sayra
             return newDiscountId;
         }
 
-        private static bool DiscountExists(SqlConnection connection, string discountType)
+        private static bool DiscountExists(SqlConnection connection, string discountType, string discountRate)
         {
-            string query = "SELECT COUNT(*) FROM tbl_Discounts WHERE LOWER(Discount_Type) = LOWER(@DiscountType)";
+            string query = "SELECT COUNT(*) FROM tbl_Discounts WHERE LOWER(Discount_Type) = LOWER(@DiscountType) AND LOWER(Discount_Rate) = LOWER(@DiscountRate)";
 
             using SqlCommand command = new(query, connection);
             command.Parameters.AddWithValue("@DiscountType", discountType.ToLower());
+            command.Parameters.AddWithValue("@DiscountRate", discountRate.ToLower());
 
             int count = Convert.ToInt32(command.ExecuteScalar());
 
@@ -147,7 +150,7 @@ namespace Sayra
 
             tb_Type.Text = string.Empty;
             nud_Rate.Value = 1;
-            cb_Status.SelectedIndex = -1;
+            cb_Status.SelectedIndex = 0;
         }
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
