@@ -139,9 +139,9 @@ namespace GrocerEase
                             Label lbl_ItemDetails = new()
                             {
                                 Name = "lbl_ItemDetails",
-                                Text = $"{itemRow["Item_Name"]} ({itemRow["Item_NetWT"]})\nPrice: ₱{itemRow["Item_Price"]}",
                                 TextAlign = ContentAlignment.MiddleCenter,
-                                AutoSize = true
+                                AutoSize = true,
+                                Text = $"{itemRow["Item_Name"]} ({itemRow["Item_NetWT"]})\nPrice: ₱{itemRow["Item_Price"]}\nIn-Stock: {itemRow["Item_InStock"]}"
                             };
 
                             lbl_ItemDetails.Click += (lblSender, lblEvent) =>
@@ -269,20 +269,6 @@ namespace GrocerEase
             return image;
         }
 
-        private void DisplayItemDetails(DataRow itemRow)
-        {
-            var itemName = itemRow["Item_Name"].ToString();
-            var itemNetWT = itemRow["Item_NetWT"].ToString();
-            decimal itemPrice = Convert.ToDecimal(itemRow["Item_Price"]);
-
-            selectedItemRow = itemRow;
-
-            lbl_Name.Text = $"Item: {itemName} ({itemNetWT})";
-            lbl_Price.Text = $"Price: ₱{itemPrice:N2}";
-
-            nud_Quantity.Value = 1;
-        }
-
         private void Nud_Quantity_ValueChanged(object sender, EventArgs e)
         {
             if (selectedItemRow != null)
@@ -296,48 +282,70 @@ namespace GrocerEase
             }
         }
 
+        private void DisplayItemDetails(DataRow itemRow)
+        {
+            var itemName = itemRow["Item_Name"].ToString();
+            var itemNetWT = itemRow["Item_NetWT"].ToString();
+            decimal itemPrice = Convert.ToDecimal(itemRow["Item_Price"]);
+            int itemInStock = Convert.ToInt32(itemRow["Item_InStock"]);
+
+            selectedItemRow = itemRow;
+
+            lbl_Name.Text = $"Item: {itemName} ({itemNetWT})";
+            lbl_Price.Text = $"Price: ₱{itemPrice:N2}";
+
+            nud_Quantity.Value = 1;
+        }
+
         private void Btn_Add_Click(object sender, EventArgs e)
         {
             if (selectedItemRow != null)
             {
                 var itemName = selectedItemRow["Item_Name"].ToString();
-                _ = selectedItemRow["Item_NetWT"].ToString();
                 decimal itemPrice = Convert.ToDecimal(selectedItemRow["Item_Price"]);
+                int itemInStock = Convert.ToInt32(selectedItemRow["Item_InStock"]);
                 int quantity = (int)nud_Quantity.Value;
 
-                bool itemExists = false;
-                foreach (ListViewItem item in lv_Bag.Items)
+                if (quantity <= itemInStock)
                 {
-                    if (item.Text == itemName)
+                    bool itemExists = false;
+                    foreach (ListViewItem item in lv_Bag.Items)
                     {
-                        int existingQuantity = int.Parse(item.SubItems[1].Text.Replace("x", ""));
-                        existingQuantity += quantity;
-                        item.SubItems[1].Text = $"x{existingQuantity}";
+                        if (item.Text == itemName)
+                        {
+                            int existingQuantity = int.Parse(item.SubItems[1].Text.Replace("x", ""));
+                            existingQuantity += quantity;
+                            item.SubItems[1].Text = $"x{existingQuantity}";
 
-                        decimal existingTotalPrice = decimal.Parse(item.SubItems[2].Text.Replace("₱", ""));
-                        existingTotalPrice += itemPrice * quantity;
-                        item.SubItems[2].Text = $"₱{existingTotalPrice:N2}";
+                            decimal existingTotalPrice = decimal.Parse(item.SubItems[2].Text.Replace("₱", ""));
+                            existingTotalPrice += itemPrice * quantity;
+                            item.SubItems[2].Text = $"₱{existingTotalPrice:N2}";
 
-                        itemExists = true;
-                        break;
+                            itemExists = true;
+                            break;
+                        }
                     }
-                }
 
-                if (!itemExists)
+                    if (!itemExists)
+                    {
+                        ListViewItem item = new(itemName);
+                        item.SubItems.Add($"x{quantity}");
+                        item.SubItems.Add($"₱{itemPrice * quantity:N2}");
+
+                        lv_Bag.Items.Add(item);
+                    }
+
+                    lv_Bag.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                    lv_Bag.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                    UpdateVATCalculations();
+
+                    btn_Pay.Enabled = lv_Bag.Items.Count > 0;
+                }
+                else
                 {
-                    ListViewItem item = new(itemName);
-                    item.SubItems.Add($"x{quantity}");
-                    item.SubItems.Add($"₱{itemPrice * quantity:N2}");
-
-                    lv_Bag.Items.Add(item);
+                    MessageBox.Show($"Quantity exceeds the in-stock for this item. In-Stock: {itemInStock}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                lv_Bag.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                lv_Bag.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                UpdateVATCalculations();
-
-                btn_Pay.Enabled = lv_Bag.Items.Count > 0;
             }
         }
 
