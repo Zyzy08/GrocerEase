@@ -82,12 +82,12 @@ namespace Sayra
             if (change >= 0)
             {
                 lbl_Change.Text = $"{change:N2}";
-                btn_Receipt.Enabled = true;
+                btn_Checkout.Enabled = true;
             }
             else
             {
                 lbl_Change.Text = "Insufficient cash";
-                btn_Receipt.Enabled = false;
+                btn_Checkout.Enabled = false;
             }
         }
     }

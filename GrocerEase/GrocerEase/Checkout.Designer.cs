@@ -30,7 +30,7 @@
         {
             lbl_Total = new Label();
             label2 = new Label();
-            btn_Receipt = new Button();
+            btn_Checkout = new Button();
             btn_Cancel = new Button();
             label3 = new Label();
             nud_Cash = new NumericUpDown();
@@ -63,20 +63,20 @@
             label2.TabIndex = 1;
             label2.Text = "Cash: ₱";
             // 
-            // btn_Receipt
+            // btn_Checkout
             // 
-            btn_Receipt.AutoSize = true;
-            btn_Receipt.BackColor = Color.OliveDrab;
-            btn_Receipt.Enabled = false;
-            btn_Receipt.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_Receipt.ForeColor = Color.White;
-            btn_Receipt.Location = new Point(314, 270);
-            btn_Receipt.Name = "btn_Receipt";
-            btn_Receipt.Size = new Size(190, 67);
-            btn_Receipt.TabIndex = 3;
-            btn_Receipt.Text = "RECEIPT";
-            btn_Receipt.UseVisualStyleBackColor = false;
-            btn_Receipt.Click += Btn_Receipt_Click;
+            btn_Checkout.AutoSize = true;
+            btn_Checkout.BackColor = Color.OliveDrab;
+            btn_Checkout.Enabled = false;
+            btn_Checkout.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_Checkout.ForeColor = Color.White;
+            btn_Checkout.Location = new Point(314, 270);
+            btn_Checkout.Name = "btn_Checkout";
+            btn_Checkout.Size = new Size(197, 67);
+            btn_Checkout.TabIndex = 3;
+            btn_Checkout.Text = "CHECKOUT";
+            btn_Checkout.UseVisualStyleBackColor = false;
+            btn_Checkout.Click += Btn_Receipt_Click;
             // 
             // btn_Cancel
             // 
@@ -195,7 +195,7 @@
             Controls.Add(nud_Cash);
             Controls.Add(label3);
             Controls.Add(btn_Cancel);
-            Controls.Add(btn_Receipt);
+            Controls.Add(btn_Checkout);
             Controls.Add(label2);
             Controls.Add(lbl_Total);
             ForeColor = Color.White;
@@ -215,7 +215,7 @@
 
         private Label lbl_Total;
         private Label label2;
-        private Button btn_Receipt;
+        private Button btn_Checkout;
         private Button btn_Cancel;
         private Label label3;
         private NumericUpDown nud_Cash;

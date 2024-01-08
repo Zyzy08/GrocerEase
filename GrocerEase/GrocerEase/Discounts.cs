@@ -54,17 +54,65 @@ namespace Sayra
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            // Add your code for adding a discount
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            using DiscountDetail discountDetail = new();
+            discountDetail.Mode = "Add";
+            discountDetail.lbl_ID.Text = DiscountDetail.GetNextDiscountId(connection).ToString();
+            discountDetail.Owner = this.ParentForm;
+            discountDetail.ShowDialog();
         }
 
         private void Btn_Edit_Click(object sender, EventArgs e)
         {
-            // Add your code for editing a discount
+            if (dgv_Discounts.SelectedRows.Count == 1)
+            {
+                int selectedRowIndex = dgv_Discounts.SelectedRows[0].Index;
+                int discountId = Convert.ToInt32(dgv_Discounts.Rows[selectedRowIndex].Cells["ID"].Value);
+
+                using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                connection.Open();
+
+                using DiscountDetail discountDetailForm = new();
+                discountDetailForm.Mode = "Edit";
+                discountDetailForm.DiscountId = discountId;
+                discountDetailForm.Owner = this.ParentForm;
+                discountDetailForm.ShowDialog();
+
+                RefreshData();
+            }
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
         {
-            // Add your code for removing a discount
+            if (dgv_Discounts.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove the selected discount/discounts?", "Confirm Removal", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                    connection.Open();
+
+                    foreach (DataGridViewRow selectedRow in dgv_Discounts.SelectedRows)
+                    {
+                        int discountID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                        string removeDiscountQuery = "DELETE FROM tbl_Discounts WHERE Discount_ID = @DiscountID";
+                        using SqlCommand removeDiscountCommand = new(removeDiscountQuery, connection);
+                        removeDiscountCommand.Parameters.AddWithValue("@DiscountID", discountID);
+                        removeDiscountCommand.ExecuteNonQuery();
+                    }
+
+                    RefreshData();
+                }
+            }
+        }
+
+        public void RefreshData()
+        {
+            LoadDiscountData();
         }
 
         private void Tb_Search_TextChanged(object sender, EventArgs e)

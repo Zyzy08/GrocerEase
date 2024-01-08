@@ -1,4 +1,5 @@
-﻿using Sayra;
+﻿using frmUserAuthentication;
+using Sayra;
 using System.Windows.Forms;
 
 namespace GrocerEase
@@ -37,6 +38,18 @@ namespace GrocerEase
                 if (control is Categories categories)
                 {
                     categories.RefreshData();
+                    break;
+                }
+            }
+        }
+
+        public void RefreshDiscountsForm()
+        {
+            foreach (Control control in pnl_Content.Controls)
+            {
+                if (control is Discounts discounts)
+                {
+                    discounts.RefreshData();
                     break;
                 }
             }
@@ -151,7 +164,7 @@ namespace GrocerEase
             UI_Load(sender, e);
         }
 
-        private void Lbl_Discounts_Click(object sender, EventArgs e)
+        public void Lbl_Discounts_Click(object sender, EventArgs e)
         {
             TabContent = "Discounts";
             lbl_Title.Text = "GrocerEase - Discounts";

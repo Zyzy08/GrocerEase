@@ -85,6 +85,7 @@
             // 
             nud_Quantity.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             nud_Quantity.Location = new Point(433, 729);
+            nud_Quantity.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
             nud_Quantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nud_Quantity.Name = "nud_Quantity";
             nud_Quantity.Size = new Size(75, 43);
