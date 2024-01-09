@@ -18,6 +18,7 @@ namespace GrocerEase
         private readonly string CashText;
         private readonly string ChangeText;
         private readonly int cashierID;
+        public bool IsCompleted;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
@@ -78,6 +79,8 @@ namespace GrocerEase
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             checkoutForm.Visible = true;
+            checkoutForm.IsCompleted = this.IsCompleted;
+            checkoutForm.Checkout_Load(sender, e);
             this.Hide();
         }
 
@@ -228,7 +231,9 @@ namespace GrocerEase
 
                     MessageBox.Show("Transaction Complete! Next Customer Please.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.Close();
+                    IsCompleted = true;
+
+                    Btn_Cancel_Click(sender, e);
                 }
                 catch (Exception ex)
                 {
@@ -261,11 +266,6 @@ namespace GrocerEase
 
                 updateInStockCommand.ExecuteNonQuery();
             }
-        }
-
-        private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
         }
     }
 }

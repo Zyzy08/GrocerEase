@@ -14,7 +14,11 @@ namespace GrocerEase
 
         private readonly int cashierID;
 
-        public POS(int cashierID)
+        private readonly Login.EmployeeData employeeData;
+
+        public bool IsCompleted = false;
+
+        public POS(Login.EmployeeData employeeData, int cashierID)
         {
             InitializeComponent();
             InitializeVATLabels();
@@ -22,6 +26,7 @@ namespace GrocerEase
             btn_Remove.Click += Btn_Remove_Click;
             tb_Search.TextChanged += Tb_Search_TextChanged;
 
+            this.employeeData = employeeData;
             this.cashierID = cashierID;
         }
 
@@ -33,8 +38,14 @@ namespace GrocerEase
             lv_Bag.Columns.Add("Price", -2, HorizontalAlignment.Left);
         }
 
-        private void POS_Load(object sender, EventArgs e)
+        public void POS_Load(object sender, EventArgs e)
         {
+            if(IsCompleted == true)
+            {
+                IsCompleted = false;
+                POS_Load(sender, e);
+            }
+
             using (SqlConnection connection = new(DatabaseManager.ConnectionString))
             {
                 connection.Open();
@@ -439,7 +450,7 @@ namespace GrocerEase
             {
                 StoreItemsInTempList();
 
-                Checkout checkout = new(lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total, cashierID);
+                Checkout checkout = new(employeeData, lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total, cashierID);
                 checkout.ShowDialog();
             }
         }

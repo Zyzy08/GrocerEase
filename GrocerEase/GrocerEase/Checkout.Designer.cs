@@ -188,6 +188,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Checkout";
+            Load += Checkout_Load;
             ((System.ComponentModel.ISupportInitialize)nud_Cash).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

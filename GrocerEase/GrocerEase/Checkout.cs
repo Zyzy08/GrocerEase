@@ -12,17 +12,20 @@ namespace Sayra
         private readonly Label lbl_DiscountsPOS;
         private readonly Label lbl_TotalPOS;
         private readonly int cashierID;
+        private readonly Login.EmployeeData employeeData;
+        public bool IsCompleted;
 
         [LibraryImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
         private static partial IntPtr CreateRoundRectRgn(int left, int right, int top, int bottom, int width, int height);
 
-        public Checkout(Label lbl_SubtotalPOS, Label lbl_VATPOS, Label lbl_DiscountsPOS, Label lbl_TotalPOS, int cashierID)
+        public Checkout(Login.EmployeeData employeeData, Label lbl_SubtotalPOS, Label lbl_VATPOS, Label lbl_DiscountsPOS, Label lbl_TotalPOS, int cashierID)
         {
             InitializeComponent();
 
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 7, 7));
 
+            this.employeeData = employeeData;
             this.lbl_SubtotalPOS = lbl_SubtotalPOS;
             this.lbl_VATPOS = lbl_VATPOS;
             this.lbl_DiscountsPOS = lbl_DiscountsPOS;
@@ -54,6 +57,9 @@ namespace Sayra
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
+            POS pos = new(employeeData, cashierID);
+            pos.IsCompleted = true;
+            pos.POS_Load(sender, e);
             this.Close();
         }
 
@@ -90,6 +96,14 @@ namespace Sayra
             {
                 lbl_Change.Text = "Insufficient cash";
                 btn_Checkout.Enabled = false;
+            }
+        }
+
+        public void Checkout_Load(object sender, EventArgs e)
+        {
+            if(IsCompleted == true)
+            {
+                Btn_Cancel_Click(sender, e);
             }
         }
     }
