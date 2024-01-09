@@ -90,46 +90,64 @@ namespace GrocerEase
             lv_List.Columns.Add("Price", -2, HorizontalAlignment.Left);
         }
 
-        private void ReceiptData()
+        public void ReceiptData(int receiptID = -1)
         {
-            using SqlConnection connection = new(DatabaseManager.ConnectionString);
-            connection.Open();
-
-            if (connection.State == ConnectionState.Open)
+            using (SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString))
             {
-                string receiptIDQuery = "SELECT TOP 1 RIGHT('0000000000' + CAST(Receipt_ID AS VARCHAR(10)), 10) AS FormattedReceiptID FROM tbl_Receipts ORDER BY Receipt_ID DESC";
+                connection.Open();
 
-                using SqlCommand receiptIDCommand = new(receiptIDQuery, connection);
-                object result = receiptIDCommand.ExecuteScalar();
-
-                string Receipt_ID;
-
-                if (result != null)
+                if (connection.State == ConnectionState.Open)
                 {
-                    Receipt_ID = result.ToString();
-                }
-                else
-                {
-                    Receipt_ID = "0000000001";
-                }
+                    // Fetch receipt details
+                    string receiptQuery = "SELECT * FROM tbl_Receipts WHERE Receipt_ID = @ReceiptID";
 
-                lbl_ReceiptNo.Text = "Receipt #: " + Receipt_ID;
+                    using (SqlCommand receiptCommand = new SqlCommand(receiptQuery, connection))
+                    {
+                        receiptCommand.Parameters.AddWithValue("@ReceiptID", receiptID);
 
-                string query = "SELECT Item, Quantity, Price FROM tbl_TempList";
+                        using (SqlDataReader receiptReader = receiptCommand.ExecuteReader())
+                        {
+                            if (receiptReader.Read())
+                            {
+                                string cashierName = receiptReader["Cashier_Name"].ToString();
+                                decimal total = Convert.ToDecimal(receiptReader["Receipt_Total"]);
+                                DateTime dateTime = Convert.ToDateTime(receiptReader["Receipt_DateTime"]);
 
-                using SqlCommand command = new(query, connection);
-                using SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    string itemName = reader["Item"].ToString();
-                    int quantity = Convert.ToInt32(reader["Quantity"]);
-                    decimal price = Convert.ToDecimal(reader["Price"]);
+                                // Display receipt details
+                                Console.WriteLine($"Receipt ID: {receiptID}");
+                                Console.WriteLine($"Cashier: {cashierName}");
+                                Console.WriteLine($"Total: {total:C}");
+                                Console.WriteLine($"Date and Time: {dateTime}");
+                                Console.WriteLine("Items:");
 
-                    ListViewItem item = new(itemName);
-                    item.SubItems.Add($"x{quantity}");
-                    item.SubItems.Add($"₱{price:N2}");
+                                // Fetch items related to the receipt
+                                string itemsQuery = "SELECT * FROM tbl_ReceiptItems WHERE Receipt_ID = @ReceiptID";
 
-                    lv_List.Items.Add(item);
+                                using (SqlCommand itemsCommand = new SqlCommand(itemsQuery, connection))
+                                {
+                                    itemsCommand.Parameters.AddWithValue("@ReceiptID", receiptID);
+
+                                    using (SqlDataReader itemsReader = itemsCommand.ExecuteReader())
+                                    {
+                                        while (itemsReader.Read())
+                                        {
+                                            int receiptItemID = Convert.ToInt32(itemsReader["ReceiptItem_ID"]);
+                                            string itemName = itemsReader["Item_Name"].ToString();
+                                            int quantity = Convert.ToInt32(itemsReader["Item_Quantity"]);
+                                            decimal price = Convert.ToDecimal(itemsReader["Item_Price"]);
+
+                                            // Display item details
+                                            Console.WriteLine($"  {receiptItemID}. {itemName} - Quantity: {quantity}, Price: {price:C}");
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Receipt with ID {receiptID} not found.");
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -178,26 +196,39 @@ namespace GrocerEase
 
                     insertCommand.ExecuteNonQuery();
 
-                    // Insert items into tbl_ReceiptItems
-                    foreach (ListViewItem item in lv_List.Items)
+                    cashierNameReader.Close(); // Close the SqlDataReader here
+
+                    cashierConnection.Close();
+
+                    // Insert items into tbl_ReceiptItems with unique ReceiptItem_ID
+                    int receiptItemID = 1; // Initialize the ReceiptItem_ID counter
+
+                    string insertItemQuery = "INSERT INTO tbl_ReceiptItems (Receipt_ID, ReceiptItem_ID, Item_Name, Item_Quantity, Item_Price) VALUES (@ReceiptID, @ReceiptItemID, @ItemName, @Quantity, @Price)";
+
+                    string query = "SELECT Item, Quantity, Price FROM tbl_TempList";
+
+                    using SqlCommand command = new SqlCommand(query, connection);
+                    using SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        string itemName = item.SubItems[0].Text;
-                        int quantity = int.Parse(item.SubItems[1].Text.Substring(1)); // Remove 'x' and convert to int
-                        decimal price = decimal.Parse(item.SubItems[2].Text.Substring(1)); // Remove '₱' and convert to decimal
+                        string itemName = reader["Item"].ToString();
+                        int quantity = Convert.ToInt32(reader["Quantity"]);
+                        decimal price = Convert.ToDecimal(reader["Price"]);
 
-                        string insertItemQuery = "INSERT INTO tbl_ReceiptItems (Receipt_ID, Item_Name, Item_Quantity, Item_Price) VALUES (@ReceiptID, @ItemName, @Quantity, @Price)";
+                        // Increment the ReceiptItem_ID for each item
+                        receiptItemID++;
 
+                        // Insert the item into tbl_ReceiptItems with unique ReceiptItem_ID
                         using SqlCommand insertItemCommand = new SqlCommand(insertItemQuery, connection);
                         insertItemCommand.Parameters.AddWithValue("@ReceiptID", newReceiptID);
+                        insertItemCommand.Parameters.AddWithValue("@ReceiptItemID", receiptItemID);
                         insertItemCommand.Parameters.AddWithValue("@ItemName", itemName);
                         insertItemCommand.Parameters.AddWithValue("@Quantity", quantity);
                         insertItemCommand.Parameters.AddWithValue("@Price", price);
 
                         insertItemCommand.ExecuteNonQuery();
                     }
-
-                    cashierNameReader.Close();
-                    cashierConnection.Close();
                 }
                 else
                 {
@@ -231,26 +262,39 @@ namespace GrocerEase
 
                     insertCommand.ExecuteNonQuery();
 
-                    // Insert items into tbl_ReceiptItems
-                    foreach (ListViewItem item in lv_List.Items)
+                    cashierNameReader.Close(); // Close the SqlDataReader here
+
+                    cashierConnection.Close();
+
+                    // Insert items into tbl_ReceiptItems with unique ReceiptItem_ID
+                    int receiptItemID = 1; // Initialize the ReceiptItem_ID counter
+
+                    string insertItemQuery = "INSERT INTO tbl_ReceiptItems (Receipt_ID, ReceiptItem_ID, Item_Name, Item_Quantity, Item_Price) VALUES (@ReceiptID, @ReceiptItemID, @ItemName, @Quantity, @Price)";
+
+                    string query = "SELECT Item, Quantity, Price FROM tbl_TempList";
+
+                    using SqlCommand command = new SqlCommand(query, connection);
+                    using SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        string itemName = item.SubItems[0].Text;
-                        int quantity = int.Parse(item.SubItems[1].Text.Substring(1)); // Remove 'x' and convert to int
-                        decimal price = decimal.Parse(item.SubItems[2].Text.Substring(1)); // Remove '₱' and convert to decimal
+                        string itemName = reader["Item"].ToString();
+                        int quantity = Convert.ToInt32(reader["Quantity"]);
+                        decimal price = Convert.ToDecimal(reader["Price"]);
 
-                        string insertItemQuery = "INSERT INTO tbl_ReceiptItems (Receipt_ID, Item_Name, Item_Quantity, Item_Price) VALUES (@ReceiptID, @ItemName, @Quantity, @Price)";
+                        // Increment the ReceiptItem_ID for each item
+                        receiptItemID++;
 
+                        // Insert the item into tbl_ReceiptItems with unique ReceiptItem_ID
                         using SqlCommand insertItemCommand = new SqlCommand(insertItemQuery, connection);
                         insertItemCommand.Parameters.AddWithValue("@ReceiptID", newReceiptID);
+                        insertItemCommand.Parameters.AddWithValue("@ReceiptItemID", receiptItemID);
                         insertItemCommand.Parameters.AddWithValue("@ItemName", itemName);
                         insertItemCommand.Parameters.AddWithValue("@Quantity", quantity);
                         insertItemCommand.Parameters.AddWithValue("@Price", price);
 
                         insertItemCommand.ExecuteNonQuery();
                     }
-
-                    cashierNameReader.Close();
-                    cashierConnection.Close();
                 }
             }
         }
