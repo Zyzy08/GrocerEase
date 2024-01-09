@@ -136,7 +136,87 @@ namespace GrocerEase
 
         private void Btn_Print_Click(object sender, EventArgs e)
         {
-            // Implement the print functionality
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string receiptIDQuery = "SELECT TOP 1 Receipt_ID FROM tbl_Receipts ORDER BY Receipt_ID DESC";
+
+                using SqlCommand receiptIDCommand = new(receiptIDQuery, connection);
+                object result = receiptIDCommand.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int latestReceiptID))
+                {
+                    int newReceiptID = latestReceiptID + 1;
+
+                    using SqlConnection cashierConnection = new(DatabaseManager.ConnectionString);
+                    cashierConnection.Open();
+
+                    string cashierNameQuery = "SELECT Employee_FirstName, Employee_LastName FROM tbl_Users WHERE Employee_ID = @EmployeeID";
+
+                    using SqlCommand cashierNameCommand = new(cashierNameQuery, cashierConnection);
+                    cashierNameCommand.Parameters.AddWithValue("@EmployeeID", cashierID);
+
+                    using SqlDataReader cashierNameReader = cashierNameCommand.ExecuteReader();
+                    string cashierFirstName = string.Empty;
+                    string cashierLastName = string.Empty;
+
+                    if (cashierNameReader.Read())
+                    {
+                        cashierFirstName = cashierNameReader["Employee_FirstName"].ToString();
+                        cashierLastName = cashierNameReader["Employee_LastName"].ToString();
+                    }
+
+                    string insertQuery = "INSERT INTO tbl_Receipts (Receipt_ID, Receipt_Total, Cashier_Name, Receipt_DateTime) VALUES (@ReceiptID, @Total, @CashierName, @DateTime)";
+
+                    using SqlCommand insertCommand = new(insertQuery, connection);
+                    insertCommand.Parameters.AddWithValue("@ReceiptID", newReceiptID);
+                    insertCommand.Parameters.AddWithValue("@Total", TotalText);
+                    insertCommand.Parameters.AddWithValue("@CashierName", $"{cashierLastName}, {cashierFirstName}");
+                    insertCommand.Parameters.AddWithValue("@DateTime", DateTime.Now);
+
+                    insertCommand.ExecuteNonQuery();
+
+                    cashierNameReader.Close();
+                    cashierConnection.Close();
+                }
+                else
+                {
+                    int newReceiptID = 1;
+
+                    using SqlConnection cashierConnection = new(DatabaseManager.ConnectionString);
+                    cashierConnection.Open();
+
+                    string cashierNameQuery = "SELECT Employee_FirstName, Employee_LastName FROM tbl_Users WHERE Employee_ID = @EmployeeID";
+
+                    using SqlCommand cashierNameCommand = new(cashierNameQuery, cashierConnection);
+                    cashierNameCommand.Parameters.AddWithValue("@EmployeeID", cashierID);
+
+                    using SqlDataReader cashierNameReader = cashierNameCommand.ExecuteReader();
+                    string cashierFirstName = string.Empty;
+                    string cashierLastName = string.Empty;
+
+                    if (cashierNameReader.Read())
+                    {
+                        cashierFirstName = cashierNameReader["Employee_FirstName"].ToString();
+                        cashierLastName = cashierNameReader["Employee_LastName"].ToString();
+                    }
+
+                    string insertQuery = "INSERT INTO tbl_Receipts (Receipt_ID, Receipt_Total, Cashier_Name, Receipt_DateTime) VALUES (@ReceiptID, @Total, @CashierName, @DateTime)";
+
+                    using SqlCommand insertCommand = new(insertQuery, connection);
+                    insertCommand.Parameters.AddWithValue("@ReceiptID", newReceiptID);
+                    insertCommand.Parameters.AddWithValue("@Total", TotalText);
+                    insertCommand.Parameters.AddWithValue("@CashierName", $"{cashierLastName}, {cashierFirstName}");
+                    insertCommand.Parameters.AddWithValue("@DateTime", DateTime.Now);
+
+                    insertCommand.ExecuteNonQuery();
+
+                    cashierNameReader.Close();
+                    cashierConnection.Close();
+                }
+            }
         }
     }
 }
