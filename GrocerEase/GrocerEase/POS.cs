@@ -309,11 +309,19 @@ namespace GrocerEase
                 if (quantity <= itemInStock)
                 {
                     bool itemExists = false;
+
                     foreach (ListViewItem item in lv_Bag.Items)
                     {
                         if (item.Text == itemName)
                         {
                             int existingQuantity = int.Parse(item.SubItems[1].Text.Replace("x", ""));
+
+                            if (existingQuantity + quantity > itemInStock)
+                            {
+                                MessageBox.Show($"Quantity exceeds the in-stock for this item. In-Stock: {itemInStock}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
                             existingQuantity += quantity;
                             item.SubItems[1].Text = $"x{existingQuantity}";
 
