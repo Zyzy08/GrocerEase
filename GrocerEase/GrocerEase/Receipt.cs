@@ -218,6 +218,8 @@ namespace GrocerEase
 
                         insertItemCommand.ExecuteNonQuery();
 
+                        UpdateInStockQuantity(itemName, quantity);
+
                         newReceiptItemID++;
                     }
 
@@ -228,6 +230,32 @@ namespace GrocerEase
                 {
                     MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void UpdateInStockQuantity(string itemName, int soldQuantity)
+        {
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                string inStockQuery = "SELECT Item_InStock FROM tbl_Items WHERE Item_Name = @ItemName";
+
+                using SqlCommand inStockCommand = new(inStockQuery, connection);
+                inStockCommand.Parameters.AddWithValue("@ItemName", itemName);
+
+                int currentInStock = Convert.ToInt32(inStockCommand.ExecuteScalar());
+
+                int newInStock = currentInStock - soldQuantity;
+
+                string updateInStockQuery = "UPDATE tbl_Items SET Item_InStock = @NewInStock WHERE Item_Name = @ItemName";
+
+                using SqlCommand updateInStockCommand = new(updateInStockQuery, connection);
+                updateInStockCommand.Parameters.AddWithValue("@NewInStock", newInStock);
+                updateInStockCommand.Parameters.AddWithValue("@ItemName", itemName);
+
+                updateInStockCommand.ExecuteNonQuery();
             }
         }
     }
