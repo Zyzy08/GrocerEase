@@ -8,9 +8,15 @@ namespace Sayra
 {
     public partial class Users : Form
     {
-        public Users()
+        private readonly int currentUser;
+
+        public Users(int currentUser)
         {
             InitializeComponent();
+
+            dgv_Users.DefaultCellStyle.Font = new Font("Comforta", 10, FontStyle.Regular);
+
+            this.currentUser = currentUser;
         }
 
         private void Users_Load(object sender, EventArgs e)
@@ -22,12 +28,11 @@ namespace Sayra
             connection.Open();
             if (connection.State == ConnectionState.Open)
             {
-                // Adjusted query based on the provided column names
                 string fetchUsersQuery = "SELECT Employee_ID as ID, " +
                                          "CONCAT(Employee_LastName, ', ', Employee_FirstName) as Name, " +
                                          "Employee_Role as Role, " +
                                          "Employee_Username as Username, " +
-                                         "Employee_Password as Password " +
+                                         "REPLICATE('*', LEN(Employee_Password)) as Password " +
                                          "FROM tbl_Users";
 
                 SqlCommand fetchCommand = new(fetchUsersQuery, connection);
@@ -46,7 +51,28 @@ namespace Sayra
         private void Dgv_Users_SelectionChanged(object sender, EventArgs e)
         {
             btn_Edit.Enabled = dgv_Users.SelectedRows.Count == 1;
-            btn_Remove.Enabled = dgv_Users.SelectedRows.Count > 0;
+
+            if (dgv_Users.SelectedRows.Count > 0)
+            {
+                bool canRemove = true;
+
+                foreach (DataGridViewRow selectedRow in dgv_Users.SelectedRows)
+                {
+                    int selectedUserId = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                    if (selectedUserId == currentUser)
+                    {
+                        canRemove = false;
+                        break;
+                    }
+                }
+
+                btn_Remove.Enabled = canRemove;
+            }
+            else
+            {
+                btn_Remove.Enabled = false;
+            }
         }
 
         private void FilterUsers(string searchText)
@@ -60,7 +86,7 @@ namespace Sayra
                                          "CONCAT(Employee_LastName, ', ', Employee_FirstName) as Name, " +
                                          "Employee_Role as Role, " +
                                          "Employee_Username as Username, " +
-                                         "Employee_Password as Password " +
+                                         "REPLICATE('*', LEN(Employee_Password)) as Password " +
                                          "FROM tbl_Users " +
                                          "WHERE CONCAT(Employee_LastName, ', ', Employee_FirstName) LIKE @SearchText";
 
@@ -76,11 +102,14 @@ namespace Sayra
 
         private void Btn_Add_Click(object sender, EventArgs e)
         {
-            /*using UserDetail userDetail = new();
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
+            connection.Open();
+
+            using UserDetail userDetail = new();
             userDetail.Mode = "Add";
-            userDetail.lbl_ID.Text = UserDetail.GetNextUserId().ToString();
+            userDetail.lbl_ID.Text = UserDetail.GetNextUserId(connection).ToString();
             userDetail.Owner = this.ParentForm;
-            userDetail.ShowDialog();*/
+            userDetail.ShowDialog();
         }
 
         private void Btn_Remove_Click(object sender, EventArgs e)
@@ -117,11 +146,11 @@ namespace Sayra
             if (connection.State == ConnectionState.Open)
             {
                 string fetchUsersQuery = "SELECT Employee_ID as ID, " +
-                                 "CONCAT(Employee_LastName, ', ', Employee_FirstName) as Name, " +
-                                 "Employee_Role as Role, " +
-                                 "Employee_Username as Username, " +
-                                 "Employee_Password as Password " +
-                                 "FROM tbl_Users";
+                                         "CONCAT(Employee_LastName, ', ', Employee_FirstName) as Name, " +
+                                         "Employee_Role as Role, " +
+                                         "Employee_Username as Username, " +
+                                         "REPLICATE('*', LEN(Employee_Password)) as Password " +
+                                         "FROM tbl_Users";
 
                 SqlCommand fetchCommand = new(fetchUsersQuery, connection);
                 SqlDataAdapter adapter = new(fetchCommand);
@@ -138,11 +167,14 @@ namespace Sayra
                 int selectedRowIndex = dgv_Users.SelectedRows[0].Index;
                 int userId = Convert.ToInt32(dgv_Users.Rows[selectedRowIndex].Cells["ID"].Value);
 
-                /*using UserDetail userDetailForm = new();
+                using SqlConnection connection = new(DatabaseManager.ConnectionString);
+                connection.Open();
+
+                using UserDetail userDetailForm = new();
                 userDetailForm.Mode = "Edit";
                 userDetailForm.UserId = userId;
                 userDetailForm.Owner = this.ParentForm;
-                userDetailForm.ShowDialog();*/
+                userDetailForm.ShowDialog();
 
                 RefreshData();
             }

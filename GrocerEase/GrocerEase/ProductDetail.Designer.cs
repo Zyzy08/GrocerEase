@@ -70,7 +70,7 @@
             lbl_Title.Name = "lbl_Title";
             lbl_Title.Size = new Size(295, 48);
             lbl_Title.TabIndex = 8;
-            lbl_Title.Text = "Add new product";
+            lbl_Title.Text = "Add a new product";
             lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label4

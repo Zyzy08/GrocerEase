@@ -84,6 +84,7 @@
             btn_Remove.TabIndex = 29;
             btn_Remove.Text = "- REMOVE";
             btn_Remove.UseVisualStyleBackColor = false;
+            btn_Remove.Click += Btn_Remove_Click;
             // 
             // btn_Edit
             // 
@@ -97,6 +98,7 @@
             btn_Edit.TabIndex = 28;
             btn_Edit.Text = "EDIT";
             btn_Edit.UseVisualStyleBackColor = false;
+            btn_Edit.Click += Btn_Edit_Click;
             // 
             // btn_Add
             // 
@@ -110,6 +112,7 @@
             btn_Add.TabIndex = 27;
             btn_Add.Text = "+ ADD";
             btn_Add.UseVisualStyleBackColor = false;
+            btn_Add.Click += Btn_Add_Click;
             // 
             // dgv_Users
             // 

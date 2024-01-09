@@ -55,9 +55,10 @@ namespace GrocerEase
 
             if (Mode == "Edit")
             {
-                lbl_Title.Text = "Edit product";
+                lbl_Title.Text = "Edit a product";
                 pnl_Title.BackColor = Color.SteelBlue;
                 this.BackColor = Color.AliceBlue;
+
                 LoadProductDataForEditing();
             }
         }

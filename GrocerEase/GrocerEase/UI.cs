@@ -59,6 +59,18 @@ namespace GrocerEase
             }
         }
 
+        public void RefreshUsersForm()
+        {
+            foreach (Control control in pnl_Content.Controls)
+            {
+                if (control is Users users)
+                {
+                    users.RefreshData();
+                    break;
+                }
+            }
+        }
+
         private void UI_Load(object sender, EventArgs e)
         {
             DisableAllTabs();
@@ -120,7 +132,7 @@ namespace GrocerEase
                     lbl_Users.BackColor = Color.SandyBrown;
                     lbl_Users.ForeColor = Color.White;
                     lbl_Users.BorderStyle = BorderStyle.None;
-                    Users users = new()
+                    Users users = new(cashierID)
                     {
                         TopLevel = false
                     };
@@ -222,7 +234,7 @@ namespace GrocerEase
             UI_Load(sender, e);
         }
 
-        private void Lbl_Users_Click(object sender, EventArgs e)
+        public void Lbl_Users_Click(object sender, EventArgs e)
         {
             TabContent = "Users";
             lbl_Title.Text = "GrocerEase - Users";

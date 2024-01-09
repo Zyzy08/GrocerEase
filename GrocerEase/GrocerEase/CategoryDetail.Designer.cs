@@ -50,7 +50,7 @@
             pnl_Title.Location = new Point(0, 0);
             pnl_Title.Margin = new Padding(3, 2, 3, 2);
             pnl_Title.Name = "pnl_Title";
-            pnl_Title.Size = new Size(321, 51);
+            pnl_Title.Size = new Size(338, 51);
             pnl_Title.TabIndex = 35;
             // 
             // lbl_Title
@@ -59,9 +59,9 @@
             lbl_Title.ForeColor = Color.White;
             lbl_Title.Location = new Point(11, 0);
             lbl_Title.Name = "lbl_Title";
-            lbl_Title.Size = new Size(295, 48);
+            lbl_Title.Size = new Size(312, 48);
             lbl_Title.TabIndex = 8;
-            lbl_Title.Text = "Add new category";
+            lbl_Title.Text = "Add a new category";
             lbl_Title.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button1
@@ -95,7 +95,7 @@
             button2.BackColor = Color.OliveDrab;
             button2.Font = new Font("Comfortaa", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(189, 165);
+            button2.Location = new Point(206, 165);
             button2.Name = "button2";
             button2.Size = new Size(117, 44);
             button2.TabIndex = 46;
@@ -140,7 +140,7 @@
             tb_Name.Location = new Point(93, 105);
             tb_Name.Margin = new Padding(3, 2, 3, 2);
             tb_Name.Name = "tb_Name";
-            tb_Name.Size = new Size(213, 33);
+            tb_Name.Size = new Size(230, 33);
             tb_Name.TabIndex = 38;
             // 
             // label2
@@ -158,7 +158,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
-            ClientSize = new Size(318, 219);
+            ClientSize = new Size(335, 219);
             Controls.Add(pnl_Title);
             Controls.Add(label1);
             Controls.Add(button2);

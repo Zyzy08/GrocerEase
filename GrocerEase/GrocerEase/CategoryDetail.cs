@@ -167,7 +167,7 @@ namespace Sayra
 
             if (Mode == "Edit")
             {
-                lbl_Title.Text = "Edit category";
+                lbl_Title.Text = "Edit a category";
                 pnl_Title.BackColor = Color.SteelBlue;
                 this.BackColor = Color.AliceBlue;
 

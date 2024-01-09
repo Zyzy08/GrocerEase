@@ -12,6 +12,7 @@ namespace Sayra
         public Categories()
         {
             InitializeComponent();
+
             dgv_Categories.DefaultCellStyle.Font = new Font("Comforta", 10, FontStyle.Regular);
         }
 
