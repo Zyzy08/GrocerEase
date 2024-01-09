@@ -217,12 +217,12 @@ namespace Sayra
 
             if (!string.IsNullOrEmpty(firstName))
             {
-                firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
+                firstName = char.ToUpper(firstName[0]) + firstName[1..];
             }
 
             if (!string.IsNullOrEmpty(lastName))
             {
-                lastName = char.ToUpper(lastName[0]) + lastName.Substring(1);
+                lastName = char.ToUpper(lastName[0]) + lastName[1..];
             }
 
             tb_Username.Text = $"{lastName}{(firstName.Length > 0 ? firstName[0] : ' ')}{lbl_ID.Text}";

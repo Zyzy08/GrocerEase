@@ -60,7 +60,7 @@ namespace GrocerEase
 
             if (connection.State == ConnectionState.Open)
             {
-                string query = "SELECT Employee_FirstName, Employee_LastName FROM tbl_Employee WHERE Employee_ID = @EmployeeID";
+                string query = "SELECT Employee_FirstName, Employee_LastName FROM tbl_Users WHERE Employee_ID = @EmployeeID";
 
                 using SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@EmployeeID", cashierID);
