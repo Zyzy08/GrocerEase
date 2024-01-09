@@ -436,6 +436,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Receipt";
+            FormClosed += Receipt_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

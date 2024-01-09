@@ -9,6 +9,8 @@ namespace Sayra
 {
     internal class CommonUtilities
     {
+        public bool completed = false;
+
         public static void UpdateCategoryInStock(SqlConnection connection)
         {
             string updateCategoryInStockQuery = @"
@@ -20,6 +22,11 @@ namespace Sayra
 
             using SqlCommand updateCommand = new(updateCategoryInStockQuery, connection);
             updateCommand.ExecuteNonQuery();
+        }
+
+        public void SetIsTransactionCompleted(bool completed)
+        {
+            this.completed = completed;
         }
     }
 }

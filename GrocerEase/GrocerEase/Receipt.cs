@@ -78,7 +78,7 @@ namespace GrocerEase
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             checkoutForm.Visible = true;
-            this.Close();
+            this.Hide();
         }
 
         private void InitializeVATLabels()
@@ -225,6 +225,10 @@ namespace GrocerEase
 
                     cashierNameReader.Close();
                     cashierConnection.Close();
+
+                    MessageBox.Show("Transaction Complete! Next Customer Please.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -257,6 +261,12 @@ namespace GrocerEase
 
                 updateInStockCommand.ExecuteNonQuery();
             }
+        }
+
+        private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CommonUtilities cu = new();
+            cu.completed = true;
         }
     }
 }
