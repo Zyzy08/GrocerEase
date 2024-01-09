@@ -265,8 +265,7 @@ namespace GrocerEase
 
         private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CommonUtilities cu = new();
-            cu.completed = true;
+            
         }
     }
 }

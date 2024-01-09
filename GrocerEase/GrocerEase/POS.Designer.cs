@@ -110,13 +110,15 @@
             // btn_Add
             // 
             btn_Add.AutoSize = true;
+            btn_Add.BackColor = Color.SteelBlue;
             btn_Add.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_Add.ForeColor = Color.White;
             btn_Add.Location = new Point(514, 718);
             btn_Add.Name = "btn_Add";
             btn_Add.Size = new Size(134, 60);
             btn_Add.TabIndex = 7;
             btn_Add.Text = "+ ADD";
-            btn_Add.UseVisualStyleBackColor = true;
+            btn_Add.UseVisualStyleBackColor = false;
             btn_Add.Click += Btn_Add_Click;
             // 
             // panel1
