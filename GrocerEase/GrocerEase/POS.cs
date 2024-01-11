@@ -298,7 +298,7 @@ namespace GrocerEase
             var itemName = itemRow["Item_Name"].ToString();
             var itemNetWT = itemRow["Item_NetWT"].ToString();
             decimal itemPrice = Convert.ToDecimal(itemRow["Item_Price"]);
-            int itemInStock = Convert.ToInt32(itemRow["Item_InStock"]);
+            _ = Convert.ToInt32(itemRow["Item_InStock"]);
 
             selectedItemRow = itemRow;
 
@@ -306,6 +306,8 @@ namespace GrocerEase
             lbl_Price.Text = $"Price: ₱{itemPrice:N2}";
 
             nud_Quantity.Value = 1;
+
+            btn_Add.Enabled = true;
         }
 
         private void Btn_Add_Click(object sender, EventArgs e)

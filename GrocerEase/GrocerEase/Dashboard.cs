@@ -23,7 +23,7 @@ namespace Sayra
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            using SqlConnection connection = new SqlConnection(DatabaseManager.ConnectionString);
+            using SqlConnection connection = new(DatabaseManager.ConnectionString);
             connection.Open();
             if (connection.State == ConnectionState.Open)
             {

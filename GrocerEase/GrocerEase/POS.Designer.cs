@@ -111,6 +111,7 @@
             // 
             btn_Add.AutoSize = true;
             btn_Add.BackColor = Color.SteelBlue;
+            btn_Add.Enabled = false;
             btn_Add.Font = new Font("Comfortaa", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Add.ForeColor = Color.White;
             btn_Add.Location = new Point(514, 718);
