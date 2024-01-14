@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
@@ -52,7 +51,6 @@
             label13 = new Label();
             label14 = new Label();
             lbl_Logout = new Label();
-            tmr_Reloader = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -330,11 +328,6 @@
             lbl_Logout.TextAlign = ContentAlignment.TopCenter;
             lbl_Logout.Click += Lbl_Logout_Click;
             // 
-            // tmr_Reloader
-            // 
-            tmr_Reloader.Enabled = true;
-            tmr_Reloader.Tick += Tmr_Reloader_Tick;
-            // 
             // UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -380,6 +373,5 @@
         public Label lbl_Products;
         private Label lbl_Discounts;
         private Label lbl_Title;
-        private System.Windows.Forms.Timer tmr_Reloader;
     }
 }

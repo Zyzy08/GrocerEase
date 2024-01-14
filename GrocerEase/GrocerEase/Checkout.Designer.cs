@@ -32,7 +32,7 @@
             label2 = new Label();
             btn_Checkout = new Button();
             btn_Cancel = new Button();
-            label3 = new Label();
+            lbl_Change_Label = new Label();
             nud_Cash = new NumericUpDown();
             label1 = new Label();
             panel1 = new Panel();
@@ -91,15 +91,15 @@
             btn_Cancel.UseVisualStyleBackColor = false;
             btn_Cancel.Click += Btn_Cancel_Click;
             // 
-            // label3
+            // lbl_Change_Label
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(12, 202);
-            label3.Name = "label3";
-            label3.Size = new Size(211, 57);
-            label3.TabIndex = 5;
-            label3.Text = "Change: ₱";
+            lbl_Change_Label.AutoSize = true;
+            lbl_Change_Label.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_Change_Label.Location = new Point(12, 202);
+            lbl_Change_Label.Name = "lbl_Change_Label";
+            lbl_Change_Label.Size = new Size(211, 57);
+            lbl_Change_Label.TabIndex = 5;
+            lbl_Change_Label.Text = "Change: ₱";
             // 
             // nud_Cash
             // 
@@ -164,8 +164,9 @@
             lbl_Change.Font = new Font("Comfortaa", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lbl_Change.Location = new Point(211, 202);
             lbl_Change.Name = "lbl_Change";
-            lbl_Change.Size = new Size(0, 57);
+            lbl_Change.Size = new Size(91, 57);
             lbl_Change.TabIndex = 9;
+            lbl_Change.Text = "0.00";
             // 
             // Checkout
             // 
@@ -177,7 +178,7 @@
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(nud_Cash);
-            Controls.Add(label3);
+            Controls.Add(lbl_Change_Label);
             Controls.Add(btn_Cancel);
             Controls.Add(btn_Checkout);
             Controls.Add(label2);
@@ -202,7 +203,7 @@
         private Label label2;
         private Button btn_Checkout;
         private Button btn_Cancel;
-        private Label label3;
+        private Label lbl_Change_Label;
         private NumericUpDown nud_Cash;
         private Label label1;
         private Panel panel1;

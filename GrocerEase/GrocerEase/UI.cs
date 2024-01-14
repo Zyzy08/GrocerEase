@@ -11,14 +11,11 @@ namespace GrocerEase
 
         private readonly int cashierID;
 
-        public bool IsCompleted;
-
         public UI(Login.EmployeeData employeeData)
         {
             InitializeComponent();
             this.employeeData = employeeData;
             cashierID = employeeData.EmployeeID;
-            tmr_Reloader.Start();
         }
 
         private void Btn_Exit_Click(object sender, EventArgs e)
@@ -258,16 +255,6 @@ namespace GrocerEase
             Login login = new();
             login.Show();
             this.Close();
-        }
-
-        private void Tmr_Reloader_Tick(object sender, EventArgs e)
-        {
-            if(IsCompleted == true)
-            {
-                tmr_Reloader.Stop();
-                IsCompleted = false;
-                Lbl_POS_Click(sender, e);
-            }
         }
     }
 }

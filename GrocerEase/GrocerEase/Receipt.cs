@@ -79,7 +79,7 @@ namespace GrocerEase
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             checkoutForm.Visible = true;
-            checkoutForm.IsCompleted = this.IsCompleted;
+            checkoutForm.IsCompleted = IsCompleted;
             checkoutForm.Checkout_Load(sender, e);
             this.Hide();
         }

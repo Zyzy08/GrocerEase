@@ -57,9 +57,13 @@ namespace Sayra
 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            POS pos = new(employeeData, cashierID);
-            pos.IsCompleted = true;
-            pos.POS_Load(sender, e);
+            if (IsCompleted == true)
+            {
+                if (this.Owner is UI ui)
+                {
+                    ui.Lbl_POS_Click(sender, e);
+                }
+            }
             this.Close();
         }
 
@@ -89,12 +93,14 @@ namespace Sayra
 
             if (change >= 0)
             {
+                lbl_Change_Label.Text = "Change: ₱";
                 lbl_Change.Text = $"{change:N2}";
                 btn_Checkout.Enabled = true;
             }
             else
             {
-                lbl_Change.Text = "Insufficient cash";
+                lbl_Change_Label.Text = "Insufficient cash";
+                lbl_Change.Text = "";
                 btn_Checkout.Enabled = false;
             }
         }

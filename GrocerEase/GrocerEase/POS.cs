@@ -16,8 +16,6 @@ namespace GrocerEase
 
         private readonly Login.EmployeeData employeeData;
 
-        public bool IsCompleted = false;
-
         public POS(Login.EmployeeData employeeData, int cashierID)
         {
             InitializeComponent();
@@ -40,12 +38,6 @@ namespace GrocerEase
 
         public void POS_Load(object sender, EventArgs e)
         {
-            if(IsCompleted == true)
-            {
-                IsCompleted = false;
-                POS_Load(sender, e);
-            }
-
             using (SqlConnection connection = new(DatabaseManager.ConnectionString))
             {
                 connection.Open();
@@ -452,7 +444,10 @@ namespace GrocerEase
             {
                 StoreItemsInTempList();
 
-                Checkout checkout = new(employeeData, lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total, cashierID);
+                Checkout checkout = new(employeeData, lbl_Subtotal, lbl_VAT, lbl_Discounts, lbl_Total, cashierID)
+                {
+                    Owner = this.ParentForm
+                };
                 checkout.ShowDialog();
             }
         }
