@@ -140,7 +140,20 @@ namespace GrocerEase
                     users.Show();
                     break;
 
+                case "History":
+                    lbl_History.BackColor = Color.SandyBrown;
+                    lbl_History.ForeColor = Color.White;
+                    lbl_History.BorderStyle = BorderStyle.None;
+                    History history = new()
+                    {
+                        TopLevel = false
+                    };
+                    pnl_Content.Controls.Add(history);
+                    history.Show();
+                    break;
+
                 case "POS":
+                    lbl_Title.Text = "GrocerEase - POS";
                     lbl_POS.BackColor = Color.SandyBrown;
                     lbl_POS.ForeColor = Color.White;
                     lbl_POS.BorderStyle = BorderStyle.None;
@@ -153,6 +166,8 @@ namespace GrocerEase
                     break;
 
                 default:
+                    Text = "Dashboard";
+                    lbl_Title.Text = "GrocerEase - Dashboard";
                     lbl_Dashboard.BackColor = Color.SandyBrown;
                     lbl_Dashboard.ForeColor = Color.White;
                     lbl_Dashboard.BorderStyle = BorderStyle.None;
@@ -172,8 +187,10 @@ namespace GrocerEase
             {
                 case "Cashier":
                     lbl_POS.Enabled = true;
+                    Text = "POS";
                     TabContent = "POS";
                     break;
+
                 default:
                     EnableAllTabs();
                     break;
@@ -205,8 +222,6 @@ namespace GrocerEase
         private void Lbl_Dashboard_Click(object sender, EventArgs e)
         {
             TabContent = "Dashboard";
-            lbl_Title.Text = "GrocerEase - Dashboard";
-            Text = "Dashboard";
             UI_Load(sender, e);
         }
 
@@ -242,11 +257,17 @@ namespace GrocerEase
             UI_Load(sender, e);
         }
 
+        private void Lbl_History_Click(object sender, EventArgs e)
+        {
+            TabContent = "History";
+            lbl_Title.Text = "GrocerEase - History";
+            Text = "History";
+            UI_Load(sender, e);
+        }
+
         public void Lbl_POS_Click(object sender, EventArgs e)
         {
             TabContent = "POS";
-            lbl_Title.Text = "GrocerEase - POS";
-            Text = "POS";
             UI_Load(sender, e);
         }
 
